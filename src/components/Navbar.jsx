@@ -8,22 +8,18 @@ import {
 import Logo from './Logo'
 import { useTheme } from '../context/ThemeContext'
 
-// ─── constants ────────────────────────────────────────────────────────────────
-
 const NAV_LINKS = [
-  { label: 'Accueil',       to: 'hero',           icon: Home },
-  { label: 'À propos',      to: 'about',          icon: User },
-  { label: 'Compétences',   to: 'skills',         icon: Code },
-  { label: 'Projets',       to: 'projects',       icon: FolderKanban },
-  { label: 'Certifications',to: 'certifications', icon: Award },
-  { label: 'Contact',       to: 'contact',        icon: Mail },
+  { label: 'Accueil',        to: 'hero',           icon: Home },
+  { label: 'À propos',       to: 'about',          icon: User },
+  { label: 'Compétences',    to: 'skills',         icon: Code },
+  { label: 'Projets',        to: 'projects',       icon: FolderKanban },
+  { label: 'Certifications', to: 'certifications', icon: Award },
+  { label: 'Contact',        to: 'contact',        icon: Mail },
 ]
 
-const NAV_HEIGHT       = { default: 85, scrolled: 70 }   // px – single source of truth
+const NAV_HEIGHT       = { default: 85, scrolled: 70 }
 const SCROLL_THRESHOLD = 50
 const SECTION_OFFSET   = 100
-
-// ─── sub-components ───────────────────────────────────────────────────────────
 
 function NavLink({ link, isActive, onClick }) {
   return (
@@ -34,7 +30,6 @@ function NavLink({ link, isActive, onClick }) {
         duration={600}
         offset={-NAV_HEIGHT.scrolled}
         spy
-        onSetActive={onClick ? undefined : undefined}
         onClick={onClick}
         aria-current={isActive ? 'page' : undefined}
         className={`nav-link ${isActive ? 'nav-link--active' : ''}`}
@@ -74,20 +69,17 @@ function CVButton({ scrolled }) {
   )
 }
 
-function MobileMenu({ isOpen, onClose, activeSection, borderColor }) {
+function MobileMenu({ isOpen, onClose, activeSection }) {
   const menuRef = useRef(null)
 
-  // Close on Escape
   useEffect(() => {
     if (!isOpen) return
     const handler = (e) => { if (e.key === 'Escape') onClose() }
     document.addEventListener('keydown', handler)
-    // Trap focus inside menu
     menuRef.current?.querySelector('a, button')?.focus()
     return () => document.removeEventListener('keydown', handler)
   }, [isOpen, onClose])
 
-  // Prevent body scroll while open
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -137,21 +129,16 @@ function MobileMenu({ isOpen, onClose, activeSection, borderColor }) {
   )
 }
 
-// ─── main component ───────────────────────────────────────────────────────────
-
 export default function Navbar() {
   const { darkMode, setDarkMode } = useTheme()
-  const [scrolled,       setScrolled]       = useState(false)
-  const [mobileOpen,     setMobileOpen]     = useState(false)
-  const [activeSection,  setActiveSection]  = useState('hero')
+  const [scrolled,      setScrolled]      = useState(false)
+  const [mobileOpen,    setMobileOpen]    = useState(false)
+  const [activeSection, setActiveSection] = useState('hero')
 
-  // Stable section IDs array – no need to re-derive on every scroll
   const sectionIds = NAV_LINKS.map(l => l.to)
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > SCROLL_THRESHOLD)
-
-    // Iterate in reverse without mutating the original array
     for (let i = sectionIds.length - 1; i >= 0; i--) {
       const el = document.getElementById(sectionIds[i])
       if (el && window.scrollY >= el.offsetTop - SECTION_OFFSET) {
@@ -172,15 +159,12 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ── Navbar ── */}
       <header
         role="banner"
         className={`navbar ${scrolled ? 'navbar--scrolled' : ''} ${darkMode ? 'dark' : 'light'}`}
         style={{ '--nav-h': `${scrolled ? NAV_HEIGHT.scrolled : NAV_HEIGHT.default}px` }}
       >
         <div className="navbar__inner">
-
-          {/* Logo + name */}
           <Link
             to="hero"
             smooth
@@ -198,7 +182,6 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop nav */}
           <ul className="navbar__links" role="list" aria-label="Navigation principale">
             {NAV_LINKS.map(link => (
               <NavLink
@@ -209,12 +192,9 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* Actions */}
           <div className="navbar__actions">
             <ThemeToggle darkMode={darkMode} onToggle={toggleTheme} />
             <CVButton scrolled={scrolled} />
-
-            {/* Mobile trigger */}
             <button
               onClick={toggleMobile}
               aria-expanded={mobileOpen}
@@ -225,24 +205,42 @@ export default function Navbar() {
               {mobileOpen ? <X size={21} aria-hidden="true" /> : <Menu size={21} aria-hidden="true" />}
             </button>
           </div>
-
         </div>
       </header>
 
-      {/* ── Mobile menu ── */}
       <MobileMenu
         isOpen={mobileOpen}
         onClose={closeMobile}
         activeSection={activeSection}
       />
 
-      {/* ── Styles ── */}
       <style>{`
-        /* ── tokens ── */
-        .navbar.dark  { --c-bg: rgba(8,12,20,0.92);  --c-border: rgba(0,212,255,0.18); --c-text: #8BA0B8; --c-active: #00D4FF; --c-name: #F1F5F9; --c-sub: #00D4FF; --c-btn-bg: #00D4FF; --c-hover-bg: rgba(0,212,255,0.07); --c-active-bg: rgba(0,212,255,0.11); }
-        .navbar.light { --c-bg: rgba(255,255,255,0.94); --c-border: rgba(0,0,0,0.08); --c-text: #334155; --c-active: #0052CC; --c-name: #0F172A; --c-sub: #0052CC; --c-btn-bg: #0052CC; --c-hover-bg: rgba(0,0,0,0.04); --c-active-bg: rgba(0,82,204,0.09); }
+        /* ── DARK : Noir + Bleu pur ── */
+        .navbar.dark {
+          --c-bg:        rgba(0, 0, 0, 0.92);
+          --c-border:    rgba(0, 0, 255, 0.25);
+          --c-text:      #8BA0B8;
+          --c-active:    #0000FF;
+          --c-name:      #F1F5F9;
+          --c-sub:       #4444FF;
+          --c-btn-bg:    #0000FF;
+          --c-hover-bg:  rgba(0, 0, 255, 0.08);
+          --c-active-bg: rgba(0, 0, 255, 0.14);
+        }
 
-        /* ── layout ── */
+        /* ── LIGHT : Blanc + Bleu nuit ── */
+        .navbar.light {
+          --c-bg:        rgba(255, 255, 255, 0.94);
+          --c-border:    rgba(25, 25, 112, 0.15);
+          --c-text:      #334155;
+          --c-active:    #191970;
+          --c-name:      #0F172A;
+          --c-sub:       #191970;
+          --c-btn-bg:    #191970;
+          --c-hover-bg:  rgba(25, 25, 112, 0.06);
+          --c-active-bg: rgba(25, 25, 112, 0.10);
+        }
+
         .navbar {
           position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
           background: var(--c-bg);
@@ -261,7 +259,6 @@ export default function Navbar() {
           transition: height .4s cubic-bezier(.16,1,.3,1);
         }
 
-        /* ── brand ── */
         .navbar__brand {
           display: flex; align-items: center; gap: .7rem;
           text-decoration: none; cursor: pointer; flex-shrink: 0;
@@ -270,8 +267,7 @@ export default function Navbar() {
         .navbar__name {
           font-family: 'Syne', sans-serif; font-weight: 700;
           font-size: clamp(.9rem, 1.2vw, 1.05rem);
-          color: var(--c-name); line-height: 1;
-          transition: color .3s;
+          color: var(--c-name); line-height: 1; transition: color .3s;
         }
         .navbar__sub {
           display: flex; align-items: center; gap: 4px;
@@ -279,7 +275,6 @@ export default function Navbar() {
           color: var(--c-sub); letter-spacing: .1em; text-transform: uppercase;
         }
 
-        /* ── desktop nav ── */
         .navbar__links {
           display: flex; gap: .2rem; list-style: none; margin: 0; padding: 0;
         }
@@ -292,10 +287,9 @@ export default function Navbar() {
           transition: background .2s, color .2s, font-weight .2s;
           white-space: nowrap;
         }
-        .nav-link:hover   { background: var(--c-hover-bg);  color: var(--c-active); }
-        .nav-link--active { background: var(--c-active-bg); color: var(--c-active); font-weight: 600; }
+        .nav-link:hover    { background: var(--c-hover-bg);  color: var(--c-active); }
+        .nav-link--active  { background: var(--c-active-bg); color: var(--c-active); font-weight: 600; }
 
-        /* ── actions ── */
         .navbar__actions { display: flex; align-items: center; gap: .5rem; flex-shrink: 0; }
 
         .icon-btn {
@@ -321,14 +315,12 @@ export default function Navbar() {
         .cv-btn:hover  { opacity: .88; }
         .cv-btn:active { transform: scale(.96); }
 
-        /* ── mobile trigger ── */
         .mobile-trigger { display: none; }
 
-        /* ── mobile menu ── */
         .mobile-menu {
           position: fixed; inset: var(--nav-h, 85px) 0 0 0;
           z-index: 999;
-          background: var(--c-bg, rgba(8,12,20,.98));
+          background: var(--c-bg);
           backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
           padding: 1.25rem 1.5rem 2rem;
           overflow-y: auto;
@@ -344,27 +336,24 @@ export default function Navbar() {
           display: flex; align-items: center; gap: .75rem;
           padding: .9rem .5rem;
           font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 400;
-          color: var(--c-text, #8BA0B8);
-          border-bottom: 1px solid var(--c-border, rgba(0,212,255,0.1));
+          color: var(--c-text);
+          border-bottom: 1px solid var(--c-border);
           cursor: pointer; transition: color .2s;
         }
         .mobile-nav-link:hover,
-        .mobile-nav-link--active { color: var(--c-active, #00D4FF); font-weight: 600; }
+        .mobile-nav-link--active { color: var(--c-active); font-weight: 600; }
 
         .mobile-cv-btn {
           display: flex; align-items: center; justify-content: center; gap: .5rem;
           margin-top: 1.25rem; padding: .9rem;
-          background: var(--c-btn-bg, #00D4FF); color: #fff;
+          background: var(--c-btn-bg); color: #fff;
           border-radius: 30px; font-weight: 600; text-decoration: none;
           font-family: 'DM Sans', sans-serif; font-size: .9rem;
           transition: opacity .2s;
         }
         .mobile-cv-btn:hover { opacity: .88; }
 
-        /* ── responsive ── */
-        @media (max-width: 900px) {
-          .navbar__links { display: none; }
-        }
+        @media (max-width: 900px) { .navbar__links { display: none; } }
         @media (max-width: 768px) {
           .mobile-trigger { display: flex; }
           .cv-btn span    { display: none; }
