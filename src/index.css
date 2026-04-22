@@ -19,15 +19,15 @@ html {
   --text-secondary: #8BA0B8;
   --text-muted: #4A6080;
   --border-color: #1E2A3A;
-  --border-light: rgba(0, 212, 255, 0.15);
+  --border-light: rgba(114, 47, 55, 0.18);
   --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   --card-shadow-hover: 0 25px 40px -12px rgba(0, 0, 0, 0.5);
   --hero-gradient: radial-gradient(ellipse at 20% 40%, #0A0F1A 0%, #080C14 50%, #05080F 100%);
   --section-gradient: linear-gradient(180deg, #0D1421 0%, #080C14 100%);
-  --tag-bg: rgba(0, 212, 255, 0.08);
-  --tag-border: rgba(0, 212, 255, 0.2);
+  --tag-bg: rgba(114, 47, 55, 0.10);
+  --tag-border: rgba(114, 47, 55, 0.22);
   --input-bg: #080C14;
-  --accent: #00D4FF;
+  --accent: #722F37;
   --accent-hover: #0099cc;
   --accent-secondary: #8B5CF6;
   --success: #4ADE80;
@@ -54,7 +54,7 @@ html {
   --tag-bg: rgba(0, 82, 204, 0.08);
   --tag-border: rgba(0, 82, 204, 0.15);
   --input-bg: #FFFFFF;
-  --accent: #0052CC;
+  --accent: #5C1F28;
   --accent-hover: #0041a3;
   --accent-secondary: #7C3AED;
   --success: #059669;
