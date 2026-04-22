@@ -57,9 +57,9 @@ export default function About() {
   const [activeFormation, setActiveFormation] = useState(null)
 
   // Tokens
-  const accent      = darkMode ? '#0000FF'               : '#191970'
-  const accentAlpha = darkMode ? 'rgba(0,0,255,0.08)'    : 'rgba(25,25,112,0.08)'
-  const accentBrd   = darkMode ? 'rgba(0,0,255,0.18)'    : 'rgba(25,25,112,0.18)'
+  const accent      = darkMode ? '#722F37'               : '#5C1F28'
+  const accentAlpha = darkMode ? 'rgba(114,47,55,0.08)'    : 'rgba(92,31,40,0.08)'
+  const accentBrd   = darkMode ? 'rgba(114,47,55,0.18)'    : 'rgba(92,31,40,0.18)'
   const sectionBg   = darkMode ? '#0A0A0A'               : '#F0F0FA'
   const cardBg      = darkMode ? 'rgba(5,5,20,0.55)'     : 'rgba(255,255,255,0.75)'
   const textTitle   = darkMode ? '#F1F5F9'               : '#0F172A'
@@ -84,8 +84,8 @@ export default function About() {
       <div style={{
         position: 'absolute', inset: 0,
         background: darkMode
-          ? `radial-gradient(circle at 20% 30%, rgba(0,0,255,0.06), transparent)`
-          : `radial-gradient(circle at 20% 30%, rgba(25,25,112,0.05), transparent)`,
+          ? `radial-gradient(circle at 20% 30%, rgba(114,47,55,0.06), transparent)`
+          : `radial-gradient(circle at 20% 30%, rgba(92,31,40,0.05), transparent)`,
         pointerEvents: 'none',
       }} />
 
@@ -153,11 +153,11 @@ export default function About() {
                 <div style={{
                   width: '70px', height: '70px',
                   background: darkMode
-                    ? 'linear-gradient(135deg, #0000FF, #3333FF)'
-                    : 'linear-gradient(135deg, #191970, #0F0F5A)',
+                    ? 'linear-gradient(135deg, #722F37, #8B3A45)'
+                    : 'linear-gradient(135deg, #5C1F28, #4A1520)',
                   borderRadius: '20px',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  boxShadow: `0 10px 25px -5px ${darkMode ? 'rgba(0,0,255,0.30)' : 'rgba(25,25,112,0.25)'}`,
+                  boxShadow: `0 10px 25px -5px ${darkMode ? 'rgba(114,47,55,0.30)' : 'rgba(92,31,40,0.25)'}`,
                 }}>
                   <Shield size={34} color="#FFFFFF" />
                 </div>

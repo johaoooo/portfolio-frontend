@@ -144,15 +144,15 @@ export default function Skills() {
   const { darkMode } = useTheme()
 
   // Tokens
-  const accent      = darkMode ? '#0000FF'              : '#191970'
-  const accentAlpha = darkMode ? 'rgba(0,0,255,0.06)'   : 'rgba(25,25,112,0.07)'
-  const accentBrd   = darkMode ? 'rgba(0,0,255,0.15)'   : 'rgba(25,25,112,0.15)'
+  const accent      = darkMode ? '#722F37'              : '#5C1F28'
+  const accentAlpha = darkMode ? 'rgba(114,47,55,0.06)'   : 'rgba(92,31,40,0.07)'
+  const accentBrd   = darkMode ? 'rgba(114,47,55,0.15)'   : 'rgba(92,31,40,0.15)'
   const sectionBg   = darkMode ? '#0A0A0A'              : '#F8F8FF'
   const cardBg      = darkMode ? 'rgba(5,5,20,0.70)'    : 'rgba(255,255,255,0.90)'
   const textTitle   = darkMode ? '#F1F5F9'              : '#0F172A'
   const textMuted   = darkMode ? '#8BA0B8'              : '#475569'
-  const glowL       = darkMode ? 'rgba(0,0,255,0.04)'   : 'rgba(25,25,112,0.05)'
-  const glowR       = darkMode ? 'rgba(0,0,255,0.03)'   : 'rgba(25,25,112,0.04)'
+  const glowL       = darkMode ? 'rgba(114,47,55,0.04)'   : 'rgba(92,31,40,0.05)'
+  const glowR       = darkMode ? 'rgba(114,47,55,0.03)'   : 'rgba(92,31,40,0.04)'
 
   const categories = {
     technical: {

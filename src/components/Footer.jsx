@@ -4,10 +4,15 @@ import { useTheme } from '../context/ThemeContext'
 export default function Footer() {
   const { darkMode } = useTheme()
 
-  const bg        = darkMode ? '#0A0A0A'              : '#FFFFFF'
-  const border    = darkMode ? 'rgba(0,0,255,0.18)'   : 'rgba(25,25,112,0.15)'
-  const textMain  = darkMode ? 'rgba(0,0,255,0.55)'   : 'rgba(25,25,112,0.55)'
-  const textFaint = darkMode ? 'rgba(0,0,255,0.20)'   : 'rgba(25,25,112,0.20)'
+  // dark: rouge au vin | light: bordeaux profond
+  const accent    = darkMode ? '#722F37' : '#5C1F28'
+  const accentRgb = darkMode ? '114,47,55' : '92,31,40'
+
+  // Fond explicite pour garantir la visibilité
+  const bg        = darkMode ? '#0D0D0D' : '#FAF8F8'
+  const border    = `rgba(${accentRgb},0.20)`
+  const textMain  = darkMode ? '#8BA0B8' : '#475569'
+  const textFaint = darkMode ? '#4A6080' : '#94A3B8'
 
   return (
     <footer style={{
@@ -33,14 +38,28 @@ export default function Footer() {
             DEHAZOUNDE JOSEPH · {new Date().getFullYear()}
           </span>
         </div>
-        <span style={{
-          fontFamily: 'JetBrains Mono, monospace',
-          fontSize: '0.65rem',
-          color: textFaint,
-          letterSpacing: '0.1em',
-        }}>
-          React + Django · Sécurité by design
-        </span>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+          <span style={{
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: '0.62rem',
+            color: textFaint,
+            letterSpacing: '0.08em',
+          }}>
+            React + Django · Sécurité by design
+          </span>
+          <span style={{
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: '0.6rem',
+            padding: '0.2rem 0.7rem',
+            background: `rgba(${accentRgb},0.10)`,
+            border: `1px solid rgba(${accentRgb},0.22)`,
+            borderRadius: '20px',
+            color: accent,
+          }}>
+            Cotonou, Bénin
+          </span>
+        </div>
       </div>
     </footer>
   )

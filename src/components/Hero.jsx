@@ -1,7 +1,7 @@
 /**
  * Hero.jsx
- * Dark  : fond #0A0A0A, accent bleu pur  #0000FF
- * Light : fond #FFFFFF, accent bleu nuit #191970
+ * Dark  : fond #0A0A0A, accent bleu pur  #722F37
+ * Light : fond #FFFFFF, accent bleu nuit #5C1F28
  */
 
 import { motion } from 'framer-motion'
@@ -171,16 +171,16 @@ export default function Hero({ darkMode }) {
           --ink2:    #E0E0E0;
           --muted:   #A0A0A0;
           --muted2:  #666666;
-          --accent:  #0000FF;
-          --accent2: #3333FF;
-          --acc-bg:  rgba(0, 0, 255, 0.10);
-          --acc-bg2: rgba(0, 0, 255, 0.06);
-          --border:  rgba(0, 0, 255, 0.22);
+          --accent:  #722F37;
+          --accent2: #8B3A45;
+          --acc-bg:  rgba(114, 47, 55, 0.10);
+          --acc-bg2: rgba(114, 47, 55, 0.06);
+          --border:  rgba(114, 47, 55, 0.22);
           --border2: rgba(255, 255, 255, 0.06);
-          --surf:    rgba(0, 0, 255, 0.04);
-          --glow1:   rgba(0, 0, 255, 0.07);
-          --glow2:   rgba(0, 0, 255, 0.04);
-          --shadow:  rgba(0, 0, 255, 0.25);
+          --surf:    rgba(114, 47, 55, 0.04);
+          --glow1:   rgba(114, 47, 55, 0.07);
+          --glow2:   rgba(114, 47, 55, 0.04);
+          --shadow:  rgba(114, 47, 55, 0.25);
         }
 
         /* ══════════════════════════════
@@ -193,16 +193,16 @@ export default function Hero({ darkMode }) {
           --ink2:    #2D2D2D;
           --muted:   #555555;
           --muted2:  #888888;
-          --accent:  #191970;
-          --accent2: #0F0F5A;
-          --acc-bg:  rgba(25, 25, 112, 0.07);
-          --acc-bg2: rgba(25, 25, 112, 0.04);
-          --border:  rgba(25, 25, 112, 0.20);
+          --accent:  #5C1F28;
+          --accent2: #4A1520;
+          --acc-bg:  rgba(92, 31, 40, 0.07);
+          --acc-bg2: rgba(92, 31, 40, 0.04);
+          --border:  rgba(92, 31, 40, 0.20);
           --border2: rgba(0, 0, 0, 0.08);
-          --surf:    rgba(25, 25, 112, 0.03);
-          --glow1:   rgba(25, 25, 112, 0.06);
-          --glow2:   rgba(25, 25, 112, 0.03);
-          --shadow:  rgba(25, 25, 112, 0.15);
+          --surf:    rgba(92, 31, 40, 0.03);
+          --glow1:   rgba(92, 31, 40, 0.06);
+          --glow2:   rgba(92, 31, 40, 0.03);
+          --shadow:  rgba(92, 31, 40, 0.15);
         }
 
         .h-section {

@@ -4,8 +4,8 @@ import { useTheme } from '../context/ThemeContext'
 import { useState } from 'react'
 
 // ── Couleurs accent selon le mode ──────────────────────────────────────────
-// dark  : bleu pur   #0000FF
-// light : bleu nuit  #191970
+// dark  : bleu pur   #722F37
+// light : bleu nuit  #5C1F28
 
 const statusMap = {
   obtained:      { icon: CircleCheck, color: '#4ADE80', label: 'Obtenu',   bg: 'rgba(74,222,128,0.1)',  border: 'rgba(74,222,128,0.3)'  },
@@ -75,15 +75,15 @@ export default function Certifications() {
   const [hoveredCard, setHoveredCard] = useState(null)
 
   // Tokens couleur selon le mode
-  const accent      = darkMode ? '#0000FF'              : '#191970'
-  const accentAlpha = darkMode ? 'rgba(0,0,255,0.10)'  : 'rgba(25,25,112,0.10)'
-  const accentBrd   = darkMode ? 'rgba(0,0,255,0.20)'  : 'rgba(25,25,112,0.20)'
+  const accent      = darkMode ? '#722F37'              : '#5C1F28'
+  const accentAlpha = darkMode ? 'rgba(114,47,55,0.10)'  : 'rgba(92,31,40,0.10)'
+  const accentBrd   = darkMode ? 'rgba(114,47,55,0.20)'  : 'rgba(92,31,40,0.20)'
   const cardBg      = darkMode ? 'rgba(5,5,20,0.65)'   : 'rgba(255,255,255,0.75)'
   const sectionBg   = darkMode ? '#0A0A0A'              : '#F8F8FF'
   const textMuted   = darkMode ? '#8BA0B8'              : '#475569'
   const textTitle   = darkMode ? '#F1F5F9'              : '#0F172A'
-  const glowColor1  = darkMode ? 'rgba(0,0,255,0.05)'  : 'rgba(25,25,112,0.06)'
-  const glowColor2  = darkMode ? 'rgba(0,0,255,0.03)'  : 'rgba(25,25,112,0.04)'
+  const glowColor1  = darkMode ? 'rgba(114,47,55,0.05)'  : 'rgba(92,31,40,0.06)'
+  const glowColor2  = darkMode ? 'rgba(114,47,55,0.03)'  : 'rgba(92,31,40,0.04)'
 
   const stats = {
     total:      certificationsData.length,

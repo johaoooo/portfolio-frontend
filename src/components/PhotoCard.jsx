@@ -1,7 +1,7 @@
 /**
  * PhotoCard.jsx
- * Dark  : noir + bleu pur  #0000FF
- * Light : blanc + bleu nuit #191970
+ * Dark  : noir + bleu pur  #722F37
+ * Light : blanc + bleu nuit #5C1F28
  */
 
 import { motion, useMotionValue, useSpring } from 'framer-motion'
@@ -24,28 +24,28 @@ export default function PhotoCard({ darkMode }) {
   const handleMouseLeave = () => { rotateX.set(0); rotateY.set(0) }
 
   const t = darkMode ? {
-    accent:      '#0000FF',
-    accent2:     '#3333FF',
-    ring1:       'rgba(0, 0, 255, 0.18)',
-    ring2:       'rgba(0, 0, 255, 0.32)',
-    photoBorder: 'rgba(0, 0, 255, 0.40)',
-    shadow:      '0 20px 60px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,255,0.18)',
+    accent:      '#722F37',
+    accent2:     '#8B3A45',
+    ring1:       'rgba(114, 47, 55, 0.18)',
+    ring2:       'rgba(114, 47, 55, 0.32)',
+    photoBorder: 'rgba(114, 47, 55, 0.40)',
+    shadow:      '0 20px 60px rgba(0,0,0,0.6), 0 4px 16px rgba(114,47,55,0.18)',
     vignette:    'linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.5) 100%)',
-    badgeBg:     'rgba(0, 0, 255, 0.10)',
-    badgeBorder: 'rgba(0, 0, 255, 0.28)',
+    badgeBg:     'rgba(114, 47, 55, 0.10)',
+    badgeBorder: 'rgba(114, 47, 55, 0.28)',
     badgeColor:  '#5555FF',
     descColor:   '#777777',
   } : {
-    accent:      '#191970',
-    accent2:     '#0F0F5A',
-    ring1:       'rgba(25, 25, 112, 0.15)',
-    ring2:       'rgba(25, 25, 112, 0.28)',
-    photoBorder: 'rgba(25, 25, 112, 0.35)',
-    shadow:      '0 20px 60px rgba(0,0,0,0.10), 0 4px 16px rgba(25,25,112,0.15)',
+    accent:      '#5C1F28',
+    accent2:     '#4A1520',
+    ring1:       'rgba(92, 31, 40, 0.15)',
+    ring2:       'rgba(92, 31, 40, 0.28)',
+    photoBorder: 'rgba(92, 31, 40, 0.35)',
+    shadow:      '0 20px 60px rgba(0,0,0,0.10), 0 4px 16px rgba(92,31,40,0.15)',
     vignette:    'linear-gradient(180deg, transparent 55%, rgba(255,255,255,0.2) 100%)',
-    badgeBg:     'rgba(25, 25, 112, 0.07)',
-    badgeBorder: 'rgba(25, 25, 112, 0.25)',
-    badgeColor:  '#191970',
+    badgeBg:     'rgba(92, 31, 40, 0.07)',
+    badgeBorder: 'rgba(92, 31, 40, 0.25)',
+    badgeColor:  '#5C1F28',
     descColor:   '#888888',
   }
 

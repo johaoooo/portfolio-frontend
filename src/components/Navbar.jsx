@@ -218,27 +218,27 @@ export default function Navbar() {
         /* ── DARK : Noir + Bleu pur ── */
         .navbar.dark {
           --c-bg:        rgba(0, 0, 0, 0.92);
-          --c-border:    rgba(0, 0, 255, 0.25);
+          --c-border:    rgba(114, 47, 55, 0.25);
           --c-text:      #8BA0B8;
-          --c-active:    #0000FF;
+          --c-active:    #722F37;
           --c-name:      #F1F5F9;
           --c-sub:       #4444FF;
-          --c-btn-bg:    #0000FF;
-          --c-hover-bg:  rgba(0, 0, 255, 0.08);
-          --c-active-bg: rgba(0, 0, 255, 0.14);
+          --c-btn-bg:    #722F37;
+          --c-hover-bg:  rgba(114, 47, 55, 0.08);
+          --c-active-bg: rgba(114, 47, 55, 0.14);
         }
 
         /* ── LIGHT : Blanc + Bleu nuit ── */
         .navbar.light {
           --c-bg:        rgba(255, 255, 255, 0.94);
-          --c-border:    rgba(25, 25, 112, 0.15);
+          --c-border:    rgba(92, 31, 40, 0.15);
           --c-text:      #334155;
-          --c-active:    #191970;
+          --c-active:    #5C1F28;
           --c-name:      #0F172A;
-          --c-sub:       #191970;
-          --c-btn-bg:    #191970;
-          --c-hover-bg:  rgba(25, 25, 112, 0.06);
-          --c-active-bg: rgba(25, 25, 112, 0.10);
+          --c-sub:       #5C1F28;
+          --c-btn-bg:    #5C1F28;
+          --c-hover-bg:  rgba(92, 31, 40, 0.06);
+          --c-active-bg: rgba(92, 31, 40, 0.10);
         }
 
         .navbar {

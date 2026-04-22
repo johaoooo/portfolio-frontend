@@ -11,15 +11,15 @@ export default function Projects() {
   const [filter, setFilter] = useState('all')
 
   // Tokens
-  const accent      = darkMode ? '#0000FF'              : '#191970'
-  const accentAlpha = darkMode ? 'rgba(0,0,255,0.08)'   : 'rgba(25,25,112,0.08)'
-  const accentBrd   = darkMode ? 'rgba(0,0,255,0.18)'   : 'rgba(25,25,112,0.18)'
+  const accent      = darkMode ? '#722F37'              : '#5C1F28'
+  const accentAlpha = darkMode ? 'rgba(114,47,55,0.08)'   : 'rgba(92,31,40,0.08)'
+  const accentBrd   = darkMode ? 'rgba(114,47,55,0.18)'   : 'rgba(92,31,40,0.18)'
   const sectionBg   = darkMode ? '#0A0A0A'              : '#F0F0FA'
   const cardBg      = darkMode ? 'rgba(5,5,20,0.65)'    : 'rgba(255,255,255,0.75)'
   const textMuted   = darkMode ? '#8BA0B8'              : '#475569'
   const textFaint   = darkMode ? '#4A6080'              : '#64748B'
-  const lineTop     = darkMode ? 'rgba(0,0,255,0.25)'   : 'rgba(25,25,112,0.20)'
-  const glowColor   = darkMode ? 'rgba(0,0,255,0.05)'   : 'rgba(25,25,112,0.06)'
+  const lineTop     = darkMode ? 'rgba(114,47,55,0.25)'   : 'rgba(92,31,40,0.20)'
+  const glowColor   = darkMode ? 'rgba(114,47,55,0.05)'   : 'rgba(92,31,40,0.06)'
 
   const stats = {
     total:        projects.length,
@@ -125,7 +125,7 @@ export default function Projects() {
           style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginBottom: '3rem', flexWrap: 'wrap' }}
         >
           {[
-            { icon: ShieldCheck, label: 'Projets sécurisés', value: `${stats.secured}/${stats.total}`, color: accent,     desc: 'OWASP compliant',    rgb: darkMode ? '0,0,255' : '25,25,112' },
+            { icon: ShieldCheck, label: 'Projets sécurisés', value: `${stats.secured}/${stats.total}`, color: accent,     desc: 'OWASP compliant',    rgb: darkMode ? '114,47,55' : '92,31,40' },
             { icon: Code2,       label: 'Technologies',      value: `${stats.technologies}+`,          color: '#C9A84C',  desc: 'stack moderne',      rgb: '201,168,76'  },
             { icon: Award,       label: 'Bonnes pratiques',  value: '100%',                            color: '#8B5CF6',  desc: 'sécurité by design', rgb: '139,92,246'  },
           ].map((stat, i) => (
