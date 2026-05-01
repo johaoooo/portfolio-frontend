@@ -1,0 +1,68 @@
+=== src/data/skills.js ===
+export const skills = {
+  security: [
+    { name: 'OWASP Top 10', level: 75 },
+    { name: 'Pentest web (Burp Suite)', level: 65 },
+    { name: 'Audit de configuration', level: 70 },
+    { name: 'Analyse de risques', level: 68 },
+    { name: 'Kali Linux', level: 72 },
+    { name: 'SQLMap / Nmap', level: 65 },
+  ],
+  dev: [
+    { name: 'React / Vite', level: 75 },
+    { name: 'Django REST Framework', level: 78 },
+    { name: 'JavaScript / ES6+', level: 72 },
+    { name: 'PostgreSQL / MySQL', level: 70 },
+    { name: 'HTML / CSS / Tailwind', level: 85 },
+    { name: 'Linux / Bash', level: 78 },
+  ],
+  tools: [
+    { name: 'Git / GitHub', level: 80 },
+    { name: 'Docker (bases)', level: 50 },
+    { name: 'Render / Vercel', level: 72 },
+    { name: 'Postman / Insomnia', level: 75 },
+  ],
+}
+=== src/data/certifications.js ===
+export const certifications = [
+  { name: 'Fullstack Development', issuer: 'Formation professionnelle', status: 'obtained', icon: '💻' },
+  { name: 'Linux Administration', issuer: 'Formation professionnelle', status: 'obtained', icon: '🐧' },
+  { name: 'MySQL & Bases de données', issuer: 'Formation professionnelle', status: 'obtained', icon: '🗄️' },
+  { name: 'Administration réseau', issuer: 'Formation professionnelle', status: 'obtained', icon: '🌐' },
+  { name: 'Bootcamp Cybersécurité OIF/D-CLIC', issuer: 'Organisation Internationale de la Francophonie', status: 'in-progress', icon: '🔐' },
+  { name: 'Google Cybersecurity Certificate', issuer: 'Google / Coursera', status: 'target', icon: '🎯' },
+  { name: 'eJPT (eLearnSecurity)', issuer: 'INE Security', status: 'target', icon: '🎯' },
+]
+=== src/data/projects.js ===
+export const projects = [
+  {
+    id: 1,
+    title: "Portfolio Sécurisé",
+    description: "Portfolio professionnel avec authentification JWT, protection CSRF, et audit de sécurité OWASP. Interface moderne avec animations.",
+    technologies: ["React", "Tailwind", "JWT", "OWASP"],
+    security: "OWASP Top 10",
+    github: "https://github.com/johaoooo/portfolio",
+    demo: "https://portfolio-joseph.com",
+    image: null
+  },
+  {
+    id: 2,
+    title: "Dashboard Cybersécurité",
+    description: "Dashboard d'analyse de vulnérabilités avec visualisation des menaces et rapports PDF. Intégration API de scan de sécurité.",
+    technologies: ["React", "Django", "PostgreSQL", "D3.js"],
+    security: "Secure by Design",
+    github: "https://github.com/johaoooo/security-dashboard",
+    demo: null,
+    image: null
+  },
+  {
+    id: 3,
+    title: "E-commerce Fullstack",
+    description: "Plateforme e-commerce avec paiement sécurisé, validation des entrées, et protection contre les injections SQL.",
+    technologies: ["Next.js", "Node.js", "MongoDB", "Stripe"],
+    security: "PCI DSS Ready",
+    github: "https://github.com/johaoooo/ecommerce-secure",
+    demo: "https://ecommerce-demo.com",
+    image: null
+  }
+]
