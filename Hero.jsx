@@ -61,7 +61,7 @@ export default function Hero() {
       alignItems: 'center',
       background: t.bg.page,
       transition: 'background 0.3s',
-      padding: '100px 20px 60px',
+      padding: '80px 24px',
       fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
     }}>
       <div style={{
@@ -90,9 +90,9 @@ export default function Hero() {
           >
             <h1 style={{
               color: t.text.primary,
-              fontSize: 'clamp(1.5rem, 5vw, 2.5rem)',
+              fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
               fontWeight: 700,
-              lineHeight: 1.3,
+              lineHeight: 1.2,
               marginBottom: '16px',
               fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
             }}>
@@ -102,7 +102,7 @@ export default function Hero() {
               <span style={{
                 color: t.text.accent,
                 display: 'inline-block',
-                minWidth: '160px'
+                minWidth: '180px'
               }}>
                 {currentText}
                 <span style={{
@@ -119,7 +119,7 @@ export default function Hero() {
             
             <p style={{
               color: t.text.secondary,
-              fontSize: 'clamp(0.85rem, 3vw, 1rem)',
+              fontSize: '1rem',
               lineHeight: 1.5,
               marginBottom: '24px',
               fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
@@ -182,7 +182,7 @@ export default function Hero() {
             </div>
           </motion.div>
           
-          {/* Partie droite - Photo */}
+          {/* Partie droite - Photo + Nom + Titre */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -191,22 +191,24 @@ export default function Hero() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              justifyContent: 'center',
               gap: '16px'
             }}
           >
             <div style={{
               width: '100%',
-              maxWidth: '220px',
-              margin: '0 auto'
+              maxWidth: '240px',
+              borderRadius: '30px',
+              overflow: 'hidden',
+              boxShadow: `0 15px 30px rgba(0,0,0,0.2)`
             }}>
               <PhotoCard />
             </div>
             
+            {/* Nom et titre sous la photo - AUCUN TEXTE INDESIRABLE */}
             <div style={{ textAlign: 'center' }}>
               <h2 style={{
                 color: t.text.primary,
-                fontSize: 'clamp(1rem, 4vw, 1.3rem)',
+                fontSize: '1.3rem',
                 fontWeight: 600,
                 marginBottom: '4px',
                 fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
@@ -215,7 +217,7 @@ export default function Hero() {
               </h2>
               <p style={{
                 color: t.text.accent,
-                fontSize: 'clamp(0.6rem, 2.5vw, 0.7rem)',
+                fontSize: '0.7rem',
                 letterSpacing: '1px',
                 fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
               }}>
@@ -234,38 +236,22 @@ export default function Hero() {
         
         @media (max-width: 768px) {
           #hero {
-            padding: 80px 16px 40px !important;
-            align-items: flex-start !important;
+            padding: 100px 16px 60px !important;
           }
           #hero > div {
-            padding: 25px !important;
+            padding: 30px !important;
           }
           #hero > div > div {
-            grid-template-columns: 1fr !important;
-            gap: 30px !important;
-            text-align: center !important;
-          }
-          #hero .hero-left {
-            order: 2 !important;
-          }
-          #hero .hero-right {
-            order: 1 !important;
-          }
-          .hero-buttons {
-            justify-content: center !important;
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 30px;
           }
         }
         
         @media (max-width: 480px) {
-          #hero {
-            padding: 70px 12px 30px !important;
-          }
           #hero > div {
             padding: 20px !important;
             border-radius: 24px !important;
-          }
-          #hero > div > div {
-            gap: 20px !important;
           }
         }
       `}</style>

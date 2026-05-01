@@ -1,216 +1,126 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import axios from 'axios'
-import { Send, GitBranch, Mail, CircleCheck } from 'lucide-react'
-import LinkedinIcon from './LinkedinIcon'
 import { useTheme } from '../context/ThemeContext'
+import { useTokens } from '../theme/tokens'
+import { motion } from 'framer-motion'
+import { Mail, Phone, MapPin, Send, MessageCircle, Sparkles } from 'lucide-react'
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
-const initial = { name: '', email: '', subject: '', message: '', website: '' }
+// Icône GitHub personnalisée
+const GithubIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  </svg>
+)
 
-function Field({ label, name, type = 'text', rows, value, onChange, error, darkMode, accent, accentRgb }) {
-  const base = {
-    width: '100%',
-    background: darkMode ? '#080C14' : '#FFFFFF',
-    border: `1px solid ${darkMode ? '#1E2A3A' : '#E2E8F0'}`,
-    borderRadius: '8px',
-    padding: '0.875rem 1rem',
-    color: darkMode ? '#F1F5F9' : '#0F172A',
-    fontFamily: 'DM Sans, sans-serif',
-    fontSize: '0.9rem',
-    outline: 'none',
-    transition: 'border-color 0.2s',
-    resize: 'vertical',
-  }
-  return (
-    <div>
-      <label style={{
-        display: 'block', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem',
-        color: darkMode ? '#4A6080' : '#64748B', letterSpacing: '0.15em',
-        textTransform: 'uppercase', marginBottom: '0.5rem',
-      }}>
-        {label}
-      </label>
-      {rows ? (
-        <textarea name={name} rows={rows} value={value} onChange={onChange} required style={base}
-          onFocus={e => e.target.style.borderColor = accent}
-          onBlur={e => e.target.style.borderColor = darkMode ? '#1E2A3A' : '#E2E8F0'} />
-      ) : (
-        <input name={name} type={type} value={value} onChange={onChange} required style={base}
-          onFocus={e => e.target.style.borderColor = accent}
-          onBlur={e => e.target.style.borderColor = darkMode ? '#1E2A3A' : '#E2E8F0'} />
-      )}
-      {error && <p style={{ color: '#F87171', fontSize: '0.75rem', marginTop: '0.25rem' }}>{error}</p>}
-    </div>
-  )
-}
+// Icône LinkedIn personnalisée
+const LinkedinIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+)
 
 export default function Contact() {
   const { darkMode } = useTheme()
-  const [form, setForm] = useState(initial)
-  const [status, setStatus] = useState(null)
-  const [errors, setErrors] = useState({})
+  const t = useTokens(darkMode)
 
-  // dark: rouge au vin | light: bordeaux profond
-  const accent    = darkMode ? '#722F37' : '#5C1F28'
-  const accentRgb = darkMode ? '114,47,55' : '92,31,40'
+  const contactInfo = [
+    { icon: <Mail size={20} />, label: 'Email', value: 'josephdehazounde@gmail.com', link: 'mailto:josephdehazounde@gmail.com' },
+    { icon: <Phone size={20} />, label: 'Téléphone', value: '01 62 10 86 94', link: null },
+    { icon: <MapPin size={20} />, label: 'Localisation', value: 'Porto-Novo, Bénin', link: null }
+  ]
 
-  const onChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
-
-  const onSubmit = async e => {
-    e.preventDefault()
-    setStatus('loading'); setErrors({})
-    try {
-      await axios.post(`${API}/contact/`, form)
-      setStatus('ok'); setForm(initial)
-    } catch (err) {
-      if (err.response?.data) setErrors(err.response.data)
-      setStatus('error')
-    }
-  }
+  const socialLinks = [
+    { icon: <GithubIcon />, name: 'GitHub', url: 'https://github.com/johaoooo' },
+    { icon: <LinkedinIcon />, name: 'LinkedIn', url: 'https://linkedin.com/in/dehazounde-joseph' }
+  ]
 
   return (
     <section id="contact" style={{
-      padding: '8rem 0',
-      background: darkMode ? '#0D0D0D' : '#FAF8F8',
+      background: t.bg.page,
+      padding: '80px 24px',
+      transition: 'background 0.3s'
     }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
-
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
-            background: `rgba(${accentRgb},0.08)`,
-            border: `1px solid rgba(${accentRgb},0.20)`,
-            padding: '0.4rem 1.2rem', borderRadius: '50px', marginBottom: '1rem',
-          }}>
-            <span style={{
-              fontFamily: 'JetBrains Mono, monospace', fontSize: '0.65rem',
-              letterSpacing: '0.15em', color: accent, textTransform: 'uppercase',
-            }}>05 — Contact</span>
+      <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+        {/* Titre avec icônes */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          style={{ textAlign: 'center', marginBottom: '48px' }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '16px' }}>
+            <MessageCircle size={28} style={{ color: t.text.accent }} />
+            <h2 style={{ color: t.text.primary, fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 700, margin: 0 }}>
+              Contact
+            </h2>
+            <Sparkles size={28} style={{ color: t.text.accent }} />
           </div>
-          <h2 style={{
-            fontFamily: 'Syne, sans-serif', fontWeight: 800,
-            fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
-            color: darkMode ? '#F1F5F9' : '#0F172A',
-            marginBottom: '0.5rem',
-          }}>
-            Travaillons <span style={{ color: accent }}>ensemble.</span>
-          </h2>
+          <p style={{ color: t.text.secondary, fontSize: '1rem', lineHeight: 1.6, maxWidth: '600px', margin: '0 auto' }}>
+            N'hésitez pas à me contacter pour toute collaboration ou opportunité
+          </p>
         </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: '4rem', marginTop: '3.5rem', alignItems: 'start' }}>
+        {/* Grille contact - formulaire */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            style={{ background: t.bg.surface, border: `1px solid ${t.border.default}`, borderRadius: '16px', padding: '28px' }}
+          >
+            <h3 style={{ color: t.text.primary, fontSize: '1.25rem', fontWeight: 600, marginBottom: '24px' }}>
+              Envoyez-moi un message
+            </h3>
+            <form action="#" method="POST">
+              <div style={{ marginBottom: '16px' }}>
+                <input type="text" placeholder="Votre nom" style={{ width: '100%', padding: '12px 16px', background: t.bg.page, border: `1px solid ${t.border.default}`, borderRadius: '8px', color: t.text.primary, fontSize: '0.9rem', outline: 'none' }} />
+              </div>
+              <div style={{ marginBottom: '16px' }}>
+                <input type="email" placeholder="Votre email" style={{ width: '100%', padding: '12px 16px', background: t.bg.page, border: `1px solid ${t.border.default}`, borderRadius: '8px', color: t.text.primary, fontSize: '0.9rem', outline: 'none' }} />
+              </div>
+              <div style={{ marginBottom: '24px' }}>
+                <textarea rows={4} placeholder="Votre message" style={{ width: '100%', padding: '12px 16px', background: t.bg.page, border: `1px solid ${t.border.default}`, borderRadius: '8px', color: t.text.primary, fontSize: '0.9rem', outline: 'none', resize: 'vertical', fontFamily: 'inherit' }} />
+              </div>
+              <button type="submit" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', background: t.text.accent, color: darkMode ? '#05080F' : '#fff', padding: '12px 24px', border: 'none', borderRadius: '8px', fontSize: '0.9rem', fontWeight: 600, cursor: 'pointer' }}>
+                <Send size={18} /> Envoyer
+              </button>
+            </form>
+          </motion.div>
 
-          {/* Infos contact */}
-          <div>
-            <p style={{ color: darkMode ? '#8BA0B8' : '#475569', lineHeight: 1.8, marginBottom: '2.5rem', fontWeight: 300 }}>
-              Un projet web à sécuriser, une alternance à proposer, un audit à réaliser — contactez-moi. Je réponds sous 24h.
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {[
-                { icon: Mail,       label: 'Email',    href: 'mailto:josephdehazounde@gmail.com',       text: 'josephdehazounde@gmail.com' },
-                { icon: GitBranch,  label: 'GitHub',   href: 'https://github.com/johaoooo',             text: 'github.com/johaoooo' },
-                { icon: LinkedinIcon, label: 'LinkedIn', href: 'https://linkedin.com/in/dehazounde-joseph', text: 'linkedin.com/in/dehazounde-joseph' },
-              ].map(({ icon: Icon, label, href, text }) => (
-                <a key={label} href={href} target="_blank" rel="noopener noreferrer"
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: '0.875rem', textDecoration: 'none',
-                    padding: '1rem',
-                    background: darkMode ? 'rgba(255,255,255,0.03)' : '#FFFFFF',
-                    border: `1px solid ${darkMode ? `rgba(${accentRgb},0.15)` : '#E2E8F0'}`,
-                    borderRadius: '12px', transition: 'border-color 0.2s, background 0.2s',
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = accent
-                    e.currentTarget.style.background = `rgba(${accentRgb},0.05)`
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = darkMode ? `rgba(${accentRgb},0.15)` : '#E2E8F0'
-                    e.currentTarget.style.background = darkMode ? 'rgba(255,255,255,0.03)' : '#FFFFFF'
-                  }}>
-                  <div style={{
-                    width: 36, height: 36,
-                    background: `rgba(${accentRgb},0.08)`,
-                    border: `1px solid rgba(${accentRgb},0.20)`,
-                    borderRadius: '10px',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-                  }}>
-                    <Icon size={15} color={accent} />
-                  </div>
+          {/* Infos de contact */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
+          >
+            <div style={{ background: t.bg.surface, border: `1px solid ${t.border.default}`, borderRadius: '16px', padding: '28px' }}>
+              <h3 style={{ color: t.text.primary, fontSize: '1.25rem', fontWeight: 600, marginBottom: '24px' }}>Coordonnées</h3>
+              {contactInfo.map((info, index) => (
+                <div key={info.label} style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: index < contactInfo.length - 1 ? '20px' : 0 }}>
+                  <div style={{ width: '40px', height: '40px', background: t.badge.bg, border: `1px solid ${t.border.accent}`, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: t.text.accent }}>{info.icon}</div>
                   <div>
-                    <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.6rem', color: accent, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{label}</div>
-                    <div style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '0.85rem', color: darkMode ? '#8BA0B8' : '#475569' }}>{text}</div>
+                    <p style={{ color: t.text.secondary, fontSize: '0.7rem', margin: 0 }}>{info.label}</p>
+                    {info.link ? <a href={info.link} style={{ color: t.text.primary, textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500 }}>{info.value}</a> : <p style={{ color: t.text.primary, fontSize: '0.9rem', fontWeight: 500, margin: 0 }}>{info.value}</p>}
                   </div>
-                </a>
+                </div>
               ))}
             </div>
-          </div>
 
-          {/* Formulaire */}
-          <div>
-            {status === 'ok' ? (
-              <div style={{
-                background: darkMode ? 'rgba(255,255,255,0.03)' : '#FFFFFF',
-                border: `1px solid rgba(74,222,128,0.25)`,
-                borderRadius: '16px', padding: '4rem 2rem', textAlign: 'center',
-              }}>
-                <CircleCheck size={48} style={{ color: '#4ADE80', margin: '0 auto 1rem' }} />
-                <p style={{ fontFamily: 'Syne, sans-serif', fontWeight: 700, fontSize: '1.25rem', color: darkMode ? '#F1F5F9' : '#0F172A', marginBottom: '0.5rem' }}>Message envoyé !</p>
-                <p style={{ color: darkMode ? '#4A6080' : '#64748B', fontSize: '0.9rem', marginBottom: '2rem' }}>Je vous répondrai dans les 24h.</p>
-                <button
-                  onClick={() => setStatus(null)}
-                  style={{
-                    background: 'transparent', border: `1px solid rgba(${accentRgb},0.35)`,
-                    borderRadius: '50px', padding: '0.6rem 1.6rem',
-                    color: accent, fontFamily: 'DM Sans, sans-serif',
-                    fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer',
-                    transition: 'all 0.2s',
-                  }}
-                >
-                  Nouveau message
-                </button>
+            <div style={{ background: t.bg.surface, border: `1px solid ${t.border.default}`, borderRadius: '16px', padding: '28px' }}>
+              <h3 style={{ color: t.text.primary, fontSize: '1.25rem', fontWeight: 600, marginBottom: '24px' }}>Réseaux sociaux</h3>
+              <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+                {socialLinks.map((social) => (
+                  <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '8px', background: t.badge.bg, border: `1px solid ${t.border.accent}`, borderRadius: '30px', padding: '8px 16px', color: t.text.accent, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500 }}>
+                    {social.icon} {social.name}
+                  </a>
+                ))}
               </div>
-            ) : (
-              <form onSubmit={onSubmit} style={{
-                background: darkMode ? 'rgba(255,255,255,0.03)' : '#FFFFFF',
-                border: `1px solid ${darkMode ? `rgba(${accentRgb},0.15)` : '#E2E8F0'}`,
-                borderRadius: '16px', padding: '2.5rem',
-                display: 'flex', flexDirection: 'column', gap: '1.25rem',
-              }} noValidate>
-                <input type="text" name="website" value={form.website} onChange={onChange}
-                  tabIndex={-1} autoComplete="off"
-                  style={{ position: 'absolute', opacity: 0, height: 0, width: 0, pointerEvents: 'none' }}
-                  aria-hidden="true" />
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                  <Field label="Nom complet" name="name" value={form.name} onChange={onChange} error={errors.name} darkMode={darkMode} accent={accent} accentRgb={accentRgb} />
-                  <Field label="Email" name="email" type="email" value={form.email} onChange={onChange} error={errors.email} darkMode={darkMode} accent={accent} accentRgb={accentRgb} />
-                </div>
-                <Field label="Sujet" name="subject" value={form.subject} onChange={onChange} error={errors.subject} darkMode={darkMode} accent={accent} accentRgb={accentRgb} />
-                <Field label="Message (20 car. min.)" name="message" rows={5} value={form.message} onChange={onChange} error={errors.message} darkMode={darkMode} accent={accent} accentRgb={accentRgb} />
-                {status === 'error' && !Object.keys(errors).length && (
-                  <p style={{ color: '#F87171', fontSize: '0.8rem' }}>Erreur serveur. Réessayez dans quelques instants.</p>
-                )}
-                <button
-                  type="submit"
-                  disabled={status === 'loading'}
-                  style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
-                    background: accent, color: '#FFFFFF',
-                    border: 'none', borderRadius: '50px',
-                    padding: '0.85rem 2rem',
-                    fontFamily: 'DM Sans, sans-serif', fontSize: '0.9rem', fontWeight: 600,
-                    cursor: status === 'loading' ? 'not-allowed' : 'pointer',
-                    opacity: status === 'loading' ? 0.6 : 1,
-                    transition: 'all 0.2s',
-                  }}
-                  onMouseEnter={e => { if (status !== 'loading') { e.currentTarget.style.opacity = '.88'; e.currentTarget.style.transform = 'translateY(-2px)' } }}
-                  onMouseLeave={e => { e.currentTarget.style.opacity = status === 'loading' ? '0.6' : '1'; e.currentTarget.style.transform = 'translateY(0)' }}
-                >
-                  {status === 'loading' ? 'Envoi…' : <><Send size={15} /> Envoyer le message</>}
-                </button>
-              </form>
-            )}
-          </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

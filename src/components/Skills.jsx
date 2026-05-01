@@ -1,185 +1,142 @@
+import { useTheme } from '../context/ThemeContext'
+import { useTokens } from '../theme/tokens'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { Code, Shield, Cloud, Brain, Cpu, Sparkles } from 'lucide-react'
 
-const skillsData = [
-  { name: 'Pentesting', level: 85, icon: '🔒' },
-  { name: 'DevOps', level: 80, icon: '⚙️' },
-  { name: 'IA / Machine Learning', level: 75, icon: '🧠' },
-  { name: 'Sécurité Offensive', level: 90, icon: '🎯' },
-  { name: 'Développement Web', level: 85, icon: '💻' },
-  { name: 'Cloud Security', level: 78, icon: '☁️' },
+const SKILLS = [
+  { category: 'Cybersécurité', items: ['Pentest', 'OWASP', 'CTF', 'Cryptographie'], icon: <Shield size={20} /> },
+  { category: 'DevOps', items: ['Docker', 'CI/CD', 'GitHub Actions', 'Kubernetes'], icon: <Cloud size={20} /> },
+  { category: 'IA & Machine Learning', items: ['Python', 'LangChain', 'Hugging Face', 'RAG'], icon: <Brain size={20} /> },
+  { category: 'Développement', items: ['React', 'Node.js', 'TypeScript', 'REST API'], icon: <Code size={20} /> },
 ]
 
 export default function Skills() {
-  const [hoveredSkill, setHoveredSkill] = useState(null)
+  const { darkMode } = useTheme()
+  const t = useTokens(darkMode)
 
   return (
-    <section id="skills" className="skills-section">
-      <div className="skills-container">
-        <motion.h2 
-          className="skills-title"
+    <section id="skills" style={{
+      background: t.bg.page, padding: '80px 24px',
+      transition: 'background 0.3s',
+    }}>
+      <div style={{
+        maxWidth: '1100px', margin: '0 auto'
+      }}>
+        {/* Titre avec icône */}
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
+          style={{
+            textAlign: 'center',
+            marginBottom: '48px'
+          }}
         >
-          Mes Compétences
-        </motion.h2>
-        
-        <div className="skills-grid">
-          {skillsData.map((skill, index) => (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '12px',
+            marginBottom: '16px'
+          }}>
+            <Cpu size={28} style={{ color: t.text.accent }} />
+            <h2 style={{
+              color: t.text.primary,
+              fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+              fontWeight: 700,
+              margin: 0
+            }}>
+              Compétences
+            </h2>
+            <Sparkles size={28} style={{ color: t.text.accent }} />
+          </div>
+          <p style={{
+            color: t.text.secondary,
+            fontSize: '1rem',
+            lineHeight: 1.6,
+            maxWidth: '600px',
+            margin: '0 auto'
+          }}>
+            Mes expertises techniques et domaines de prédilection
+          </p>
+        </motion.div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gap: '24px',
+        }}>
+          {SKILLS.map(({ category, items, icon }, index) => (
             <motion.div
-              key={skill.name}
-              className="skill-card"
+              key={category}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              viewport={{ once: true, margin: "-50px" }}
-              onMouseEnter={() => setHoveredSkill(index)}
-              onMouseLeave={() => setHoveredSkill(null)}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              style={{
+                background: t.bg.surface,
+                border: `1px solid ${t.border.default}`,
+                borderRadius: '16px', padding: '24px',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = 'translateY(-5px)'
+                e.currentTarget.style.borderColor = t.border.accent
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.borderColor = t.border.default
+              }}
             >
-              <div className="skill-icon">{skill.icon}</div>
-              <h3 className="skill-name">{skill.name}</h3>
-              <div className="skill-bar-container">
-                <div 
-                  className="skill-bar" 
-                  style={{ width: `${hoveredSkill === index ? skill.level : 0}%` }}
-                >
-                  <span className="skill-percent">{skill.level}%</span>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                marginBottom: '20px'
+              }}>
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  background: t.badge.bg,
+                  border: `1px solid ${t.border.accent}`,
+                  borderRadius: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: t.text.accent
+                }}>
+                  {icon}
                 </div>
+                <h3 style={{
+                  color: t.text.accent,
+                  fontSize: '0.9rem',
+                  fontWeight: 600,
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                  margin: 0
+                }}>
+                  {category}
+                </h3>
+              </div>
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {items.map(skill => (
+                  <span key={skill} style={{
+                    background: t.badge.bg,
+                    color: t.badge.text,
+                    border: `1px solid ${t.border.accent}`,
+                    padding: '6px 14px', borderRadius: '30px',
+                    fontSize: '0.8rem', fontWeight: 500,
+                  }}>
+                    {skill}
+                  </span>
+                ))}
               </div>
             </motion.div>
           ))}
         </div>
       </div>
-
-      <style>{`
-        .skills-section {
-          padding: 5rem 1.5rem;
-          background: linear-gradient(180deg, #0A1020 0%, #05080F 100%);
-        }
-
-        .skills-container {
-          max-width: 1160px;
-          margin: 0 auto;
-        }
-
-        .skills-title {
-          text-align: center;
-          font-size: clamp(1.8rem, 5vw, 2.5rem);
-          font-weight: 700;
-          color: #E2E8F0;
-          margin-bottom: 3rem;
-          position: relative;
-        }
-
-        .skills-title::after {
-          content: '';
-          position: absolute;
-          bottom: -10px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 60px;
-          height: 3px;
-          background: #7CB9E8;
-          border-radius: 2px;
-        }
-
-        .skills-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 1.8rem;
-        }
-
-        .skill-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(99, 130, 180, 0.15);
-          border-radius: 16px;
-          padding: 1.8rem;
-          text-align: center;
-          transition: all 0.3s ease;
-          backdrop-filter: blur(10px);
-        }
-
-        .skill-card:hover {
-          transform: translateY(-5px);
-          border-color: rgba(124, 185, 232, 0.3);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .skill-icon {
-          font-size: 2.5rem;
-          margin-bottom: 1rem;
-        }
-
-        .skill-name {
-          color: #E2E8F0;
-          font-size: 1.25rem;
-          font-weight: 600;
-          margin-bottom: 1.2rem;
-        }
-
-        .skill-bar-container {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 10px;
-          height: 8px;
-          overflow: hidden;
-        }
-
-        .skill-bar {
-          background: linear-gradient(90deg, #7CB9E8, #2563EB);
-          border-radius: 10px;
-          height: 100%;
-          position: relative;
-          transition: width 1s ease-out;
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-        }
-
-        .skill-percent {
-          position: absolute;
-          right: 5px;
-          top: -20px;
-          font-size: 0.7rem;
-          color: #7CB9E8;
-          font-weight: 600;
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-          .skills-section {
-            padding: 3rem 1rem;
-          }
-
-          .skills-grid {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-          }
-
-          .skill-card {
-            padding: 1.2rem;
-          }
-
-          .skill-name {
-            font-size: 1.1rem;
-          }
-
-          .skill-icon {
-            font-size: 2rem;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .skills-section {
-            padding: 2rem 0.8rem;
-          }
-
-          .skill-card {
-            padding: 1rem;
-          }
-        }
-      `}</style>
     </section>
   )
 }

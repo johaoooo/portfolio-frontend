@@ -1,6 +1,8 @@
+import { ThemeProvider } from "./context/ThemeContext";
 import Navbar         from './components/Navbar'
 import Hero           from './components/Hero'
 import About          from './components/About'
+import Parcours from "./components/Parcours"
 import Skills         from './components/Skills'
 import Projects       from './components/Projects'
 import Certifications from './components/Certifications'
@@ -12,6 +14,7 @@ export default function App() {
   const { darkMode } = useTheme()
 
   return (
+    <ThemeProvider>
     <div style={{
       minHeight: '100vh',
       background: darkMode ? '#0A0A0A' : '#FFFFFF',
@@ -26,5 +29,6 @@ export default function App() {
       <Contact        darkMode={darkMode} />
       <Footer         darkMode={darkMode} />
     </div>
+    </ThemeProvider>
   )
 }
