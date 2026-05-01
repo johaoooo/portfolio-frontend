@@ -19,10 +19,6 @@ export default function Navbar() {
   return (
     <>
       <style>{`
-        @media (max-width: 768px) {
-          .nav-links { display: none !important; }
-          .hamburger { display: flex !important; }
-        }
         .nav-link:hover { 
           color: ${t.text.accent} !important; 
           transform: translateY(-2px);
@@ -30,39 +26,65 @@ export default function Navbar() {
         .nav-link {
           transition: all 0.2s ease;
         }
+        
+        /* Mobile styles */
+        @media (max-width: 768px) {
+          .nav-links { display: none !important; }
+          .hamburger { display: flex !important; }
+          .navbar-custom {
+            width: 85% !important;
+            padding: 0 16px !important;
+          }
+          .menu-mobile {
+            width: 85% !important;
+            max-width: 300px !important;
+          }
+        }
+        
+        /* Desktop styles */
+        @media (min-width: 769px) {
+          .navbar-custom {
+            width: auto !important;
+            min-width: 700px !important;
+            padding: 0 28px !important;
+          }
+          .hamburger {
+            display: none !important;
+          }
+        }
       `}</style>
 
-      <nav style={{
+      <nav className="navbar-custom" style={{
         position: 'fixed',
         top: '20px',
         left: '50%',
         transform: 'translateX(-50%)',
-        width: 'calc(100% - 40px)',
-        maxWidth: '900px',
         boxSizing: 'border-box',
         background: t.bg.nav,
         backdropFilter: 'blur(12px)',
         border: `1px solid ${t.border.default}`,
         borderRadius: '60px',
-        display: 'flex', alignItems: 'center',
+        display: 'flex',
+        alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 20px', height: '56px',
+        padding: '0 28px',
+        height: '60px',
         zIndex: 1000,
         transition: 'background 0.3s, border-color 0.3s',
         boxShadow: darkMode ? '0 4px 20px rgba(0,0,0,0.3)' : '0 4px 20px rgba(0,0,0,0.05)'
       }}>
         {/* Logo gauche */}
         <ScrollLink to="hero" smooth duration={500} style={{
-          color: t.text.accent, fontWeight: 700, fontSize: '1.3rem',
+          color: t.text.accent, fontWeight: 700, fontSize: '1.4rem',
           cursor: 'pointer', textDecoration: 'none',
-          display: 'flex', alignItems: 'center', gap: '6px'
+          display: 'flex', alignItems: 'center', gap: '8px'
         }}>
-          <Code size={20} /> JD
+          <Code size={22} /> JD
         </ScrollLink>
 
         {/* Menu centré avec icônes */}
         <div className="nav-links" style={{
-          display: 'flex', gap: '20px', alignItems: 'center'
+          display: 'flex', gap: '28px', alignItems: 'center'
         }}>
           {menuItems.map(item => (
             <ScrollLink
@@ -74,13 +96,13 @@ export default function Navbar() {
               className="nav-link"
               style={{
                 color: t.text.secondary,
-                fontSize: '0.85rem',
+                fontSize: '0.9rem',
                 textDecoration: 'none',
                 cursor: 'pointer',
                 fontWeight: 500,
                 display: 'flex',
                 alignItems: 'center',
-                gap: '5px'
+                gap: '6px'
               }}
             >
               {item.icon}
@@ -90,64 +112,59 @@ export default function Navbar() {
         </div>
 
         {/* Boutons droite */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           {/* Bouton CV */}
           <a
             href="/cv.pdf"
             download
             style={{
-              display: 'flex', alignItems: 'center', gap: '5px',
+              display: 'flex', alignItems: 'center', gap: '6px',
               background: t.text.accent,
               color: darkMode ? '#05080F' : '#fff',
-              padding: '5px 12px', borderRadius: '40px',
-              textDecoration: 'none', fontSize: '0.75rem',
+              padding: '6px 14px', borderRadius: '40px',
+              textDecoration: 'none', fontSize: '0.8rem',
               fontWeight: 600, transition: 'opacity 0.2s'
             }}
             onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
             onMouseLeave={e => e.currentTarget.style.opacity = '1'}
           >
-            <FileText size={12} /> CV
+            <FileText size={14} /> CV
           </a>
 
           {/* Bouton thème */}
           <button style={{
             background: 'none', border: `1px solid ${t.border.default}`,
             color: t.text.secondary, borderRadius: '50%',
-            width: 32, height: 32, cursor: 'pointer',
-            fontSize: '0.9rem', flexShrink: 0,
+            width: 36, height: 36, cursor: 'pointer',
             transition: 'border-color 0.2s, color 0.2s',
             display: 'flex', alignItems: 'center', justifyContent: 'center'
           }} onClick={() => setDarkMode(!darkMode)} aria-label="Changer de thème">
-            {darkMode ? <Sun size={14} /> : <Moon size={14} />}
+            {darkMode ? <Sun size={16} /> : <Moon size={16} />}
           </button>
 
           {/* Hamburger mobile */}
           <button className="hamburger" style={{
             background: 'none', border: 'none',
             color: t.text.primary, cursor: 'pointer',
-            padding: '6px', flexShrink: 0,
+            padding: '8px', flexShrink: 0,
             display: 'none', alignItems: 'center', justifyContent: 'center'
           }} onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </nav>
 
-      {/* Menu mobile avec icônes */}
+      {/* Menu mobile */}
       {menuOpen && (
-        <div style={{
+        <div className="menu-mobile" style={{
           position: 'fixed',
-          top: '85px',
+          top: '90px',
           left: '50%',
           transform: 'translateX(-50%)',
-          width: 'calc(100% - 40px)',
-          maxWidth: '350px',
           background: t.bg.surface,
           border: `1px solid ${t.border.default}`,
-          borderRadius: '20px',
+          borderRadius: '24px',
           zIndex: 999,
-          boxSizing: 'border-box',
-          transition: 'background 0.3s',
           overflow: 'hidden',
           backdropFilter: 'blur(12px)'
         }}>
@@ -160,41 +177,41 @@ export default function Navbar() {
               offset={-70}
               onClick={() => setMenuOpen(false)}
               style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
-                padding: '14px 20px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
+                padding: '16px 24px',
                 color: t.text.primary, textDecoration: 'none',
                 borderBottom: `1px solid ${t.border.default}`,
-                fontSize: '0.9rem', cursor: 'pointer', textAlign: 'center'
+                fontSize: '1rem', cursor: 'pointer'
               }}
             >
               {item.icon}
               {item.name}
             </ScrollLink>
           ))}
-          <div style={{ padding: '14px 20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div style={{ padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <a
               href="/cv.pdf"
               download
               style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
                 background: t.text.accent,
                 color: darkMode ? '#05080F' : '#fff',
-                padding: '8px', borderRadius: '40px',
-                textDecoration: 'none', fontSize: '0.85rem', fontWeight: 600
+                padding: '10px', borderRadius: '40px',
+                textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600
               }}
             >
-              <FileText size={14} /> Télécharger CV
+              <FileText size={16} /> Télécharger CV
             </a>
             <button
               onClick={() => { setDarkMode(!darkMode); setMenuOpen(false) }}
               style={{
                 background: 'none', border: `1px solid ${t.border.accent}`,
-                color: t.text.accent, padding: '8px',
-                borderRadius: '40px', cursor: 'pointer', fontSize: '0.8rem',
-                width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px'
+                color: t.text.accent, padding: '10px',
+                borderRadius: '40px', cursor: 'pointer', fontSize: '0.85rem',
+                width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
               }}
             >
-              {darkMode ? <Sun size={14} /> : <Moon size={14} />}
+              {darkMode ? <Sun size={16} /> : <Moon size={16} />}
               {darkMode ? 'Mode clair' : 'Mode sombre'}
             </button>
           </div>

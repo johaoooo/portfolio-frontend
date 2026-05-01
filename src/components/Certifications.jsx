@@ -45,12 +45,13 @@ export default function Certifications() {
   return (
     <section id="certifications" style={{
       background: t.bg.page,
-      padding: '80px 24px',
+      padding: '60px 20px',
       transition: 'background 0.3s'
     }}>
       <div style={{
         maxWidth: '1000px',
-        margin: '0 auto'
+        margin: '0 auto',
+        padding: '0 16px'
       }}>
         {/* Titre avec icône */}
         <motion.div
@@ -60,7 +61,7 @@ export default function Certifications() {
           viewport={{ once: true }}
           style={{
             textAlign: 'center',
-            marginBottom: '48px'
+            marginBottom: '40px'
           }}
         >
           <div style={{
@@ -68,12 +69,13 @@ export default function Certifications() {
             alignItems: 'center',
             justifyContent: 'center',
             gap: '12px',
-            marginBottom: '16px'
+            marginBottom: '16px',
+            flexWrap: 'wrap'
           }}>
             <Medal size={28} style={{ color: t.text.accent }} />
             <h2 style={{
               color: t.text.primary,
-              fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+              fontSize: 'clamp(1.5rem, 5vw, 2rem)',
               fontWeight: 700,
               margin: 0
             }}>
@@ -83,7 +85,7 @@ export default function Certifications() {
           </div>
           <p style={{
             color: t.text.secondary,
-            fontSize: '1rem',
+            fontSize: '0.9rem',
             lineHeight: 1.6,
             maxWidth: '600px',
             margin: '0 auto'
@@ -92,10 +94,11 @@ export default function Certifications() {
           </p>
         </motion.div>
 
+        {/* Grille des certifications - Responsive */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-          gap: '24px'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '20px'
         }}>
           {certificationsData.map((cert, index) => (
             <motion.div
@@ -108,9 +111,10 @@ export default function Certifications() {
                 background: t.bg.surface,
                 border: `1px solid ${t.border.default}`,
                 borderRadius: '16px',
-                padding: '24px',
+                padding: '20px',
                 transition: 'all 0.3s ease',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                overflow: 'hidden'
               }}
               onMouseEnter={e => {
                 e.currentTarget.style.transform = 'translateY(-5px)'
@@ -125,7 +129,8 @@ export default function Certifications() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '12px',
-                marginBottom: '16px'
+                marginBottom: '16px',
+                flexWrap: 'wrap'
               }}>
                 <div style={{
                   width: '48px',
@@ -136,14 +141,15 @@ export default function Certifications() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: t.text.accent
+                  color: t.text.accent,
+                  flexShrink: 0
                 }}>
                   <Award size={24} />
                 </div>
                 <div>
                   <h3 style={{
                     color: t.text.primary,
-                    fontSize: '1rem',
+                    fontSize: 'clamp(0.9rem, 3vw, 1rem)',
                     fontWeight: 600,
                     margin: 0
                   }}>
@@ -151,7 +157,7 @@ export default function Certifications() {
                   </h3>
                   <p style={{
                     color: t.text.accent,
-                    fontSize: '0.75rem',
+                    fontSize: '0.7rem',
                     margin: '4px 0 0 0'
                   }}>
                     {cert.issuer}
@@ -161,7 +167,7 @@ export default function Certifications() {
 
               <p style={{
                 color: t.text.secondary,
-                fontSize: '0.85rem',
+                fontSize: '0.8rem',
                 lineHeight: 1.5,
                 marginBottom: '16px'
               }}>
@@ -210,8 +216,21 @@ export default function Certifications() {
 
       <style>{`
         @media (max-width: 768px) {
+          #certifications {
+            padding: 40px 16px !important;
+          }
+          #certifications > div {
+            padding: 0 !important;
+          }
           #certifications > div > div {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          #certifications {
+            padding: 30px 12px !important;
           }
         }
       `}</style>

@@ -71,14 +71,14 @@ export default function Hero() {
         background: t.bg.surface,
         border: `1px solid ${t.border.default}`,
         borderRadius: '40px',
-        padding: '40px 50px',
+        padding: '60px 70px',
         transition: 'all 0.3s ease',
         boxShadow: darkMode ? '0 20px 40px rgba(0,0,0,0.3)' : '0 20px 40px rgba(0,0,0,0.05)'
       }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 0.8fr',
-          gap: '40px',
+          gridTemplateColumns: '1fr 0.7fr',
+          gap: '60px',
           alignItems: 'center'
         }}>
           
@@ -90,10 +90,10 @@ export default function Hero() {
           >
             <h1 style={{
               color: t.text.primary,
-              fontSize: 'clamp(1.5rem, 5vw, 2.5rem)',
+              fontSize: 'clamp(2rem, 4vw, 3rem)',
               fontWeight: 700,
-              lineHeight: 1.3,
-              marginBottom: '16px',
+              lineHeight: 1.2,
+              marginBottom: '20px',
               fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
             }}>
               <span style={{ color: t.text.accent }}>Expert</span>
@@ -102,12 +102,12 @@ export default function Hero() {
               <span style={{
                 color: t.text.accent,
                 display: 'inline-block',
-                minWidth: '160px'
+                minWidth: '220px'
               }}>
                 {currentText}
                 <span style={{
                   display: 'inline-block',
-                  width: '2px',
+                  width: '3px',
                   height: '1em',
                   backgroundColor: t.text.accent,
                   marginLeft: '4px',
@@ -119,9 +119,9 @@ export default function Hero() {
             
             <p style={{
               color: t.text.secondary,
-              fontSize: 'clamp(0.85rem, 3vw, 1rem)',
+              fontSize: '1.1rem',
               lineHeight: 1.5,
-              marginBottom: '24px',
+              marginBottom: '30px',
               fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
             }}>
               Expert en Cybersécurité & Développeur Fullstack
@@ -129,7 +129,7 @@ export default function Hero() {
             
             <div style={{
               display: 'flex',
-              gap: '12px',
+              gap: '16px',
               flexWrap: 'wrap'
             }}>
               <ScrollLink
@@ -139,13 +139,14 @@ export default function Hero() {
                 style={{
                   background: t.text.accent,
                   color: darkMode ? '#05080F' : '#fff',
-                  padding: '10px 24px',
+                  padding: '12px 28px',
                   borderRadius: '40px',
                   textDecoration: 'none',
-                  fontSize: '0.85rem',
+                  fontSize: '0.9rem',
                   fontWeight: 600,
                   cursor: 'pointer',
-                  transition: 'opacity 0.2s'
+                  transition: 'opacity 0.2s',
+                  display: 'inline-block'
                 }}
                 onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
                 onMouseLeave={e => e.currentTarget.style.opacity = '1'}
@@ -160,13 +161,14 @@ export default function Hero() {
                   background: 'transparent',
                   border: `2px solid ${t.text.accent}`,
                   color: t.text.accent,
-                  padding: '10px 24px',
+                  padding: '12px 28px',
                   borderRadius: '40px',
                   textDecoration: 'none',
-                  fontSize: '0.85rem',
+                  fontSize: '0.9rem',
                   fontWeight: 600,
                   cursor: 'pointer',
-                  transition: 'all 0.2s'
+                  transition: 'all 0.2s',
+                  display: 'inline-block'
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.background = t.text.accent
@@ -192,12 +194,12 @@ export default function Hero() {
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '16px'
+              gap: '20px'
             }}
           >
             <div style={{
               width: '100%',
-              maxWidth: '220px',
+              maxWidth: '300px',
               margin: '0 auto'
             }}>
               <PhotoCard />
@@ -206,16 +208,16 @@ export default function Hero() {
             <div style={{ textAlign: 'center' }}>
               <h2 style={{
                 color: t.text.primary,
-                fontSize: 'clamp(1rem, 4vw, 1.3rem)',
+                fontSize: '1.4rem',
                 fontWeight: 600,
-                marginBottom: '4px',
+                marginBottom: '6px',
                 fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
               }}>
                 Joseph <span style={{ color: t.text.accent }}>Dehazounde</span>
               </h2>
               <p style={{
                 color: t.text.accent,
-                fontSize: 'clamp(0.6rem, 2.5vw, 0.7rem)',
+                fontSize: '0.75rem',
                 letterSpacing: '1px',
                 fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
               }}>
@@ -232,40 +234,41 @@ export default function Hero() {
           50% { opacity: 0; }
         }
         
-        @media (max-width: 768px) {
+        /* Desktop */
+        @media (min-width: 769px) {
           #hero {
-            padding: 80px 16px 40px !important;
-            align-items: flex-start !important;
+            padding: 100px 20px 80px !important;
           }
           #hero > div {
-            padding: 25px !important;
+            padding: 60px 70px !important;
+          }
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+          #hero {
+            padding: 90px 16px 40px !important;
+          }
+          #hero > div {
+            padding: 30px 25px !important;
           }
           #hero > div > div {
             grid-template-columns: 1fr !important;
             gap: 30px !important;
             text-align: center !important;
           }
-          #hero .hero-left {
-            order: 2 !important;
-          }
-          #hero .hero-right {
-            order: 1 !important;
-          }
-          .hero-buttons {
+          #hero .hero-buttons {
             justify-content: center !important;
           }
         }
         
         @media (max-width: 480px) {
           #hero {
-            padding: 70px 12px 30px !important;
+            padding: 85px 12px 30px !important;
           }
           #hero > div {
-            padding: 20px !important;
+            padding: 25px 20px !important;
             border-radius: 24px !important;
-          }
-          #hero > div > div {
-            gap: 20px !important;
           }
         }
       `}</style>
