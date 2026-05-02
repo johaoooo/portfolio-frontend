@@ -1,16 +1,9 @@
 import { useTheme } from '../context/ThemeContext'
 import { useTokens } from '../theme/tokens'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, MessageCircle, Sparkles } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, MessageCircle, Sparkles, Code } from 'lucide-react'
 
-// Icône GitHub personnalisée
-const GithubIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-  </svg>
-)
-
-// Icône LinkedIn personnalisée
+// Icône LinkedIn personnalisée (car lucide-react ne l'exporte pas correctement)
 const LinkedinIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -25,12 +18,12 @@ export default function Contact() {
 
   const contactInfo = [
     { icon: <Mail size={20} />, label: 'Email', value: 'josephdehazounde@gmail.com', link: 'mailto:josephdehazounde@gmail.com' },
-    { icon: <Phone size={20} />, label: 'Téléphone', value: '01 62 10 86 94', link: null },
+    { icon: <Phone size={20} />, label: 'Téléphone', value: '01 62 10 86 94', link: 'tel:+33162108694' },
     { icon: <MapPin size={20} />, label: 'Localisation', value: 'Porto-Novo, Bénin', link: null }
   ]
 
   const socialLinks = [
-    { icon: <GithubIcon />, name: 'GitHub', url: 'https://github.com/johaoooo' },
+    { icon: <Code size={20} />, name: 'GitHub', url: 'https://github.com/johaoooo' },
     { icon: <LinkedinIcon />, name: 'LinkedIn', url: 'https://linkedin.com/in/dehazounde-joseph' }
   ]
 
@@ -41,7 +34,6 @@ export default function Contact() {
       transition: 'background 0.3s'
     }}>
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-        {/* Titre avec icônes */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,12 +48,8 @@ export default function Contact() {
             </h2>
             <Sparkles size={28} style={{ color: t.text.accent }} />
           </div>
-          <p style={{ color: t.text.secondary, fontSize: '1rem', lineHeight: 1.6, maxWidth: '600px', margin: '0 auto' }}>
-            N'hésitez pas à me contacter pour toute collaboration ou opportunité
-          </p>
         </motion.div>
 
-        {/* Grille contact - formulaire */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -89,7 +77,6 @@ export default function Contact() {
             </form>
           </motion.div>
 
-          {/* Infos de contact */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
