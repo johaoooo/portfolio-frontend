@@ -126,7 +126,11 @@ export default function Hero() {
               Expert en Cybersécurité & Développeur Fullstack
             </p>
             
-            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+            <div style={{
+              display: 'flex',
+              gap: '16px',
+              flexWrap: 'wrap'
+            }} className="hero-buttons">
               <ScrollLink
                 to="projects"
                 smooth duration={500}
@@ -210,10 +214,32 @@ export default function Hero() {
           50% { opacity: 0; }
         }
         
+        /* Desktop */
+        @media (min-width: 769px) {
+          #hero { padding: 100px 20px 80px !important; }
+          #hero > div { padding: 60px 70px !important; }
+          .hero-buttons { justify-content: flex-start !important; }
+        }
+        
+        /* Mobile */
         @media (max-width: 768px) {
           #hero { padding: 90px 16px 40px !important; }
-          #hero > div { padding: 30px 25px !important; }
+          #hero > div { padding: 30px 20px !important; }
           #hero > div > div { grid-template-columns: 1fr !important; gap: 30px !important; text-align: center !important; }
+          .hero-buttons { 
+            justify-content: center !important; 
+            display: flex !important;
+          }
+          .hero-buttons a {
+            display: inline-block !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          #hero { padding: 85px 12px 30px !important; }
+          #hero > div { padding: 25px 15px !important; border-radius: 24px !important; }
+          .hero-buttons { gap: 12px !important; }
+          .hero-buttons a { padding: 10px 20px !important; font-size: 0.8rem !important; }
         }
       `}</style>
     </section>
