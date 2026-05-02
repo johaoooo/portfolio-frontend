@@ -34,49 +34,120 @@ export default function Contact() {
       transition: 'background 0.3s'
     }}>
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+        
+        {/* Titre dynamique avec icônes */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
           viewport={{ once: true }}
-          style={{ textAlign: 'center', marginBottom: '48px' }}
+          style={{ textAlign: 'center', marginBottom: '50px' }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '16px' }}>
+          <motion.div
+            animate={{ rotate: [0, 5, -5, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px' }}
+          >
             <MessageCircle size={28} style={{ color: t.text.accent }} />
-            <h2 style={{ color: t.text.primary, fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 700, margin: 0 }}>
+            <h2 style={{
+              color: t.text.primary,
+              fontSize: 'clamp(1.8rem, 4vw, 2.2rem)',
+              fontWeight: 700,
+              margin: 0,
+              display: 'inline-block'
+            }}>
               Contact
             </h2>
-            <Sparkles size={28} style={{ color: t.text.accent }} />
-          </div>
+            <motion.div
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            >
+              <Sparkles size={28} style={{ color: t.text.accent }} />
+            </motion.div>
+          </motion.div>
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: '60px' }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
+            style={{
+              height: '3px',
+              background: t.text.accent,
+              borderRadius: '2px',
+              margin: '12px auto 0'
+            }}
+          />
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            style={{
+              color: t.text.secondary,
+              fontSize: '0.95rem',
+              maxWidth: '600px',
+              margin: '16px auto 0'
+            }}
+          >
+            N'hésitez pas à me contacter pour toute collaboration ou opportunité
+          </motion.p>
         </motion.div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+          
+          {/* Formulaire */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            style={{ background: t.bg.surface, border: `1px solid ${t.border.default}`, borderRadius: '16px', padding: '28px' }}
+            whileHover={{ y: -5 }}
+            style={{
+              background: t.bg.surface,
+              border: `1px solid ${t.border.default}`,
+              borderRadius: '20px',
+              padding: '28px',
+              transition: 'all 0.3s ease'
+            }}
           >
             <h3 style={{ color: t.text.primary, fontSize: '1.25rem', fontWeight: 600, marginBottom: '24px' }}>
               Envoyez-moi un message
             </h3>
             <form action="#" method="POST">
               <div style={{ marginBottom: '16px' }}>
-                <input type="text" placeholder="Votre nom" style={{ width: '100%', padding: '12px 16px', background: t.bg.page, border: `1px solid ${t.border.default}`, borderRadius: '8px', color: t.text.primary, fontSize: '0.9rem', outline: 'none' }} />
+                <input type="text" placeholder="Votre nom" style={{ width: '100%', padding: '12px 16px', background: t.bg.page, border: `1px solid ${t.border.default}`, borderRadius: '12px', color: t.text.primary, fontSize: '0.9rem', outline: 'none' }} />
               </div>
               <div style={{ marginBottom: '16px' }}>
-                <input type="email" placeholder="Votre email" style={{ width: '100%', padding: '12px 16px', background: t.bg.page, border: `1px solid ${t.border.default}`, borderRadius: '8px', color: t.text.primary, fontSize: '0.9rem', outline: 'none' }} />
+                <input type="email" placeholder="Votre email" style={{ width: '100%', padding: '12px 16px', background: t.bg.page, border: `1px solid ${t.border.default}`, borderRadius: '12px', color: t.text.primary, fontSize: '0.9rem', outline: 'none' }} />
               </div>
               <div style={{ marginBottom: '24px' }}>
-                <textarea rows={4} placeholder="Votre message" style={{ width: '100%', padding: '12px 16px', background: t.bg.page, border: `1px solid ${t.border.default}`, borderRadius: '8px', color: t.text.primary, fontSize: '0.9rem', outline: 'none', resize: 'vertical', fontFamily: 'inherit' }} />
+                <textarea rows={4} placeholder="Votre message" style={{ width: '100%', padding: '12px 16px', background: t.bg.page, border: `1px solid ${t.border.default}`, borderRadius: '12px', color: t.text.primary, fontSize: '0.9rem', outline: 'none', resize: 'vertical', fontFamily: 'inherit' }} />
               </div>
-              <button type="submit" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', background: t.text.accent, color: darkMode ? '#05080F' : '#fff', padding: '12px 24px', border: 'none', borderRadius: '8px', fontSize: '0.9rem', fontWeight: 600, cursor: 'pointer' }}>
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  background: t.text.accent,
+                  color: darkMode ? '#05080F' : '#fff',
+                  padding: '12px 24px',
+                  border: 'none',
+                  borderRadius: '40px',
+                  fontSize: '0.9rem',
+                  fontWeight: 600,
+                  cursor: 'pointer'
+                }}
+              >
                 <Send size={18} /> Envoyer
-              </button>
+              </motion.button>
             </form>
           </motion.div>
 
+          {/* Infos de contact */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -84,29 +155,72 @@ export default function Contact() {
             viewport={{ once: true }}
             style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
           >
-            <div style={{ background: t.bg.surface, border: `1px solid ${t.border.default}`, borderRadius: '16px', padding: '28px' }}>
+            <motion.div
+              whileHover={{ y: -5 }}
+              style={{
+                background: t.bg.surface,
+                border: `1px solid ${t.border.default}`,
+                borderRadius: '20px',
+                padding: '28px',
+                transition: 'all 0.3s ease'
+              }}
+            >
               <h3 style={{ color: t.text.primary, fontSize: '1.25rem', fontWeight: 600, marginBottom: '24px' }}>Coordonnées</h3>
               {contactInfo.map((info, index) => (
                 <div key={info.label} style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: index < contactInfo.length - 1 ? '20px' : 0 }}>
-                  <div style={{ width: '40px', height: '40px', background: t.badge.bg, border: `1px solid ${t.border.accent}`, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: t.text.accent }}>{info.icon}</div>
+                  <div style={{ width: '40px', height: '40px', background: t.badge.bg, border: `1px solid ${t.border.accent}`, borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: t.text.accent }}>
+                    {info.icon}
+                  </div>
                   <div>
                     <p style={{ color: t.text.secondary, fontSize: '0.7rem', margin: 0 }}>{info.label}</p>
-                    {info.link ? <a href={info.link} style={{ color: t.text.primary, textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500 }}>{info.value}</a> : <p style={{ color: t.text.primary, fontSize: '0.9rem', fontWeight: 500, margin: 0 }}>{info.value}</p>}
+                    {info.link ? (
+                      <a href={info.link} style={{ color: t.text.primary, textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500 }}>{info.value}</a>
+                    ) : (
+                      <p style={{ color: t.text.primary, fontSize: '0.9rem', fontWeight: 500, margin: 0 }}>{info.value}</p>
+                    )}
                   </div>
                 </div>
               ))}
-            </div>
+            </motion.div>
 
-            <div style={{ background: t.bg.surface, border: `1px solid ${t.border.default}`, borderRadius: '16px', padding: '28px' }}>
+            <motion.div
+              whileHover={{ y: -5 }}
+              style={{
+                background: t.bg.surface,
+                border: `1px solid ${t.border.default}`,
+                borderRadius: '20px',
+                padding: '28px',
+                transition: 'all 0.3s ease'
+              }}
+            >
               <h3 style={{ color: t.text.primary, fontSize: '1.25rem', fontWeight: 600, marginBottom: '24px' }}>Réseaux sociaux</h3>
               <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
                 {socialLinks.map((social) => (
-                  <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '8px', background: t.badge.bg, border: `1px solid ${t.border.accent}`, borderRadius: '30px', padding: '8px 16px', color: t.text.accent, textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500 }}>
+                  <motion.a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05, y: -3 }}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      background: t.badge.bg,
+                      border: `1px solid ${t.border.accent}`,
+                      borderRadius: '40px',
+                      padding: '8px 16px',
+                      color: t.text.accent,
+                      textDecoration: 'none',
+                      fontSize: '0.85rem',
+                      fontWeight: 500
+                    }}
+                  >
                     {social.icon} {social.name}
-                  </a>
+                  </motion.a>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

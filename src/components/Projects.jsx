@@ -1,7 +1,7 @@
 import { useTheme } from '../context/ThemeContext'
 import { useTokens } from '../theme/tokens'
 import { motion } from 'framer-motion'
-import { FolderGit2, Sparkles } from 'lucide-react'
+import { FolderGit2, Sparkles, Code, Shield, Cloud, Brain } from 'lucide-react'
 import ProjectCard from './ProjectCard'
 
 const PROJECTS = [
@@ -48,33 +48,70 @@ export default function Projects() {
 
   return (
     <section id="projects" style={{
-      background: t.bg.page, padding: '80px 24px',
+      background: t.bg.page,
+      padding: '80px 24px',
       transition: 'background 0.3s',
+      position: 'relative',
+      overflow: 'hidden'
     }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+        
+        {/* Titre dynamique avec icônes */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
           viewport={{ once: true }}
-          style={{ textAlign: 'center', marginBottom: '48px' }}
+          style={{ textAlign: 'center', marginBottom: '50px' }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '16px' }}>
+          <motion.div
+            animate={{ rotate: [0, 5, -5, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px' }}
+          >
             <FolderGit2 size={28} style={{ color: t.text.accent }} />
-            <h2 style={{ color: t.text.primary, fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 700, margin: 0 }}>
+            <h2 style={{
+              color: t.text.primary,
+              fontSize: 'clamp(1.8rem, 4vw, 2.2rem)',
+              fontWeight: 700,
+              margin: 0,
+              display: 'inline-block'
+            }}>
               Projets
             </h2>
             <Sparkles size={28} style={{ color: t.text.accent }} />
-          </div>
-          <p style={{ color: t.text.secondary, fontSize: '1rem', maxWidth: '600px', margin: '0 auto' }}>
+          </motion.div>
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: '60px' }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
+            style={{
+              height: '3px',
+              background: t.text.accent,
+              borderRadius: '2px',
+              margin: '12px auto 0'
+            }}
+          />
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            style={{
+              color: t.text.secondary,
+              fontSize: '0.95rem',
+              maxWidth: '600px',
+              margin: '16px auto 0'
+            }}
+          >
             Découvrez mes réalisations récentes
-          </p>
+          </motion.p>
         </motion.div>
 
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '24px',
+          gap: '24px'
         }}>
           {PROJECTS.map((project, index) => (
             <ProjectCard key={index} {...project} />
