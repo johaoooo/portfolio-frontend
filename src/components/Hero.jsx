@@ -130,8 +130,9 @@ export default function Hero() {
             <div style={{
               display: 'flex',
               gap: '16px',
-              flexWrap: 'wrap'
-            }}>
+              flexWrap: 'wrap',
+              justifyContent: 'flex-start'
+            }} className="hero-buttons">
               <ScrollLink
                 to="projects"
                 smooth duration={500}
@@ -242,6 +243,9 @@ export default function Hero() {
           #hero > div {
             padding: 60px 70px !important;
           }
+          .hero-buttons {
+            justify-content: flex-start !important;
+          }
         }
         
         /* Mobile */
@@ -257,7 +261,7 @@ export default function Hero() {
             gap: 30px !important;
             text-align: center !important;
           }
-          #hero .hero-buttons {
+          .hero-buttons {
             justify-content: center !important;
           }
         }
@@ -269,6 +273,9 @@ export default function Hero() {
           #hero > div {
             padding: 25px 20px !important;
             border-radius: 24px !important;
+          }
+          .hero-buttons {
+            justify-content: center !important;
           }
         }
       `}</style>
