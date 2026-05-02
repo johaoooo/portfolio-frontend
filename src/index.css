@@ -39,3 +39,32 @@ html {
     scroll-padding-top: 60px;
   }
 }
+
+/* Correction pour mobile - évite les pages blanches */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: -webkit-fill-available;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  background: #05080F;
+}
+
+/* Évite les problèmes de hauteur sur mobile */
+section {
+  min-height: auto !important;
+  min-height: 100vh !important;
+  min-height: -webkit-fill-available !important;
+}
+
+/* Force l'affichage du contenu */
+#hero, #skills, #projects, #about, #certifications, #contact {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}

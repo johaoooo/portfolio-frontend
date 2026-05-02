@@ -1,4 +1,3 @@
-import ParticlesBackground from "./components/ParticlesBackground"
 import { ThemeProvider } from "./context/ThemeContext";
 import Navbar         from './components/Navbar'
 import Hero           from './components/Hero'
@@ -16,7 +15,6 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <ParticlesBackground />
     <div style={{
       minHeight: '100vh',
       background: darkMode ? '#0A0A0A' : '#FFFFFF',

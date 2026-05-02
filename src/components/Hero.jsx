@@ -12,7 +12,6 @@ export default function Hero() {
   const [currentText, setCurrentText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
   const [loopNum, setLoopNum] = useState(0)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   
   const texts = [
     'Cybersécurité',
@@ -55,15 +54,6 @@ export default function Hero() {
     }
   }, [])
   
-  // Effet de suivi de souris pour le fond
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight })
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-  
   return (
     <section id="hero" style={{
       minHeight: '100vh',
@@ -72,20 +62,8 @@ export default function Hero() {
       background: t.bg.page,
       transition: 'background 0.3s',
       padding: '100px 20px 60px',
-      fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif',
-      position: 'relative',
-      overflow: 'hidden'
+      fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
     }}>
-      {/* Effet de fond dynamique qui suit la souris */}
-      <div style={{
-        position: 'absolute',
-        width: '150%',
-        height: '150%',
-        background: `radial-gradient(circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, ${t.text.accent}08, transparent 50%)`,
-        pointerEvents: 'none',
-        transition: 'background 0.1s ease'
-      }} />
-      
       <div style={{
         maxWidth: '1200px',
         margin: '0 auto',
@@ -95,8 +73,7 @@ export default function Hero() {
         borderRadius: '40px',
         padding: '60px 70px',
         transition: 'all 0.3s ease',
-        boxShadow: darkMode ? '0 20px 40px rgba(0,0,0,0.3)' : '0 20px 40px rgba(0,0,0,0.05)',
-        backdropFilter: 'blur(10px)'
+        boxShadow: darkMode ? '0 20px 40px rgba(0,0,0,0.3)' : '0 20px 40px rgba(0,0,0,0.05)'
       }}>
         <div style={{
           display: 'grid',
@@ -106,22 +83,18 @@ export default function Hero() {
         }}>
           
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
+            transition={{ duration: 0.5 }}
           >
-            <motion.h1
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              style={{
-                color: t.text.primary,
-                fontSize: 'clamp(2rem, 4vw, 3rem)',
-                fontWeight: 700,
-                lineHeight: 1.2,
-                marginBottom: '20px',
-                fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
-              }}
-            >
+            <h1 style={{
+              color: t.text.primary,
+              fontSize: 'clamp(2rem, 4vw, 3rem)',
+              fontWeight: 700,
+              lineHeight: 1.2,
+              marginBottom: '20px',
+              fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
+            }}>
               <span style={{ color: t.text.accent }}>Expert</span>
               <br />
               en{' '}
@@ -131,48 +104,29 @@ export default function Hero() {
                 minWidth: '220px'
               }}>
                 {currentText}
-                <motion.span
-                  animate={{ opacity: [1, 0, 1] }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                  style={{
-                    display: 'inline-block',
-                    width: '3px',
-                    height: '1em',
-                    backgroundColor: t.text.accent,
-                    marginLeft: '4px',
-                    verticalAlign: 'middle'
-                  }} />
+                <span style={{
+                  display: 'inline-block',
+                  width: '3px',
+                  height: '1em',
+                  backgroundColor: t.text.accent,
+                  marginLeft: '4px',
+                  animation: 'blink 1s step-end infinite',
+                  verticalAlign: 'middle'
+                }} />
               </span>
-            </motion.h1>
+            </h1>
             
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              style={{
-                color: t.text.secondary,
-                fontSize: '1.1rem',
-                lineHeight: 1.6,
-                marginBottom: '30px',
-                fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif',
-                maxWidth: '500px'
-              }}
-            >
-              Passionné par la cybersécurité offensive et le développement fullstack, 
-              je construis des applications robustes et sécurisées. Également autodidacte, 
-              je me forme constamment aux nouvelles technologies.
-            </motion.p>
+            <p style={{
+              color: t.text.secondary,
+              fontSize: '1.1rem',
+              lineHeight: 1.5,
+              marginBottom: '30px',
+              fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
+            }}>
+              Expert en Cybersécurité & Développeur Fullstack
+            </p>
             
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              style={{
-                display: 'flex',
-                gap: '16px',
-                flexWrap: 'wrap'
-              }} className="hero-buttons"
-            >
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
               <ScrollLink
                 to="projects"
                 smooth duration={500}
@@ -185,11 +139,8 @@ export default function Hero() {
                   textDecoration: 'none',
                   fontSize: '0.9rem',
                   fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  display: 'inline-block'
+                  cursor: 'pointer'
                 }}
-                whileHover={{ scale: 1.05, boxShadow: `0 5px 20px ${t.text.accent}40` }}
               >
                 Voir mes projets
               </ScrollLink>
@@ -206,21 +157,18 @@ export default function Hero() {
                   textDecoration: 'none',
                   fontSize: '0.9rem',
                   fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  display: 'inline-block'
+                  cursor: 'pointer'
                 }}
-                whileHover={{ scale: 1.05, background: t.text.accent, color: darkMode ? '#05080F' : '#fff' }}
               >
                 Me contacter
               </ScrollLink>
-            </motion.div>
+            </div>
           </motion.div>
           
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, type: "spring" }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -229,24 +177,11 @@ export default function Hero() {
               gap: '20px'
             }}
           >
-            <motion.div
-              animate={{ rotate: [0, 5, 0, -5, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              style={{
-                width: '100%',
-                maxWidth: '300px',
-                margin: '0 auto'
-              }}
-            >
+            <div style={{ width: '100%', maxWidth: '280px', margin: '0 auto' }}>
               <PhotoCard />
-            </motion.div>
+            </div>
             
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              style={{ textAlign: 'center' }}
-            >
+            <div style={{ textAlign: 'center' }}>
               <h2 style={{
                 color: t.text.primary,
                 fontSize: '1.4rem',
@@ -264,7 +199,7 @@ export default function Hero() {
               }}>
                 EXPERT CYBERSÉCURITÉ & FULLSTACK DEV
               </p>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -275,17 +210,10 @@ export default function Hero() {
           50% { opacity: 0; }
         }
         
-        @media (min-width: 769px) {
-          #hero { padding: 100px 20px 80px !important; }
-          #hero > div { padding: 60px 70px !important; }
-          .hero-buttons { justify-content: flex-start !important; }
-        }
-        
         @media (max-width: 768px) {
           #hero { padding: 90px 16px 40px !important; }
           #hero > div { padding: 30px 25px !important; }
           #hero > div > div { grid-template-columns: 1fr !important; gap: 30px !important; text-align: center !important; }
-          .hero-buttons { justify-content: center !important; }
         }
       `}</style>
     </section>
