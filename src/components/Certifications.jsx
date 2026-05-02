@@ -5,35 +5,45 @@ import { Award, Calendar, ExternalLink, Medal, Sparkles } from 'lucide-react'
 
 const certificationsData = [
   {
-    name: 'OWASP Top 10',
-    issuer: 'OWASP Foundation',
-    date: '2024',
-    description: 'Maîtrise des vulnérabilités web et des bonnes pratiques de sécurité.',
-    credentialId: 'OWASP-2024-001',
+    name: 'Administration système Linux',
+    issuer: 'OpenClassrooms',
+    date: '2025',
+    description: 'Maîtrise de l\'administration système sous Linux, gestion des utilisateurs, processus, et sécurisation.',
     url: '#'
   },
   {
-    name: 'DevOps Engineer - Docker & Kubernetes',
-    issuer: 'Linux Foundation',
-    date: '2023',
-    description: 'Containerisation, orchestration et CI/CD.',
-    credentialId: 'LF-2023-042',
+    name: 'Bootcamp Cybersécurité',
+    issuer: 'D-Clic / OIF (Organisation Internationale de la Francophonie)',
+    date: '2026',
+    description: 'Formation intensive en cybersécurité offensive et défensive.',
     url: '#'
   },
   {
-    name: 'Certified Ethical Hacker (CEH)',
-    issuer: 'EC-Council',
-    date: '2024',
-    description: 'Techniques de pentest et identification des vulnérabilités.',
-    credentialId: 'CEH-2024-089',
+    name: 'Administration Cisco',
+    issuer: 'OpenClassrooms',
+    date: '2026',
+    description: 'Configuration et administration des équipements réseau Cisco.',
     url: '#'
   },
   {
-    name: 'Security+',
-    issuer: 'CompTIA',
-    date: '2023',
-    description: 'Fondamentaux de la sécurité réseau et gestion des risques.',
-    credentialId: 'COMP-2023-567',
+    name: 'GitHub',
+    issuer: 'OpenClassrooms',
+    date: '2026',
+    description: 'Gestion de versions, collaboration sur projets, et automatisation avec GitHub Actions.',
+    url: '#'
+  },
+  {
+    name: 'Docker',
+    issuer: 'OpenClassrooms',
+    date: '2026',
+    description: 'Containerisation d\'applications, orchestration avec Docker Compose.',
+    url: '#'
+  },
+  {
+    name: 'Windows Server',
+    issuer: 'OpenClassrooms',
+    date: '2026',
+    description: 'Administration de serveurs Windows, Active Directory, et déploiement de services.',
     url: '#'
   }
 ]
@@ -45,11 +55,11 @@ export default function Certifications() {
   return (
     <section id="certifications" style={{
       background: t.bg.page,
-      padding: '60px 20px',
+      padding: '80px 20px',
       transition: 'background 0.3s'
     }}>
       <div style={{
-        maxWidth: '1000px',
+        maxWidth: '1200px',
         margin: '0 auto',
         padding: '0 16px'
       }}>
@@ -61,7 +71,7 @@ export default function Certifications() {
           viewport={{ once: true }}
           style={{
             textAlign: 'center',
-            marginBottom: '40px'
+            marginBottom: '48px'
           }}
         >
           <div style={{
@@ -85,36 +95,38 @@ export default function Certifications() {
           </div>
           <p style={{
             color: t.text.secondary,
-            fontSize: '0.9rem',
+            fontSize: '0.95rem',
             lineHeight: 1.6,
             maxWidth: '600px',
             margin: '0 auto'
           }}>
-            Certifications professionnelles et formations continues
+            Certifications professionnelles obtenues pour renforcer mes compétences en cybersécurité et développement
           </p>
         </motion.div>
 
-        {/* Grille des certifications - Responsive */}
+        {/* Grille des certifications 3 colonnes sur desktop */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '20px'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '24px'
         }}>
           {certificationsData.map((cert, index) => (
             <motion.div
               key={cert.name}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
               viewport={{ once: true }}
               style={{
                 background: t.bg.surface,
                 border: `1px solid ${t.border.default}`,
-                borderRadius: '16px',
-                padding: '20px',
+                borderRadius: '20px',
+                padding: '24px',
                 transition: 'all 0.3s ease',
                 cursor: 'pointer',
-                overflow: 'hidden'
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column'
               }}
               onMouseEnter={e => {
                 e.currentTarget.style.transform = 'translateY(-5px)'
@@ -128,16 +140,15 @@ export default function Certifications() {
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '12px',
-                marginBottom: '16px',
-                flexWrap: 'wrap'
+                gap: '14px',
+                marginBottom: '16px'
               }}>
                 <div style={{
-                  width: '48px',
-                  height: '48px',
+                  width: '50px',
+                  height: '50px',
                   background: t.badge.bg,
                   border: `1px solid ${t.border.accent}`,
-                  borderRadius: '12px',
+                  borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -149,16 +160,18 @@ export default function Certifications() {
                 <div>
                   <h3 style={{
                     color: t.text.primary,
-                    fontSize: 'clamp(0.9rem, 3vw, 1rem)',
-                    fontWeight: 600,
-                    margin: 0
+                    fontSize: '1rem',
+                    fontWeight: 700,
+                    margin: 0,
+                    lineHeight: 1.3
                   }}>
                     {cert.name}
                   </h3>
                   <p style={{
                     color: t.text.accent,
                     fontSize: '0.7rem',
-                    margin: '4px 0 0 0'
+                    margin: '5px 0 0 0',
+                    fontWeight: 500
                   }}>
                     {cert.issuer}
                   </p>
@@ -167,9 +180,10 @@ export default function Certifications() {
 
               <p style={{
                 color: t.text.secondary,
-                fontSize: '0.8rem',
+                fontSize: '0.85rem',
                 lineHeight: 1.5,
-                marginBottom: '16px'
+                marginBottom: '20px',
+                flex: 1
               }}>
                 {cert.description}
               </p>
@@ -178,36 +192,37 @@ export default function Certifications() {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: '8px'
+                marginTop: 'auto'
               }}>
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
                   color: t.text.secondary,
-                  fontSize: '0.7rem'
+                  fontSize: '0.75rem'
                 }}>
-                  <Calendar size={12} />
-                  <span>{cert.date}</span>
+                  <Calendar size={14} />
+                  <span>Obtenue en {cert.date}</span>
                 </div>
-                <a
-                  href={cert.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    color: t.text.accent,
-                    fontSize: '0.7rem',
-                    textDecoration: 'none',
-                    fontWeight: 500
-                  }}
-                >
-                  <ExternalLink size={12} />
-                  Voir la certification
-                </a>
+                {cert.url !== '#' && (
+                  <a
+                    href={cert.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      color: t.text.accent,
+                      fontSize: '0.7rem',
+                      textDecoration: 'none',
+                      fontWeight: 500
+                    }}
+                  >
+                    <ExternalLink size={12} />
+                    Voir
+                  </a>
+                )}
               </div>
             </motion.div>
           ))}
@@ -217,7 +232,7 @@ export default function Certifications() {
       <style>{`
         @media (max-width: 768px) {
           #certifications {
-            padding: 40px 16px !important;
+            padding: 50px 16px !important;
           }
           #certifications > div {
             padding: 0 !important;
@@ -230,7 +245,7 @@ export default function Certifications() {
         
         @media (max-width: 480px) {
           #certifications {
-            padding: 30px 12px !important;
+            padding: 40px 12px !important;
           }
         }
       `}</style>

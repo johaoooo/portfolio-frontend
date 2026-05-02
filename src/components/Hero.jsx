@@ -82,7 +82,6 @@ export default function Hero() {
           alignItems: 'center'
         }}>
           
-          {/* Partie gauche - Texte dynamique */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -120,18 +119,20 @@ export default function Hero() {
             <p style={{
               color: t.text.secondary,
               fontSize: '1.1rem',
-              lineHeight: 1.5,
+              lineHeight: 1.6,
               marginBottom: '30px',
-              fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
+              fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif',
+              maxWidth: '500px'
             }}>
-              Expert en Cybersécurité & Développeur Fullstack
+              Passionné par la cybersécurité offensive et le développement fullstack, 
+              je construis des applications robustes et sécurisées. Également autodidacte, 
+              je me forme constamment aux nouvelles technologies.
             </p>
             
             <div style={{
               display: 'flex',
               gap: '16px',
-              flexWrap: 'wrap',
-              justifyContent: 'flex-start'
+              flexWrap: 'wrap'
             }} className="hero-buttons">
               <ScrollLink
                 to="projects"
@@ -149,8 +150,6 @@ export default function Hero() {
                   transition: 'opacity 0.2s',
                   display: 'inline-block'
                 }}
-                onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
-                onMouseLeave={e => e.currentTarget.style.opacity = '1'}
               >
                 Voir mes projets
               </ScrollLink>
@@ -171,21 +170,12 @@ export default function Hero() {
                   transition: 'all 0.2s',
                   display: 'inline-block'
                 }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.background = t.text.accent
-                  e.currentTarget.style.color = darkMode ? '#05080F' : '#fff'
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.background = 'transparent'
-                  e.currentTarget.style.color = t.text.accent
-                }}
               >
                 Me contacter
               </ScrollLink>
             </div>
           </motion.div>
           
-          {/* Partie droite - Photo */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -235,48 +225,17 @@ export default function Hero() {
           50% { opacity: 0; }
         }
         
-        /* Desktop */
         @media (min-width: 769px) {
-          #hero {
-            padding: 100px 20px 80px !important;
-          }
-          #hero > div {
-            padding: 60px 70px !important;
-          }
-          .hero-buttons {
-            justify-content: flex-start !important;
-          }
+          #hero { padding: 100px 20px 80px !important; }
+          #hero > div { padding: 60px 70px !important; }
+          .hero-buttons { justify-content: flex-start !important; }
         }
         
-        /* Mobile */
         @media (max-width: 768px) {
-          #hero {
-            padding: 90px 16px 40px !important;
-          }
-          #hero > div {
-            padding: 30px 25px !important;
-          }
-          #hero > div > div {
-            grid-template-columns: 1fr !important;
-            gap: 30px !important;
-            text-align: center !important;
-          }
-          .hero-buttons {
-            justify-content: center !important;
-          }
-        }
-        
-        @media (max-width: 480px) {
-          #hero {
-            padding: 85px 12px 30px !important;
-          }
-          #hero > div {
-            padding: 25px 20px !important;
-            border-radius: 24px !important;
-          }
-          .hero-buttons {
-            justify-content: center !important;
-          }
+          #hero { padding: 90px 16px 40px !important; }
+          #hero > div { padding: 30px 25px !important; }
+          #hero > div > div { grid-template-columns: 1fr !important; gap: 30px !important; text-align: center !important; }
+          .hero-buttons { justify-content: center !important; }
         }
       `}</style>
     </section>
