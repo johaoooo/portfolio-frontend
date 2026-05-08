@@ -26,13 +26,13 @@ const certificationsData = [
     name: 'Développement Web Fullstack',
     issuer: 'OpenClassrooms',
     date: '2025',
-    description: 'Maîtrise du développement web frontend (React.js, HTML/CSS, JavaScript) et backend (Node.js, Django, API REST).'
+    description: 'Maîtrise du développement web frontend (React, HTML/CSS, JavaScript) et backend (Node.js, Django).'
   },
   {
     name: 'Administration de Bases de Données Relationnelles',
     issuer: 'OpenClassrooms',
     date: '2025',
-    description: 'Conception, gestion et optimisation de bases de données SQL (MySQL, PostgreSQL, requêtes avancées).'
+    description: 'Conception, gestion et optimisation de bases de données SQL (MySQL, PostgreSQL).'
   },
   {
     name: 'GitHub',
@@ -116,7 +116,7 @@ export default function Certifications() {
               margin: '16px auto 0'
             }}
           >
-            Certifications professionnelles obtenues
+            Certifications professionnelles obtenues pour renforcer mes compétences
           </motion.p>
         </motion.div>
 
