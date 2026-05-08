@@ -115,7 +115,7 @@ export default function Navbar() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           {/* Bouton CV */}
           <a
-            href="/cv.pdf"
+            href="/CV_DEHAZOUNDE_v4.pdf"
             download
             style={{
               display: 'flex', alignItems: 'center', gap: '6px',
@@ -190,7 +190,7 @@ export default function Navbar() {
           ))}
           <div style={{ padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <a
-              href="/cv.pdf"
+              href="/CV_DEHAZOUNDE_v4.pdf"
               download
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
