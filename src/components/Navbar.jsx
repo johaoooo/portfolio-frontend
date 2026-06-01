@@ -1,52 +1,130 @@
 import { useTheme } from '../context/ThemeContext'
 import { useTokens } from '../theme/tokens'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link as ScrollLink } from 'react-scroll'
-import { FileText, Home, Code, Briefcase, Mail, Sun, Moon, Menu, X } from 'lucide-react'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
+import { FileText, Home, Code, Briefcase, Mail, Sun, Moon, Menu, X, Newspaper } from 'lucide-react'
 
 export default function Navbar() {
   const { darkMode, setDarkMode } = useTheme()
   const t = useTokens(darkMode)
   const [menuOpen, setMenuOpen] = useState(false)
+  const location = useLocation()
+  const [activeSection, setActiveSection] = useState('hero')
 
+  const isBlogPage = location.pathname === '/blog' || location.pathname.startsWith('/blog/')
+  const isHomePage = location.pathname === '/'
+
+  // Détection de la section active sur la page d'accueil
+  useEffect(() => {
+    if (!isHomePage) return
+
+    const sections = ['hero', 'skills', 'projects', 'contact']
+    const observers = []
+
+    sections.forEach(sectionId => {
+      const element = document.getElementById(sectionId)
+      if (!element) return
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              setActiveSection(sectionId)
+            }
+          })
+        },
+        { threshold: 0.3, rootMargin: '-70px 0px -70px 0px' }
+      )
+      observer.observe(element)
+      observers.push(observer)
+    })
+
+    return () => {
+      observers.forEach(observer => observer.disconnect())
+    }
+  }, [isHomePage])
+
+  // Tous les éléments du menu (toujours visibles)
   const menuItems = [
-    { name: 'Accueil', to: 'hero', icon: <Home size={16} /> },
-    { name: 'Compétences', to: 'skills', icon: <Code size={16} /> },
-    { name: 'Projets', to: 'projects', icon: <Briefcase size={16} /> },
-    { name: 'Contact', to: 'contact', icon: <Mail size={16} /> }
+    { name: 'Accueil', to: '/', icon: <Home size={16} />, isScroll: true, scrollTo: 'hero' },
+    { name: 'Compétences', to: '/', icon: <Code size={16} />, isScroll: true, scrollTo: 'skills' },
+    { name: 'Projets', to: '/', icon: <Briefcase size={16} />, isScroll: true, scrollTo: 'projects' },
+    { name: 'Contact', to: '/', icon: <Mail size={16} />, isScroll: true, scrollTo: 'contact' },
+    { name: 'Blog', to: '/blog', icon: <Newspaper size={16} />, isScroll: false, scrollTo: null }
   ]
+
+  const isActive = (item) => {
+    // Pour la page blog
+    if (item.name === 'Blog') {
+      return isBlogPage
+    }
+    // Pour la page d'accueil avec scroll
+    if (isHomePage && item.isScroll) {
+      return activeSection === item.scrollTo
+    }
+    return false
+  }
+
+  const handleClick = (item) => {
+    setMenuOpen(false)
+    if (item.isScroll && isHomePage) {
+      // Déjà sur la page d'accueil, on scrolle
+      const element = document.getElementById(item.scrollTo)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+    // Sinon, le RouterLink fera la navigation
+  }
 
   return (
     <>
       <style>{`
+        .nav-link { 
+          transition: all 0.2s ease;
+          position: relative;
+        }
         .nav-link:hover { 
           color: ${t.text.accent} !important; 
           transform: translateY(-2px);
         }
-        .nav-link {
-          transition: all 0.2s ease;
+        .nav-link.active {
+          color: ${t.text.accent} !important;
+        }
+        .nav-link.active::after {
+          content: '';
+          position: absolute;
+          bottom: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 20px;
+          height: 2px;
+          background: ${t.text.accent};
+          border-radius: 2px;
         }
         
-        /* Mobile styles */
         @media (max-width: 768px) {
           .nav-links { display: none !important; }
           .hamburger { display: flex !important; }
           .navbar-custom {
-            width: 85% !important;
+            width: 90% !important;
             padding: 0 16px !important;
           }
           .menu-mobile {
-            width: 85% !important;
-            max-width: 300px !important;
+            width: 90% !important;
+            max-width: 320px !important;
+          }
+          .nav-link.active::after {
+            display: none;
           }
         }
         
-        /* Desktop styles */
         @media (min-width: 769px) {
           .navbar-custom {
             width: auto !important;
-            min-width: 700px !important;
-            padding: 0 28px !important;
+            min-width: 750px !important;
+            padding: 0 24px !important;
           }
           .hamburger {
             display: none !important;
@@ -67,53 +145,67 @@ export default function Navbar() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 28px',
+        padding: '0 24px',
         height: '60px',
         zIndex: 1000,
         transition: 'background 0.3s, border-color 0.3s',
         boxShadow: darkMode ? '0 4px 20px rgba(0,0,0,0.3)' : '0 4px 20px rgba(0,0,0,0.05)'
       }}>
-        {/* Logo gauche */}
-        <ScrollLink to="hero" smooth duration={500} style={{
+        <RouterLink to="/" style={{
           color: t.text.accent, fontWeight: 700, fontSize: '1.4rem',
           cursor: 'pointer', textDecoration: 'none',
           display: 'flex', alignItems: 'center', gap: '8px'
         }}>
-          <Code size={22} /> JD
-        </ScrollLink>
+          JD
+        </RouterLink>
 
-        {/* Menu centré avec icônes */}
         <div className="nav-links" style={{
-          display: 'flex', gap: '28px', alignItems: 'center'
+          display: 'flex', gap: '32px', alignItems: 'center'
         }}>
           {menuItems.map(item => (
-            <ScrollLink
-              key={item.name}
-              to={item.to}
-              smooth={true}
-              duration={500}
-              offset={-70}
-              className="nav-link"
-              style={{
-                color: t.text.secondary,
-                fontSize: '0.9rem',
-                textDecoration: 'none',
-                cursor: 'pointer',
-                fontWeight: 500,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px'
-              }}
-            >
-              {item.icon}
-              {item.name}
-            </ScrollLink>
+            item.isScroll ? (
+              <RouterLink
+                key={item.name}
+                to={item.to}
+                className={`nav-link ${isActive(item) ? 'active' : ''}`}
+                style={{
+                  color: isActive(item) ? t.text.accent : t.text.secondary,
+                  fontSize: '0.9rem',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  fontWeight: 500,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}
+              >
+                {item.icon}
+                {item.name}
+              </RouterLink>
+            ) : (
+              <RouterLink
+                key={item.name}
+                to={item.to}
+                className={`nav-link ${isActive(item) ? 'active' : ''}`}
+                style={{
+                  color: isActive(item) ? t.text.accent : t.text.secondary,
+                  fontSize: '0.9rem',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  fontWeight: 500,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}
+              >
+                {item.icon}
+                {item.name}
+              </RouterLink>
+            )
           ))}
         </div>
 
-        {/* Boutons droite */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          {/* Bouton CV */}
           <a
             href="/CV_DEHAZOUNDE_v4.pdf"
             download
@@ -131,7 +223,6 @@ export default function Navbar() {
             <FileText size={14} /> CV
           </a>
 
-          {/* Bouton thème */}
           <button style={{
             background: 'none', border: `1px solid ${t.border.default}`,
             color: t.text.secondary, borderRadius: '50%',
@@ -142,7 +233,6 @@ export default function Navbar() {
             {darkMode ? <Sun size={16} /> : <Moon size={16} />}
           </button>
 
-          {/* Hamburger mobile */}
           <button className="hamburger" style={{
             background: 'none', border: 'none',
             color: t.text.primary, cursor: 'pointer',
@@ -154,7 +244,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Menu mobile */}
       {menuOpen && (
         <div className="menu-mobile" style={{
           position: 'fixed',
@@ -169,24 +258,23 @@ export default function Navbar() {
           backdropFilter: 'blur(12px)'
         }}>
           {menuItems.map(item => (
-            <ScrollLink
+            <RouterLink
               key={item.name}
               to={item.to}
-              smooth={true}
-              duration={500}
-              offset={-70}
               onClick={() => setMenuOpen(false)}
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
                 padding: '16px 24px',
-                color: t.text.primary, textDecoration: 'none',
+                color: isActive(item) ? t.text.accent : t.text.primary,
+                textDecoration: 'none',
                 borderBottom: `1px solid ${t.border.default}`,
-                fontSize: '1rem', cursor: 'pointer'
+                fontSize: '1rem', cursor: 'pointer',
+                background: isActive(item) ? t.badge.bg : 'transparent'
               }}
             >
               {item.icon}
               {item.name}
-            </ScrollLink>
+            </RouterLink>
           ))}
           <div style={{ padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <a

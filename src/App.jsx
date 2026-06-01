@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useTheme } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -7,27 +8,37 @@ import Projects from './components/Projects'
 import Certifications from './components/Certifications'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import BlogList from './pages/blog/BlogList'
+import BlogPost from './pages/blog/BlogPost'
 
 function AppContent() {
   const { darkMode } = useTheme()
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: darkMode ? '#05080F' : '#F8FAFC',
-      transition: 'background 0.3s ease',
-      position: 'relative',
-      zIndex: 1
-    }}>
-      <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Certifications />
-      <Contact />
-      <Footer />
-    </div>
+    <Router>
+      <div style={{
+        minHeight: '100vh',
+        background: darkMode ? '#05080F' : '#F8FAFC',
+        transition: 'background 0.3s ease'
+      }}>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Hero />
+              <About />
+              <Skills />
+              <Projects />
+              <Certifications />
+              <Contact />
+            </>
+          } />
+          <Route path="/blog" element={<BlogList />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   )
 }
 
