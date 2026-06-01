@@ -62,7 +62,6 @@ export default function Hero() {
       background: t.bg.page,
       transition: 'background 0.3s',
       padding: '100px 20px 60px',
-      fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
     }}>
       <div style={{
         maxWidth: '1200px',
@@ -93,7 +92,6 @@ export default function Hero() {
               fontWeight: 700,
               lineHeight: 1.2,
               marginBottom: '20px',
-              fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
             }}>
               <span style={{ color: t.text.accent }}>Expert</span>
               <br />
@@ -121,7 +119,6 @@ export default function Hero() {
               fontSize: '1.1rem',
               lineHeight: 1.5,
               marginBottom: '30px',
-              fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
             }}>
               Expert en Cybersécurité & Développeur Fullstack
             </p>
@@ -191,7 +188,6 @@ export default function Hero() {
                 fontSize: '1.4rem',
                 fontWeight: 600,
                 marginBottom: '6px',
-                fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
               }}>
                 Joseph <span style={{ color: t.text.accent }}>Dehazounde</span>
               </h2>
@@ -199,7 +195,6 @@ export default function Hero() {
                 color: t.text.accent,
                 fontSize: '0.75rem',
                 letterSpacing: '1px',
-                fontFamily: 'Calibri, "Segoe UI", Arial, sans-serif'
               }}>
                 EXPERT CYBERSÉCURITÉ & FULLSTACK DEV
               </p>

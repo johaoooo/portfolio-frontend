@@ -1,3 +1,6 @@
+/* Import de la police Clash Display depuis FontShare */
+@import url('https://fonts.cdnfonts.com/css/clash-display');
+
 * {
   margin: 0;
   padding: 0;
@@ -17,7 +20,7 @@ body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
   background: #05080F;
-  font-family: 'Inter', 'DM Sans', system-ui, -apple-system, sans-serif;
+  font-family: 'Clash Display', 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 #root {
