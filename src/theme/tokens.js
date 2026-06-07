@@ -28,14 +28,14 @@ export const tokens = {
     text: {
       primary:   '#1E293B',
       secondary:  '#475569',
-      accent:    '#059669',  // Vert plus foncé pour le mode clair
+      accent:    '#059669',  // Vert plus soutenu pour le mode clair
     },
     border: {
-      default: 'rgba(5,150,105,0.15)',
-      accent:  'rgba(5,150,105,0.20)',
+      default: 'rgba(5,150,105,0.2)',
+      accent:  'rgba(5,150,105,0.3)',
     },
     badge: {
-      bg:   'rgba(5,150,105,0.09)',
+      bg:   'rgba(5,150,105,0.12)',
       text: '#059669',
     },
   },
