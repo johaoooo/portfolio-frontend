@@ -8,15 +8,15 @@ export const tokens = {
     text: {
       primary:   '#E2E8F0',
       secondary:  '#94A3B8',
-      accent:    '#3B82F6',  // Bleu dominant
+      accent:    '#10B981',  // Vert émeraude
     },
     border: {
-      default: 'rgba(59,130,246,0.15)',
-      accent:  'rgba(59,130,246,0.25)',
+      default: 'rgba(16,185,129,0.15)',
+      accent:  'rgba(16,185,129,0.25)',
     },
     badge: {
-      bg:   'rgba(59,130,246,0.10)',
-      text: '#3B82F6',
+      bg:   'rgba(16,185,129,0.10)',
+      text: '#10B981',
     },
   },
   light: {
@@ -28,15 +28,15 @@ export const tokens = {
     text: {
       primary:   '#1E293B',
       secondary:  '#475569',
-      accent:    '#3B82F6',  // Bleu dominant
+      accent:    '#059669',  // Vert plus foncé pour le mode clair
     },
     border: {
-      default: 'rgba(59,130,246,0.15)',
-      accent:  'rgba(59,130,246,0.20)',
+      default: 'rgba(5,150,105,0.15)',
+      accent:  'rgba(5,150,105,0.20)',
     },
     badge: {
-      bg:   'rgba(59,130,246,0.09)',
-      text: '#3B82F6',
+      bg:   'rgba(5,150,105,0.09)',
+      text: '#059669',
     },
   },
 }
