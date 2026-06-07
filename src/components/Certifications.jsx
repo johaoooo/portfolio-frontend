@@ -1,56 +1,36 @@
 import { useTheme } from '../context/ThemeContext'
 import { useTokens } from '../theme/tokens'
 import { motion } from 'framer-motion'
-import { Award, Calendar, ExternalLink, Medal, Sparkles } from 'lucide-react'
+import { Award, Calendar, Medal, Sparkles } from 'lucide-react'
 
 const certificationsData = [
   {
-    name: 'Administration système Linux',
-    issuer: 'OpenClassrooms',
-    date: '2025',
-    description: 'Maîtrise de l\'administration système sous Linux, gestion des utilisateurs, processus, et sécurisation.'
+    name: 'Informatique et Internet',
+    issuer: 'Université Numérique Cheikh Hamidou Kane (Force-N)',
+    date: '2026',
+    description: 'Formation en informatique et internet.',
+    status: 'Obtenue'
+  },
+  {
+    name: 'Marketing Digital',
+    issuer: 'Université Numérique Cheikh Hamidou Kane (Force-N)',
+    date: 'En cours',
+    description: 'Formation en marketing digital.',
+    status: 'En cours'
   },
   {
     name: 'Bootcamp Cybersécurité',
-    issuer: 'D-Clic / OIF',
-    date: '2026',
-    description: 'Formation intensive en cybersécurité offensive et défensive.'
+    issuer: 'Dclic OIF',
+    date: 'En cours',
+    description: 'Formation intensive en cybersécurité offensive et défensive.',
+    status: 'En cours'
   },
   {
-    name: 'Administration Cisco',
+    name: 'Ingénierie en Cybersécurité',
     issuer: 'OpenClassrooms',
-    date: '2026',
-    description: 'Configuration et administration des équipements réseau Cisco.'
-  },
-  {
-    name: 'Développement Web Fullstack',
-    issuer: 'OpenClassrooms',
-    date: '2025',
-    description: 'Maîtrise du développement web frontend (React.js, HTML/CSS, JavaScript) et backend (Node.js, Django, API REST).'
-  },
-  {
-    name: 'Administration de Bases de Données Relationnelles',
-    issuer: 'OpenClassrooms',
-    date: '2025',
-    description: 'Conception, gestion et optimisation de bases de données SQL (MySQL, PostgreSQL, requêtes avancées).'
-  },
-  {
-    name: 'GitHub',
-    issuer: 'OpenClassrooms',
-    date: '2026',
-    description: 'Gestion de versions, collaboration sur projets, et automatisation avec GitHub Actions.'
-  },
-  {
-    name: 'Docker',
-    issuer: 'OpenClassrooms',
-    date: '2026',
-    description: 'Containerisation d\'applications, orchestration avec Docker Compose.'
-  },
-  {
-    name: 'Windows Server',
-    issuer: 'OpenClassrooms',
-    date: '2026',
-    description: 'Administration de serveurs Windows, Active Directory, et déploiement de services.'
+    date: 'En cours',
+    description: 'Parcours complet en ingénierie cybersécurité.',
+    status: 'En cours'
   }
 ]
 
@@ -61,12 +41,14 @@ export default function Certifications() {
   return (
     <section id="certifications" style={{
       background: t.bg.page,
-      padding: '80px 24px',
-      transition: 'background 0.3s',
-      position: 'relative',
-      overflow: 'hidden'
+      padding: '80px 20px',
+      transition: 'background 0.3s'
     }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '0 16px'
+      }}>
         
         {/* Titre dynamique avec icônes */}
         <motion.div
@@ -79,12 +61,12 @@ export default function Certifications() {
           <motion.div
             animate={{ rotate: [0, 5, -5, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px' }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}
           >
             <Medal size={28} style={{ color: t.text.accent }} />
             <h2 style={{
               color: t.text.primary,
-              fontSize: 'clamp(1.8rem, 4vw, 2.2rem)',
+              fontSize: 'clamp(1.8rem, 5vw, 2.2rem)',
               fontWeight: 700,
               margin: 0,
               display: 'inline-block'
@@ -111,7 +93,7 @@ export default function Certifications() {
             transition={{ delay: 0.4, duration: 0.6 }}
             style={{
               color: t.text.secondary,
-              fontSize: '0.95rem',
+              fontSize: '0.9rem',
               maxWidth: '600px',
               margin: '16px auto 0'
             }}
@@ -120,10 +102,10 @@ export default function Certifications() {
           </motion.p>
         </motion.div>
 
-        {/* Grille des certifications */}
+        {/* Grille des certifications - responsive */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+          gridTemplateColumns: 'repeat(2, 1fr)',
           gap: '24px'
         }}>
           {certificationsData.map((cert, index) => (
@@ -131,7 +113,7 @@ export default function Certifications() {
               key={cert.name}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.03, type: "spring", stiffness: 80 }}
+              transition={{ duration: 0.5, delay: index * 0.05, type: "spring", stiffness: 80 }}
               viewport={{ once: true, margin: "-50px" }}
               whileHover={{ y: -5 }}
               style={{
@@ -140,14 +122,18 @@ export default function Certifications() {
                 borderRadius: '20px',
                 padding: '24px',
                 transition: 'all 0.3s ease',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%'
               }}
             >
               <div style={{
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 gap: '14px',
-                marginBottom: '16px'
+                marginBottom: '16px',
+                flexWrap: 'wrap'
               }}>
                 <motion.div
                   whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
@@ -161,17 +147,19 @@ export default function Certifications() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: t.text.accent
+                    color: t.text.accent,
+                    flexShrink: 0
                   }}
                 >
                   <Award size={24} />
                 </motion.div>
-                <div>
+                <div style={{ flex: 1 }}>
                   <h3 style={{
                     color: t.text.primary,
                     fontSize: '1rem',
                     fontWeight: 700,
-                    margin: 0
+                    margin: 0,
+                    lineHeight: 1.3
                   }}>
                     {cert.name}
                   </h3>
@@ -190,7 +178,8 @@ export default function Certifications() {
                 color: t.text.secondary,
                 fontSize: '0.85rem',
                 lineHeight: 1.5,
-                marginBottom: '16px'
+                marginBottom: '16px',
+                flex: 1
               }}>
                 {cert.description}
               </p>
@@ -198,17 +187,46 @@ export default function Certifications() {
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px',
-                color: t.text.secondary,
-                fontSize: '0.75rem'
+                gap: '8px',
+                marginTop: 'auto'
               }}>
-                <Calendar size={14} />
-                <span>Obtenue en {cert.date}</span>
+                <Calendar size={14} style={{ color: t.text.accent }} />
+                <span style={{
+                  color: cert.status === 'En cours' ? t.text.accent : t.text.secondary,
+                  fontSize: '0.75rem',
+                  background: cert.status === 'En cours' ? t.badge.bg : 'transparent',
+                  padding: '2px 8px',
+                  borderRadius: '20px',
+                  display: 'inline-block'
+                }}>
+                  {cert.status === 'En cours' ? '📖 En cours' : `✅ ${cert.date}`}
+                </span>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          #certifications {
+            padding: 50px 16px !important;
+          }
+          #certifications > div {
+            padding: 0 !important;
+          }
+          #certifications > div > div {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+          }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+          #certifications > div > div {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

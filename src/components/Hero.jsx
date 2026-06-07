@@ -85,6 +85,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
+            style={{ textAlign: 'left' }}
           >
             <h1 style={{
               color: t.text.primary,
@@ -111,11 +112,16 @@ export default function Hero() {
               </span>
             </h1>
             
-            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+            <div style={{
+              display: 'flex',
+              gap: '16px',
+              flexWrap: 'wrap'
+            }} className="hero-buttons">
               <ScrollLink
                 to="projects"
                 smooth duration={500}
                 offset={-70}
+                className="hero-btn"
                 style={{
                   background: t.text.accent,
                   color: darkMode ? '#05080F' : '#fff',
@@ -124,7 +130,9 @@ export default function Hero() {
                   textDecoration: 'none',
                   fontSize: '0.9rem',
                   fontWeight: 600,
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  display: 'inline-block',
+                  transition: 'opacity 0.2s'
                 }}
               >
                 Voir mes projets
@@ -133,6 +141,7 @@ export default function Hero() {
                 to="contact"
                 smooth duration={500}
                 offset={-70}
+                className="hero-btn"
                 style={{
                   background: 'transparent',
                   border: `2px solid ${t.text.accent}`,
@@ -142,7 +151,9 @@ export default function Hero() {
                   textDecoration: 'none',
                   fontSize: '0.9rem',
                   fontWeight: 600,
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  display: 'inline-block',
+                  transition: 'all 0.2s'
                 }}
               >
                 Me contacter
@@ -193,15 +204,32 @@ export default function Hero() {
           50% { opacity: 0; }
         }
         
+        /* Desktop */
         @media (min-width: 769px) {
           #hero { padding: 100px 20px 80px !important; }
           #hero > div { padding: 60px 70px !important; }
+          .hero-buttons { justify-content: flex-start !important; }
         }
         
+        /* Mobile */
         @media (max-width: 768px) {
           #hero { padding: 90px 16px 40px !important; }
           #hero > div { padding: 30px 20px !important; }
           #hero > div > div { grid-template-columns: 1fr !important; gap: 30px !important; text-align: center !important; }
+          .hero-buttons { 
+            justify-content: center !important; 
+            display: flex !important;
+          }
+          .hero-btn {
+            display: inline-block !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          #hero { padding: 85px 12px 30px !important; }
+          #hero > div { padding: 25px 15px !important; border-radius: 24px !important; }
+          .hero-buttons { gap: 12px !important; }
+          .hero-btn { padding: 10px 20px !important; font-size: 0.8rem !important; }
         }
       `}</style>
     </section>

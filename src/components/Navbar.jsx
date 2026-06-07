@@ -3,7 +3,7 @@ import { useTokens } from '../theme/tokens'
 import { useState, useEffect } from 'react'
 import { Link as ScrollLink } from 'react-scroll'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
-import { FileText, Home, Code, Briefcase, Mail, Sun, Moon, Menu, X, Newspaper } from 'lucide-react'
+import { FileText, Home, Code, Briefcase, Mail, Sun, Moon, Menu, X, Newspaper, ChevronsLeft, ChevronsRight } from 'lucide-react'
 
 export default function Navbar() {
   const { darkMode, setDarkMode } = useTheme()
@@ -45,7 +45,7 @@ export default function Navbar() {
     }
   }, [isHomePage])
 
-  // Tous les éléments du menu (toujours visibles)
+  // Tous les éléments du menu
   const menuItems = [
     { name: 'Accueil', to: '/', icon: <Home size={16} />, isScroll: true, scrollTo: 'hero' },
     { name: 'Compétences', to: '/', icon: <Code size={16} />, isScroll: true, scrollTo: 'skills' },
@@ -55,27 +55,13 @@ export default function Navbar() {
   ]
 
   const isActive = (item) => {
-    // Pour la page blog
     if (item.name === 'Blog') {
       return isBlogPage
     }
-    // Pour la page d'accueil avec scroll
     if (isHomePage && item.isScroll) {
       return activeSection === item.scrollTo
     }
     return false
-  }
-
-  const handleClick = (item) => {
-    setMenuOpen(false)
-    if (item.isScroll && isHomePage) {
-      // Déjà sur la page d'accueil, on scrolle
-      const element = document.getElementById(item.scrollTo)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }
-    }
-    // Sinon, le RouterLink fera la navigation
   }
 
   return (
@@ -123,8 +109,8 @@ export default function Navbar() {
         @media (min-width: 769px) {
           .navbar-custom {
             width: auto !important;
-            min-width: 750px !important;
-            padding: 0 24px !important;
+            min-width: 800px !important;
+            padding: 0 28px !important;
           }
           .hamburger {
             display: none !important;
@@ -145,67 +131,52 @@ export default function Navbar() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 24px',
+        padding: '0 32px',
         height: '60px',
         zIndex: 1000,
         transition: 'background 0.3s, border-color 0.3s',
         boxShadow: darkMode ? '0 4px 20px rgba(0,0,0,0.3)' : '0 4px 20px rgba(0,0,0,0.05)'
       }}>
+        {/* Logo avec chevrons */}
         <RouterLink to="/" style={{
           color: t.text.accent, fontWeight: 700, fontSize: '1.4rem',
           cursor: 'pointer', textDecoration: 'none',
-          display: 'flex', alignItems: 'center', gap: '8px'
+          display: 'flex', alignItems: 'center', gap: '4px',
+          marginRight: '40px'
         }}>
-          JD
+          <ChevronsLeft size={20} style={{ color: t.text.accent }} />
+          <span>JD</span>
+          <ChevronsRight size={20} style={{ color: t.text.accent }} />
         </RouterLink>
 
         <div className="nav-links" style={{
-          display: 'flex', gap: '32px', alignItems: 'center'
+          display: 'flex', gap: '32px', alignItems: 'center',
+          flex: 1,
+          justifyContent: 'center'
         }}>
           {menuItems.map(item => (
-            item.isScroll ? (
-              <RouterLink
-                key={item.name}
-                to={item.to}
-                className={`nav-link ${isActive(item) ? 'active' : ''}`}
-                style={{
-                  color: isActive(item) ? t.text.accent : t.text.secondary,
-                  fontSize: '0.9rem',
-                  textDecoration: 'none',
-                  cursor: 'pointer',
-                  fontWeight: 500,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px'
-                }}
-              >
-                {item.icon}
-                {item.name}
-              </RouterLink>
-            ) : (
-              <RouterLink
-                key={item.name}
-                to={item.to}
-                className={`nav-link ${isActive(item) ? 'active' : ''}`}
-                style={{
-                  color: isActive(item) ? t.text.accent : t.text.secondary,
-                  fontSize: '0.9rem',
-                  textDecoration: 'none',
-                  cursor: 'pointer',
-                  fontWeight: 500,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px'
-                }}
-              >
-                {item.icon}
-                {item.name}
-              </RouterLink>
-            )
+            <RouterLink
+              key={item.name}
+              to={item.to}
+              className={`nav-link ${isActive(item) ? 'active' : ''}`}
+              style={{
+                color: isActive(item) ? t.text.accent : t.text.secondary,
+                fontSize: '0.9rem',
+                textDecoration: 'none',
+                cursor: 'pointer',
+                fontWeight: 500,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+            >
+              {item.icon}
+              {item.name}
+            </RouterLink>
           ))}
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginLeft: '20px' }}>
           <a
             href="/CV_DEHAZOUNDE_Joseph-vf.pdf"
             download
@@ -213,7 +184,7 @@ export default function Navbar() {
               display: 'flex', alignItems: 'center', gap: '6px',
               background: t.text.accent,
               color: darkMode ? '#05080F' : '#fff',
-              padding: '6px 14px', borderRadius: '40px',
+              padding: '6px 16px', borderRadius: '40px',
               textDecoration: 'none', fontSize: '0.8rem',
               fontWeight: 600, transition: 'opacity 0.2s'
             }}
