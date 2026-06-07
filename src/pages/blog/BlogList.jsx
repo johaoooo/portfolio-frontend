@@ -13,7 +13,7 @@ export default function BlogList() {
     <section style={{
       minHeight: '100vh',
       background: t.bg.page,
-      padding: '120px 24px 80px',
+      padding: '120px 20px 80px',
       transition: 'background 0.3s'
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -28,7 +28,7 @@ export default function BlogList() {
           <motion.div
             animate={{ rotate: [0, 5, -5, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px' }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}
           >
             <Newspaper size={32} style={{ color: t.text.accent }} />
             <h1 style={{
@@ -60,24 +60,52 @@ export default function BlogList() {
               color: t.text.secondary,
               fontSize: '1rem',
               maxWidth: '600px',
-              margin: '20px auto 0'
+              margin: '20px auto 0',
+              padding: '0 16px'
             }}
           >
             Articles sur la cybersécurité, le développement et les technologies
           </motion.p>
         </motion.div>
 
-        {/* Grille des articles */}
+        {/* Grille des articles - responsive */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))',
-          gap: '30px'
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: '30px',
+          padding: '0 16px'
         }}>
           {blogPosts.map((article) => (
             <ArticleCard key={article.id} article={article} />
           ))}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 1024px) {
+          section > div > div {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 24px !important;
+          }
+        }
+        
+        @media (max-width: 768px) {
+          section {
+            padding: 100px 16px 60px !important;
+          }
+          section > div > div {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+            padding: 0 !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          section {
+            padding: 90px 12px 40px !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

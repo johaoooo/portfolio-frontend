@@ -85,6 +85,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
+            className="hero-left"
             style={{ textAlign: 'left' }}
           >
             <h1 style={{
@@ -97,8 +98,9 @@ export default function Hero() {
               <span style={{
                 color: t.text.accent,
                 display: 'inline-block',
-                minWidth: '320px'
-              }}>
+                minWidth: '320px',
+                textAlign: 'left'
+              }} className="dynamic-text">
                 {currentText}
                 <span style={{
                   display: 'inline-block',
@@ -112,11 +114,7 @@ export default function Hero() {
               </span>
             </h1>
             
-            <div style={{
-              display: 'flex',
-              gap: '16px',
-              flexWrap: 'wrap'
-            }} className="hero-buttons">
+            <div className="hero-buttons">
               <ScrollLink
                 to="projects"
                 smooth duration={500}
@@ -209,13 +207,21 @@ export default function Hero() {
           #hero { padding: 100px 20px 80px !important; }
           #hero > div { padding: 60px 70px !important; }
           .hero-buttons { justify-content: flex-start !important; }
+          .hero-left { text-align: left !important; }
+          .dynamic-text { text-align: left !important; }
         }
         
         /* Mobile */
         @media (max-width: 768px) {
           #hero { padding: 90px 16px 40px !important; }
           #hero > div { padding: 30px 20px !important; }
-          #hero > div > div { grid-template-columns: 1fr !important; gap: 30px !important; text-align: center !important; }
+          #hero > div > div { grid-template-columns: 1fr !important; gap: 30px !important; }
+          .hero-left { text-align: center !important; }
+          .dynamic-text { 
+            text-align: center !important; 
+            display: block !important;
+            width: 100% !important;
+          }
           .hero-buttons { 
             justify-content: center !important; 
             display: flex !important;
@@ -230,6 +236,7 @@ export default function Hero() {
           #hero > div { padding: 25px 15px !important; border-radius: 24px !important; }
           .hero-buttons { gap: 12px !important; }
           .hero-btn { padding: 10px 20px !important; font-size: 0.8rem !important; }
+          .dynamic-text { min-width: auto !important; }
         }
       `}</style>
     </section>

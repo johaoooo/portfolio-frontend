@@ -14,6 +14,13 @@ export default function About() {
       period: "2011",
       location: "Bénin",
       icon: <GraduationCap size={18} />
+    },
+    {
+      title: "Sécurité Informatique (2 ans)",
+      institution: "IFRI - Institut de Formation et de Recherche en Informatique (UAC)",
+      period: "2016 - 2018",
+      location: "Bénin",
+      icon: <Shield size={18} />
     }
   ]
 
@@ -147,10 +154,10 @@ export default function About() {
                 borderBottom: `1px solid ${t.border.default}`
               }}>
                 <GraduationCap size={20} />
-                Formation académique
+                Formations académiques
               </h3>
               {formations.map((f, i) => (
-                <div key={i}>
+                <div key={i} style={{ marginBottom: i < formations.length - 1 ? '20px' : 0 }}>
                   <h4 style={{ color: t.text.primary, fontSize: '1rem', fontWeight: 600, marginBottom: '6px' }}>{f.title}</h4>
                   <p style={{ color: t.text.secondary, fontSize: '0.85rem', marginBottom: '4px' }}>{f.institution}</p>
                   <div style={{ display: 'flex', gap: '16px', fontSize: '0.7rem', color: t.text.secondary }}>
