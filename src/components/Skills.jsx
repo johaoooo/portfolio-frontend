@@ -1,34 +1,44 @@
 import { useTheme } from '../context/ThemeContext'
 import { useTokens } from '../theme/tokens'
 import { motion } from 'framer-motion'
-import { Code, Shield, Cloud, Database, Sparkles, Cpu, PenTool, GitBranch, Container } from 'lucide-react'
+import { Code, Shield, Cloud, Database, Sparkles, Cpu, PenTool, Server, Globe, Lock, Terminal, Wrench, Brain } from 'lucide-react'
 
 const SKILLS = [
   { 
-    category: 'Cybersécurité', 
-    items: ['Pentest', 'OWASP', 'Administration Cisco', 'Sécurité applicative', 'Windows Server'],
-    icon: <Shield size={24} />
-  },
-  { 
-    category: 'DevOps & Outils', 
-    items: ['Docker', 'CI/CD', 'Linux', 'Akvo Flow', 'Kobocollect', 'GitHub'],
-    icon: <Container size={24} />
-  },
-  { 
-    category: 'Développement', 
-    items: ['React.js', 'Node.js', 'Django', 'Next.js', 'JavaScript', 'Python', 'HTML/CSS'],
+    category: 'Langages de programmation', 
+    items: ['HTML', 'CSS', 'JavaScript', 'Python', 'SQL'],
     icon: <Code size={24} />
   },
   { 
-    category: 'Base de données', 
-    items: ['SQL', 'MySQL', 'PostgreSQL'],
+    category: 'Frameworks & Bibliothèques', 
+    items: ['React JS', 'Node JS', 'Django', 'WordPress'],
+    icon: <Terminal size={24} />
+  },
+  { 
+    category: 'Cybersécurité', 
+    items: ['Tests d\'intrusion web', 'BurpSuite', 'Metasploit', 'TCP/IP', 'Cisco', 'OWASP Top 10'],
+    icon: <Shield size={24} />
+  },
+  { 
+    category: 'Systèmes & DevOps', 
+    items: ['Linux', 'Docker', 'Virtualisation', 'Laragon', 'GitHub'],
+    icon: <Cloud size={24} />
+  },
+  { 
+    category: 'Bases de données', 
+    items: ['MySQL', 'PostgreSQL'],
     icon: <Database size={24} />
   },
   { 
-    category: 'Design & Outils', 
-    items: ['Figma', 'Excel', 'Gestion', 'Collecte données'],
+    category: 'Outils & Logiciels', 
+    items: ['Figma', 'OBS', 'Microsoft Office', 'Canva', 'Adobe'],
     icon: <PenTool size={24} />
   },
+  { 
+    category: 'Soft Skills', 
+    items: ['Leadership', 'Rigueur', 'Autonomie', 'Esprit d\'initiative', 'Gestion d\'équipe'],
+    icon: <Brain size={24} />
+  }
 ]
 
 export default function Skills() {
@@ -39,9 +49,7 @@ export default function Skills() {
     <section id="skills" style={{
       background: t.bg.page,
       padding: '80px 24px',
-      transition: 'background 0.3s',
-      position: 'relative',
-      overflow: 'hidden'
+      transition: 'background 0.3s'
     }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         
@@ -81,11 +89,24 @@ export default function Skills() {
               margin: '12px auto 0'
             }}
           />
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            style={{
+              color: t.text.secondary,
+              fontSize: '0.95rem',
+              maxWidth: '600px',
+              margin: '16px auto 0'
+            }}
+          >
+            Technologies, outils et compétences que je maîtrise
+          </motion.p>
         </motion.div>
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
           gap: '24px'
         }}>
           {SKILLS.map((skill, index) => (
@@ -93,33 +114,21 @@ export default function Skills() {
               key={skill.category}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1, type: "spring", stiffness: 80 }}
+              transition={{ duration: 0.5, delay: index * 0.05, type: "spring", stiffness: 80 }}
               viewport={{ once: true, margin: "-50px" }}
-              whileHover={{ y: -8 }}
+              whileHover={{ y: -5 }}
               style={{
                 background: t.bg.surface,
                 border: `1px solid ${t.border.default}`,
                 borderRadius: '20px',
                 padding: '24px',
-                position: 'relative',
-                overflow: 'hidden'
+                transition: 'all 0.3s ease',
+                cursor: 'pointer',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column'
               }}
             >
-              <motion.div
-                initial={{ x: '-100%' }}
-                whileHover={{ x: '100%' }}
-                transition={{ duration: 0.6 }}
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  background: `linear-gradient(90deg, transparent, ${t.text.accent}15, transparent)`,
-                  pointerEvents: 'none'
-                }}
-              />
-              
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
                 <motion.div
                   whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
@@ -150,17 +159,17 @@ export default function Skills() {
                 </h3>
               </div>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', flex: 1 }}>
                 {skill.items.map((item, i) => (
                   <motion.span
                     key={item}
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.1 + i * 0.03, duration: 0.3 }}
+                    transition={{ delay: index * 0.05 + i * 0.02, duration: 0.3 }}
                     viewport={{ once: true }}
                     whileHover={{ 
                       scale: 1.05,
-                      y: -3,
+                      y: -2,
                       background: t.text.accent,
                       color: darkMode ? '#05080F' : '#fff'
                     }}
@@ -170,7 +179,7 @@ export default function Skills() {
                       border: `1px solid ${t.border.accent}`,
                       padding: '6px 14px',
                       borderRadius: '30px',
-                      fontSize: '0.8rem',
+                      fontSize: '0.75rem',
                       fontWeight: 500,
                       cursor: 'pointer',
                       transition: 'all 0.2s ease'
@@ -184,6 +193,18 @@ export default function Skills() {
           ))}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          #skills {
+            padding: 60px 16px !important;
+          }
+          #skills > div > div {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }
