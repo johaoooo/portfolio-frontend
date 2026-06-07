@@ -37,7 +37,7 @@ const PROJECTS = [
     title: 'MacBenin',
     description: 'Plateforme e-commerce d\'artisanat',
     tech: ['React', 'Django'],
-    link: 'https://macbenin-frontend.vercel.app/',
+    link: 'https://afi-frontend-nine.vercel.app/',
     github: 'https://github.com/johaoooo'
   }
 ]

@@ -14,10 +14,10 @@ export default function Hero() {
   const [loopNum, setLoopNum] = useState(0)
   
   const texts = [
-    'Cybersécurité',
-    'Développement Web',
-    'Réseaux',
-    'Intelligence Artificielle'
+    'Expert en cybersécurité',
+    'Développeur web fullstack',
+    'Marketeur',
+    'Technicien en maintenance informatique'
   ]
   
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function Hero() {
   
   useEffect(() => {
     if (currentText === '' && !isDeleting && loopNum === 0) {
-      setCurrentText('Cybersécurité')
+      setCurrentText('Expert en cybersécurité')
     }
   }, [])
   
@@ -61,7 +61,7 @@ export default function Hero() {
       alignItems: 'center',
       background: t.bg.page,
       transition: 'background 0.3s',
-      padding: '100px 20px 60px',
+      padding: '100px 20px 60px'
     }}>
       <div style={{
         maxWidth: '1200px',
@@ -91,15 +91,12 @@ export default function Hero() {
               fontSize: 'clamp(2rem, 4vw, 3rem)',
               fontWeight: 700,
               lineHeight: 1.2,
-              marginBottom: '20px',
+              marginBottom: '30px'
             }}>
-              <span style={{ color: t.text.accent }}>Expert</span>
-              <br />
-              en{' '}
               <span style={{
                 color: t.text.accent,
                 display: 'inline-block',
-                minWidth: '220px'
+                minWidth: '320px'
               }}>
                 {currentText}
                 <span style={{
@@ -114,20 +111,7 @@ export default function Hero() {
               </span>
             </h1>
             
-            <p style={{
-              color: t.text.secondary,
-              fontSize: '1.1rem',
-              lineHeight: 1.5,
-              marginBottom: '30px',
-            }}>
-              Expert en Cybersécurité & Développeur Fullstack
-            </p>
-            
-            <div style={{
-              display: 'flex',
-              gap: '16px',
-              flexWrap: 'wrap'
-            }} className="hero-buttons">
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
               <ScrollLink
                 to="projects"
                 smooth duration={500}
@@ -187,14 +171,14 @@ export default function Hero() {
                 color: t.text.primary,
                 fontSize: '1.4rem',
                 fontWeight: 600,
-                marginBottom: '6px',
+                marginBottom: '6px'
               }}>
                 Joseph <span style={{ color: t.text.accent }}>Dehazounde</span>
               </h2>
               <p style={{
                 color: t.text.accent,
                 fontSize: '0.75rem',
-                letterSpacing: '1px',
+                letterSpacing: '1px'
               }}>
                 EXPERT CYBERSÉCURITÉ & FULLSTACK DEV
               </p>
@@ -209,32 +193,15 @@ export default function Hero() {
           50% { opacity: 0; }
         }
         
-        /* Desktop */
         @media (min-width: 769px) {
           #hero { padding: 100px 20px 80px !important; }
           #hero > div { padding: 60px 70px !important; }
-          .hero-buttons { justify-content: flex-start !important; }
         }
         
-        /* Mobile */
         @media (max-width: 768px) {
           #hero { padding: 90px 16px 40px !important; }
           #hero > div { padding: 30px 20px !important; }
           #hero > div > div { grid-template-columns: 1fr !important; gap: 30px !important; text-align: center !important; }
-          .hero-buttons { 
-            justify-content: center !important; 
-            display: flex !important;
-          }
-          .hero-buttons a {
-            display: inline-block !important;
-          }
-        }
-        
-        @media (max-width: 480px) {
-          #hero { padding: 85px 12px 30px !important; }
-          #hero > div { padding: 25px 15px !important; border-radius: 24px !important; }
-          .hero-buttons { gap: 12px !important; }
-          .hero-buttons a { padding: 10px 20px !important; font-size: 0.8rem !important; }
         }
       `}</style>
     </section>
