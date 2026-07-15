@@ -43,7 +43,7 @@ const SKILLS = [
 
 export default function Skills() {
   const { darkMode } = useTheme()
-  const t = useTokens(darkMode)
+  const t = useTokens()
 
   return (
     <section id="skills" style={{

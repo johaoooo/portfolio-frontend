@@ -5,7 +5,7 @@ import { ExternalLink, Code, FolderGit2 } from 'lucide-react'
 
 export default function ProjectCard({ title, description, tech = [], link, github }) {
   const { darkMode } = useTheme()
-  const t = useTokens(darkMode)
+  const t = useTokens()
 
   const badgeBg = t.badge?.bg || (darkMode ? 'rgba(59,130,246,0.1)' : 'rgba(59,130,246,0.09)')
   const badgeText = t.badge?.text || '#3B82F6'

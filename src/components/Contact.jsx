@@ -14,7 +14,7 @@ const LinkedinIcon = () => (
 
 export default function Contact() {
   const { darkMode } = useTheme()
-  const t = useTokens(darkMode)
+  const t = useTokens()
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
 

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { createContext, useContext, useState, useLayoutEffect, useCallback } from 'react'
 
 const ThemeContext = createContext()
 
@@ -13,10 +13,9 @@ export function ThemeProvider({ children }) {
     setDarkMode(prev => !prev)
   }, [])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode))
     document.documentElement.classList.toggle('dark', darkMode)
-    document.body.style.background = darkMode ? '#05080F' : '#F8FAFC'
   }, [darkMode])
 
   return (

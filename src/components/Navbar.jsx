@@ -7,7 +7,7 @@ import { FileText, Home, Code, Briefcase, Mail, Sun, Moon, Menu, X, Newspaper, C
 
 export default function Navbar() {
   const { darkMode, setDarkMode } = useTheme()
-  const t = useTokens(darkMode)
+  const t = useTokens()
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
@@ -88,58 +88,6 @@ export default function Navbar() {
 
   return (
     <>
-      <style>{`
-        .nav-link { 
-          transition: all 0.2s ease;
-          position: relative;
-        }
-        .nav-link:hover { 
-          color: ${t.text.accent} !important; 
-          transform: translateY(-2px);
-        }
-        .nav-link.active {
-          color: ${t.text.accent} !important;
-        }
-        .nav-link.active::after {
-          content: '';
-          position: absolute;
-          bottom: -8px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 20px;
-          height: 2px;
-          background: ${t.text.accent};
-          border-radius: 2px;
-        }
-        
-        @media (max-width: 768px) {
-          .nav-links { display: none !important; }
-          .hamburger { display: flex !important; }
-          .navbar-custom {
-            width: 90% !important;
-            padding: 0 16px !important;
-          }
-          .menu-mobile {
-            width: 90% !important;
-            max-width: 320px !important;
-          }
-          .nav-link.active::after {
-            display: none;
-          }
-        }
-        
-        @media (min-width: 769px) {
-          .navbar-custom {
-            width: auto !important;
-            min-width: 800px !important;
-            padding: 0 28px !important;
-          }
-          .hamburger {
-            display: none !important;
-          }
-        }
-      `}</style>
-
       <nav className="navbar-custom" style={{
         position: 'fixed',
         top: '20px',
@@ -186,7 +134,7 @@ export default function Navbar() {
             <span
               key={item.name}
               onClick={() => handleNavClick(item)}
-              className={`nav-link ${isActive(item) ? 'active' : ''}`}
+              className={`nav-link hover:!text-emerald-500 dark:hover:!text-emerald-400`}
               style={{
                 color: isActive(item) ? t.text.accent : t.text.secondary,
                 fontSize: '0.9rem',
@@ -194,11 +142,21 @@ export default function Navbar() {
                 fontWeight: 500,
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px'
+                gap: '6px',
+                transition: 'all 0.2s ease',
+                position: 'relative'
               }}
             >
               {item.icon}
               {item.name}
+              {isActive(item) && (
+                <span className="hidden md:block" style={{
+                  position: 'absolute', bottom: '-8px',
+                  left: '50%', transform: 'translateX(-50%)',
+                  width: '20px', height: '2px',
+                  background: t.text.accent, borderRadius: '2px'
+                }} />
+              )}
             </span>
           ))}
         </div>

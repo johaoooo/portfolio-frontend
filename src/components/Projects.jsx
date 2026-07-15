@@ -1,4 +1,3 @@
-import { useTheme } from '../context/ThemeContext'
 import { useTokens } from '../theme/tokens'
 import { motion } from 'framer-motion'
 import { FolderGit2, Sparkles, Code, Shield, Cloud, Brain } from 'lucide-react'
@@ -43,8 +42,7 @@ const PROJECTS = [
 ]
 
 export default function Projects() {
-  const { darkMode } = useTheme()
-  const t = useTokens(darkMode)
+  const t = useTokens()
 
   return (
     <section id="projects" style={{

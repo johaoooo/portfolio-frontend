@@ -1,4 +1,3 @@
-import { useTheme } from '../context/ThemeContext'
 import { useTokens } from '../theme/tokens'
 import { motion } from 'framer-motion'
 
@@ -17,8 +16,7 @@ const LinkedinIcon = () => (
 )
 
 export default function Footer() {
-  const { darkMode } = useTheme()
-  const t = useTokens(darkMode)
+  const t = useTokens()
   const currentYear = new Date().getFullYear()
 
   return (

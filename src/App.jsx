@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useTheme } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -11,15 +10,9 @@ import BlogList from './pages/blog/BlogList'
 import BlogPost from './pages/blog/BlogPost'
 
 function AppContent() {
-  const { darkMode } = useTheme()
-
   return (
     <Router>
-      <div style={{
-        minHeight: '100vh',
-        background: darkMode ? '#05080F' : '#F8FAFC',
-        transition: 'background 0.3s ease'
-      }}>
+      <div className="bg-[#F8FAFC] dark:bg-[#05080F]" style={{ minHeight: '100vh' }}>
         <Navbar />
         <Routes>
           <Route path="/" element={

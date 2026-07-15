@@ -1,4 +1,3 @@
-import { useTheme } from '../../context/ThemeContext'
 import { useTokens } from '../../theme/tokens'
 import { motion } from 'framer-motion'
 import { Newspaper, Sparkles } from 'lucide-react'
@@ -6,8 +5,7 @@ import ArticleCard from '../../components/blog/ArticleCard'
 import blogPosts from '../../data/blogPosts'
 
 export default function BlogList() {
-  const { darkMode } = useTheme()
-  const t = useTokens(darkMode)
+  const t = useTokens()
 
   return (
     <section style={{

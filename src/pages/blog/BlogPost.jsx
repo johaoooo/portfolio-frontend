@@ -1,4 +1,3 @@
-import { useTheme } from '../../context/ThemeContext'
 import { useTokens } from '../../theme/tokens'
 import { motion } from 'framer-motion'
 import { useParams, Link } from 'react-router-dom'
@@ -7,8 +6,7 @@ import blogPosts from '../../data/blogPosts'
 
 export default function BlogPost() {
   const { id } = useParams()
-  const { darkMode } = useTheme()
-  const t = useTokens(darkMode)
+  const t = useTokens()
   
   const article = blogPosts.find(post => post.id === parseInt(id))
 

@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Portfolio de Joseph Dehazounde - Expert en cybersécurité et développeur fullstack" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      (function() {
+        var theme = localStorage.getItem('darkMode');
+        if (theme !== null) {
+          if (JSON.parse(theme)) document.documentElement.classList.add('dark');
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />

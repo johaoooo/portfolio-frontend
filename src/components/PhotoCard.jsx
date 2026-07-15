@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 export default function PhotoCard() {
   const { darkMode } = useTheme()
-  const t = useTokens(darkMode)
+  const t = useTokens()
   const [imgError, setImgError] = useState(false)
 
   return (
@@ -15,7 +15,7 @@ export default function PhotoCard() {
       aspectRatio: '1/1',
       borderRadius: '50%',
       overflow: 'hidden',
-      background: `linear-gradient(135deg, ${t.text.accent}, ${t.text.accent}66)`,
+      background: `linear-gradient(135deg, var(--text-accent), var(--accent-66))`,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',

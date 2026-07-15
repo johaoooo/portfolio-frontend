@@ -1,4 +1,3 @@
-import { useTheme } from '../context/ThemeContext'
 import { useTokens } from '../theme/tokens'
 import { motion } from 'framer-motion'
 import { Award, Calendar, Medal, Sparkles } from 'lucide-react'
@@ -35,8 +34,7 @@ const certificationsData = [
 ]
 
 export default function Certifications() {
-  const { darkMode } = useTheme()
-  const t = useTokens(darkMode)
+  const t = useTokens()
 
   return (
     <section id="certifications" style={{

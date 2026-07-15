@@ -1,12 +1,10 @@
-import { useTheme } from '../../context/ThemeContext'
 import { useTokens } from '../../theme/tokens'
 import { motion } from 'framer-motion'
 import { Calendar, Clock, Tag, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export default function ArticleCard({ article }) {
-  const { darkMode } = useTheme()
-  const t = useTokens(darkMode)
+  const t = useTokens()
 
   return (
     <motion.article

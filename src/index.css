@@ -4,10 +4,44 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg-page: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-nav: #FFFFFF;
+  --text-primary: #1E293B;
+  --text-secondary: #475569;
+  --text-accent: #059669;
+  --border-default: rgba(5,150,105,0.2);
+  --border-accent: rgba(5,150,105,0.3);
+  --badge-bg: rgba(5,150,105,0.12);
+  --badge-text: #059669;
+  --accent-15: rgba(5,150,105,0.15);
+  --accent-10: rgba(5,150,105,0.10);
+  --accent-33: rgba(5,150,105,0.33);
+  --accent-66: rgba(5,150,105,0.66);
+}
+:root.dark {
+  --bg-page: #05080F;
+  --bg-surface: rgba(255,255,255,0.03);
+  --bg-nav: rgba(255,255,255,0.04);
+  --text-primary: #E2E8F0;
+  --text-secondary: #94A3B8;
+  --text-accent: #10B981;
+  --border-default: rgba(16,185,129,0.15);
+  --border-accent: rgba(16,185,129,0.25);
+  --badge-bg: rgba(16,185,129,0.10);
+  --badge-text: #10B981;
+  --accent-15: rgba(16,185,129,0.15);
+  --accent-10: rgba(16,185,129,0.10);
+  --accent-33: rgba(16,185,129,0.33);
+  --accent-66: rgba(16,185,129,0.66);
+}
+
 html {
   overflow-x: hidden;
   scroll-behavior: smooth;
   height: 100%;
+  scroll-padding-top: 70px;
 }
 
 body {
@@ -16,9 +50,8 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  background: #05080F;
+  background: var(--bg-page);
   font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  transition: background 0.3s ease;
 }
 
 #root {
@@ -41,16 +74,7 @@ section {
   -webkit-backface-visibility: hidden;
 }
 
-/* Transition fluide pour le thème */
-*, *::before, *::after {
-  transition-property: background-color, border-color, color;
-  transition-duration: 0.2s;
-  transition-timing-function: ease;
-}
-
-button, a, input {
-  transition: none;
-}
+/* Désactivé : les transitions globales sur * causaient un scintillement au changement de thème */
 
 @keyframes spin {
   from { transform: rotate(0deg); }
@@ -76,12 +100,45 @@ button, a, input {
   background: rgba(16,185,129,0.5);
 }
 
-html {
-  scroll-padding-top: 70px;
+/* Navbar responsive */
+@media (max-width: 768px) {
+  html { scroll-padding-top: 60px; }
+  .nav-links { display: none !important; }
+  .hamburger { display: flex !important; }
+  .navbar-custom { width: 90% !important; padding: 0 16px !important; }
+  .menu-mobile { width: 90% !important; max-width: 320px !important; }
+}
+@media (min-width: 769px) {
+  .navbar-custom { width: auto !important; min-width: 800px !important; padding: 0 28px !important; }
+  .hamburger { display: none !important; }
 }
 
+/* Hero responsive */
+@media (min-width: 769px) {
+  #hero { padding: 100px 20px 80px !important; }
+  #hero > div { padding: 60px 70px !important; }
+  .hero-buttons { justify-content: flex-start !important; }
+  .hero-left { text-align: left !important; }
+  .dynamic-text { text-align: left !important; }
+}
 @media (max-width: 768px) {
-  html {
-    scroll-padding-top: 60px;
-  }
+  #hero { padding: 90px 16px 40px !important; }
+  #hero > div { padding: 30px 20px !important; }
+  #hero > div > div { grid-template-columns: 1fr !important; gap: 30px !important; }
+  .hero-left { text-align: center !important; }
+  .dynamic-text { text-align: center !important; display: block !important; width: 100% !important; }
+  .hero-buttons { justify-content: center !important; display: flex !important; }
+  .hero-btn { display: inline-block !important; }
+}
+@media (max-width: 480px) {
+  #hero { padding: 85px 12px 30px !important; }
+  #hero > div { padding: 25px 15px !important; border-radius: 24px !important; }
+  .hero-buttons { gap: 12px !important; }
+  .hero-btn { padding: 10px 20px !important; font-size: 0.8rem !important; }
+  .dynamic-text { min-width: auto !important; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }

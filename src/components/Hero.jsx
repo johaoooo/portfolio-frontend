@@ -7,7 +7,7 @@ import PhotoCard from './PhotoCard'
 
 export default function Hero() {
   const { darkMode } = useTheme()
-  const t = useTokens(darkMode)
+  const t = useTokens()
   
   const texts = [
     'Analyste en cybersécurité',
@@ -67,7 +67,7 @@ export default function Hero() {
         width: '400px',
         height: '400px',
         borderRadius: '50%',
-        background: `radial-gradient(circle, ${t.text.accent}15 0%, transparent 70%)`,
+        background: `radial-gradient(circle, var(--accent-15) 0%, transparent 70%)`,
         pointerEvents: 'none'
       }} />
       <div style={{
@@ -77,7 +77,7 @@ export default function Hero() {
         width: '300px',
         height: '300px',
         borderRadius: '50%',
-        background: `radial-gradient(circle, ${t.text.accent}10 0%, transparent 70%)`,
+        background: `radial-gradient(circle, var(--accent-10) 0%, transparent 70%)`,
         pointerEvents: 'none'
       }} />
 
@@ -252,49 +252,6 @@ export default function Hero() {
         </div>
       </div>
       
-      <style>{`
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-        
-        /* Desktop */
-        @media (min-width: 769px) {
-          #hero { padding: 100px 20px 80px !important; }
-          #hero > div { padding: 60px 70px !important; }
-          .hero-buttons { justify-content: flex-start !important; }
-          .hero-left { text-align: left !important; }
-          .dynamic-text { text-align: left !important; }
-        }
-        
-        /* Mobile */
-        @media (max-width: 768px) {
-          #hero { padding: 90px 16px 40px !important; }
-          #hero > div { padding: 30px 20px !important; }
-          #hero > div > div { grid-template-columns: 1fr !important; gap: 30px !important; }
-          .hero-left { text-align: center !important; }
-          .dynamic-text { 
-            text-align: center !important; 
-            display: block !important;
-            width: 100% !important;
-          }
-          .hero-buttons { 
-            justify-content: center !important; 
-            display: flex !important;
-          }
-          .hero-btn {
-            display: inline-block !important;
-          }
-        }
-        
-        @media (max-width: 480px) {
-          #hero { padding: 85px 12px 30px !important; }
-          #hero > div { padding: 25px 15px !important; border-radius: 24px !important; }
-          .hero-buttons { gap: 12px !important; }
-          .hero-btn { padding: 10px 20px !important; font-size: 0.8rem !important; }
-          .dynamic-text { min-width: auto !important; }
-        }
-      `}</style>
     </section>
   )
 }

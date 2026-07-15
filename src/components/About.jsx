@@ -1,11 +1,9 @@
-import { useTheme } from '../context/ThemeContext'
 import { useTokens } from '../theme/tokens'
 import { motion } from 'framer-motion'
 import { GraduationCap, Briefcase, Calendar, MapPin, Sparkles, Shield, Code, Users, Wrench, Award, Target, BookOpen, Cpu } from 'lucide-react'
 
 export default function About() {
-  const { darkMode } = useTheme()
-  const t = useTokens(darkMode)
+  const t = useTokens()
 
   const formations = [
     {
@@ -254,7 +252,7 @@ export default function About() {
                 top: '4px',
                 bottom: '4px',
                 width: '2px',
-                background: `linear-gradient(to bottom, ${t.text.accent}, ${t.text.accent}33)`,
+                background: `linear-gradient(to bottom, var(--text-accent), var(--accent-33))`,
                 borderRadius: '2px'
               }} />
               {experiences.map((exp, i) => (
