@@ -1,8 +1,8 @@
 import { useTheme } from '../context/ThemeContext'
 import { useTokens } from '../theme/tokens'
-import { useState, useEffect } from 'react'
-import { Link as ScrollLink } from 'react-scroll'
-import { Link as RouterLink, useLocation } from 'react-router-dom'
+import { useState, useEffect, useCallback } from 'react'
+import { scroller } from 'react-scroll'
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom'
 import { FileText, Home, Code, Briefcase, Mail, Sun, Moon, Menu, X, Newspaper, ChevronsLeft, ChevronsRight } from 'lucide-react'
 
 export default function Navbar() {
@@ -10,12 +10,12 @@ export default function Navbar() {
   const t = useTokens(darkMode)
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
   const [activeSection, setActiveSection] = useState('hero')
 
   const isBlogPage = location.pathname === '/blog' || location.pathname.startsWith('/blog/')
   const isHomePage = location.pathname === '/'
 
-  // Détection de la section active sur la page d'accueil
   useEffect(() => {
     if (!isHomePage) return
 
@@ -45,7 +45,29 @@ export default function Navbar() {
     }
   }, [isHomePage])
 
-  // Tous les éléments du menu
+  const handleScroll = useCallback((sectionId) => {
+    setMenuOpen(false)
+    scroller.scrollTo(sectionId, {
+      smooth: true,
+      duration: 500,
+      offset: -70
+    })
+  }, [])
+
+  const handleNavClick = useCallback((item) => {
+    setMenuOpen(false)
+    if (!item.isScroll) {
+      navigate(item.to)
+      return
+    }
+    if (!isHomePage) {
+      navigate('/')
+      setTimeout(() => handleScroll(item.scrollTo), 100)
+    } else {
+      handleScroll(item.scrollTo)
+    }
+  }, [isHomePage, navigate, handleScroll])
+
   const menuItems = [
     { name: 'Accueil', to: '/', icon: <Home size={16} />, isScroll: true, scrollTo: 'hero' },
     { name: 'Compétences', to: '/', icon: <Code size={16} />, isScroll: true, scrollTo: 'skills' },
@@ -161,14 +183,13 @@ export default function Navbar() {
           justifyContent: 'center'
         }}>
           {menuItems.map(item => (
-            <RouterLink
+            <span
               key={item.name}
-              to={item.to}
+              onClick={() => handleNavClick(item)}
               className={`nav-link ${isActive(item) ? 'active' : ''}`}
               style={{
                 color: isActive(item) ? t.text.accent : t.text.secondary,
                 fontSize: '0.9rem',
-                textDecoration: 'none',
                 cursor: 'pointer',
                 fontWeight: 500,
                 display: 'flex',
@@ -178,7 +199,7 @@ export default function Navbar() {
             >
               {item.icon}
               {item.name}
-            </RouterLink>
+            </span>
           ))}
         </div>
 
@@ -235,15 +256,13 @@ export default function Navbar() {
           backdropFilter: 'blur(12px)'
         }}>
           {menuItems.map(item => (
-            <RouterLink
+            <span
               key={item.name}
-              to={item.to}
-              onClick={() => setMenuOpen(false)}
+              onClick={() => handleNavClick(item)}
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
                 padding: '16px 24px',
                 color: isActive(item) ? t.text.accent : t.text.primary,
-                textDecoration: 'none',
                 borderBottom: `1px solid ${t.border.default}`,
                 fontSize: '1rem', cursor: 'pointer',
                 background: isActive(item) ? t.badge.bg : 'transparent'
@@ -251,7 +270,7 @@ export default function Navbar() {
             >
               {item.icon}
               {item.name}
-            </RouterLink>
+            </span>
           ))}
           <div style={{ padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <a

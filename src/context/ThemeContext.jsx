@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect, useCallback } from 'react'
 
 const ThemeContext = createContext()
 
@@ -9,13 +9,18 @@ export function ThemeProvider({ children }) {
     return window.matchMedia('(prefers-color-scheme: dark)').matches
   })
 
+  const toggleTheme = useCallback(() => {
+    setDarkMode(prev => !prev)
+  }, [])
+
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode))
     document.documentElement.classList.toggle('dark', darkMode)
+    document.body.style.background = darkMode ? '#05080F' : '#F8FAFC'
   }, [darkMode])
 
   return (
-    <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+    <ThemeContext.Provider value={{ darkMode, setDarkMode, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   )
