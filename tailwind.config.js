@@ -15,9 +15,9 @@ export default {
         soft:    '#8BA0B8',
       },
       fontFamily: {
-        display: ['Syne', 'sans-serif'],
-        body:    ['DM Sans', 'sans-serif'],
-        mono:    ['JetBrains Mono', 'monospace'],
+        sans:    ['Poppins', 'sans-serif'],
+        display: ['Poppins', 'sans-serif'],
+        mono:    ['Poppins', 'monospace'],
       },
       backgroundImage: {
         'grid-pattern': "linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px)",

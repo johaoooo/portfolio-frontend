@@ -137,16 +137,22 @@ export default function Navbar() {
         transition: 'background 0.3s, border-color 0.3s',
         boxShadow: darkMode ? '0 4px 20px rgba(0,0,0,0.3)' : '0 4px 20px rgba(0,0,0,0.05)'
       }}>
-        {/* Logo avec chevrons */}
+        {/* Logo avec effet gradient */}
         <RouterLink to="/" style={{
-          color: t.text.accent, fontWeight: 700, fontSize: '1.4rem',
+          fontWeight: 800, fontSize: '1.5rem',
           cursor: 'pointer', textDecoration: 'none',
-          display: 'flex', alignItems: 'center', gap: '4px',
+          display: 'flex', alignItems: 'center', gap: '6px',
           marginRight: '40px'
         }}>
-          <ChevronsLeft size={20} style={{ color: t.text.accent }} />
-          <span>JD</span>
-          <ChevronsRight size={20} style={{ color: t.text.accent }} />
+          <span style={{
+            background: `linear-gradient(135deg, ${t.text.accent}, #34D399)`,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>
+            JD
+          </span>
+          <span style={{ color: t.text.secondary, fontSize: '0.6rem', fontWeight: 300 }}>✦</span>
         </RouterLink>
 
         <div className="nav-links" style={{

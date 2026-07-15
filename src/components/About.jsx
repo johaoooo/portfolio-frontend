@@ -246,9 +246,31 @@ export default function About() {
               <Briefcase size={24} />
               Expériences professionnelles
             </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <div style={{ position: 'relative', paddingLeft: '24px' }}>
+              {/* Ligne de timeline */}
+              <div style={{
+                position: 'absolute',
+                left: '7px',
+                top: '4px',
+                bottom: '4px',
+                width: '2px',
+                background: `linear-gradient(to bottom, ${t.text.accent}, ${t.text.accent}33)`,
+                borderRadius: '2px'
+              }} />
               {experiences.map((exp, i) => (
-                <div key={i}>
+                <div key={i} style={{ position: 'relative', paddingBottom: i < experiences.length - 1 ? '28px' : '4px', paddingLeft: '20px' }}>
+                  {/* Point de la timeline */}
+                  <div style={{
+                    position: 'absolute',
+                    left: '-20px',
+                    top: '4px',
+                    width: '14px',
+                    height: '14px',
+                    borderRadius: '50%',
+                    background: t.text.accent,
+                    border: `3px solid ${t.bg.page}`,
+                    boxShadow: `0 0 0 2px ${t.text.accent}`
+                  }} />
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', marginBottom: '6px' }}>
                     <h4 style={{ color: t.text.primary, fontSize: '1rem', fontWeight: 600, margin: 0 }}>{exp.title}</h4>
                     <span style={{
@@ -261,9 +283,8 @@ export default function About() {
                       {exp.period}
                     </span>
                   </div>
-                  <p style={{ color: t.text.accent, fontSize: '0.85rem', marginBottom: '8px' }}>{exp.company}</p>
-                  <p style={{ color: t.text.secondary, fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>{exp.description}</p>
-                  {i < experiences.length - 1 && <hr style={{ margin: '20px 0 0', borderColor: t.border.default }} />}
+                  <p style={{ color: t.text.accent, fontSize: '0.85rem', marginBottom: '6px', fontWeight: 500 }}>{exp.company}</p>
+                  <p style={{ color: t.text.secondary, fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>{exp.description}</p>
                 </div>
               ))}
             </div>

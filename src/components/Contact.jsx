@@ -1,9 +1,9 @@
 import { useTheme } from '../context/ThemeContext'
 import { useTokens } from '../theme/tokens'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, MessageCircle, Sparkles, Code } from 'lucide-react'
+import { useState } from 'react'
+import { Mail, Phone, MapPin, Send, MessageCircle, Sparkles, Code, CheckCircle, Loader } from 'lucide-react'
 
-// Icône LinkedIn personnalisée (car lucide-react ne l'exporte pas correctement)
 const LinkedinIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -15,6 +15,28 @@ const LinkedinIcon = () => (
 export default function Contact() {
   const { darkMode } = useTheme()
   const t = useTokens(darkMode)
+  const [sent, setSent] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    const form = e.target
+    const data = new FormData(form)
+    try {
+      await fetch('https://formspree.io/f/xpwzbkqw', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      })
+      setSent(true)
+      form.reset()
+    } catch {
+      alert('Une erreur est survenue. Veuillez réessayer.')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const contactInfo = [
     { icon: <Mail size={20} />, label: 'Email', value: 'josephdehazounde@gmail.com', link: 'mailto:josephdehazounde@gmail.com' },
@@ -35,7 +57,6 @@ export default function Contact() {
     }}>
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
         
-        {/* Titre dynamique avec icônes */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -112,39 +133,94 @@ export default function Contact() {
             <h3 style={{ color: t.text.primary, fontSize: '1.25rem', fontWeight: 600, marginBottom: '24px' }}>
               Envoyez-moi un message
             </h3>
-            <form action="#" method="POST">
-              <div style={{ marginBottom: '16px' }}>
-                <input type="text" placeholder="Votre nom" style={{ width: '100%', padding: '12px 16px', background: t.bg.page, border: `1px solid ${t.border.default}`, borderRadius: '12px', color: t.text.primary, fontSize: '0.9rem', outline: 'none' }} />
-              </div>
-              <div style={{ marginBottom: '16px' }}>
-                <input type="email" placeholder="Votre email" style={{ width: '100%', padding: '12px 16px', background: t.bg.page, border: `1px solid ${t.border.default}`, borderRadius: '12px', color: t.text.primary, fontSize: '0.9rem', outline: 'none' }} />
-              </div>
-              <div style={{ marginBottom: '24px' }}>
-                <textarea rows={4} placeholder="Votre message" style={{ width: '100%', padding: '12px 16px', background: t.bg.page, border: `1px solid ${t.border.default}`, borderRadius: '12px', color: t.text.primary, fontSize: '0.9rem', outline: 'none', resize: 'vertical', fontFamily: 'inherit' }} />
-              </div>
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px',
-                  background: t.text.accent,
-                  color: darkMode ? '#05080F' : '#fff',
-                  padding: '12px 24px',
-                  border: 'none',
-                  borderRadius: '40px',
-                  fontSize: '0.9rem',
-                  fontWeight: 600,
-                  cursor: 'pointer'
-                }}
+            {sent ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                style={{ textAlign: 'center', padding: '40px 20px' }}
               >
-                <Send size={18} /> Envoyer
-              </motion.button>
-            </form>
+                <CheckCircle size={48} style={{ color: t.text.accent, marginBottom: '16px' }} />
+                <p style={{ color: t.text.primary, fontSize: '1.1rem', fontWeight: 600 }}>Message envoyé !</p>
+                <p style={{ color: t.text.secondary, fontSize: '0.9rem' }}>Merci, je vous répondrai dans les plus brefs délais.</p>
+                <button onClick={() => setSent(false)} style={{
+                  marginTop: '16px',
+                  background: 'none',
+                  border: `1px solid ${t.text.accent}`,
+                  color: t.text.accent,
+                  padding: '8px 20px',
+                  borderRadius: '40px',
+                  cursor: 'pointer',
+                  fontSize: '0.85rem',
+                  fontWeight: 500
+                }}>
+                  Envoyer un autre message
+                </button>
+              </motion.div>
+            ) : (
+              <form onSubmit={handleSubmit}>
+                <div style={{ marginBottom: '16px' }}>
+                  <input type="text" name="name" required placeholder="Votre nom" style={{
+                    width: '100%', padding: '12px 16px',
+                    background: t.bg.page, border: `1px solid ${t.border.default}`,
+                    borderRadius: '12px', color: t.text.primary, fontSize: '0.9rem',
+                    outline: 'none', fontFamily: 'inherit',
+                    transition: 'border-color 0.2s'
+                  }}
+                    onFocus={e => e.target.style.borderColor = t.text.accent}
+                    onBlur={e => e.target.style.borderColor = t.border.default}
+                  />
+                </div>
+                <div style={{ marginBottom: '16px' }}>
+                  <input type="email" name="email" required placeholder="Votre email" style={{
+                    width: '100%', padding: '12px 16px',
+                    background: t.bg.page, border: `1px solid ${t.border.default}`,
+                    borderRadius: '12px', color: t.text.primary, fontSize: '0.9rem',
+                    outline: 'none', fontFamily: 'inherit',
+                    transition: 'border-color 0.2s'
+                  }}
+                    onFocus={e => e.target.style.borderColor = t.text.accent}
+                    onBlur={e => e.target.style.borderColor = t.border.default}
+                  />
+                </div>
+                <div style={{ marginBottom: '24px' }}>
+                  <textarea name="message" required rows={4} placeholder="Votre message" style={{
+                    width: '100%', padding: '12px 16px',
+                    background: t.bg.page, border: `1px solid ${t.border.default}`,
+                    borderRadius: '12px', color: t.text.primary, fontSize: '0.9rem',
+                    outline: 'none', resize: 'vertical', fontFamily: 'inherit',
+                    transition: 'border-color 0.2s'
+                  }}
+                    onFocus={e => e.target.style.borderColor = t.text.accent}
+                    onBlur={e => e.target.style.borderColor = t.border.default}
+                  />
+                </div>
+                <motion.button
+                  type="submit"
+                  disabled={loading}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    background: loading ? t.text.secondary : t.text.accent,
+                    color: darkMode ? '#05080F' : '#fff',
+                    padding: '12px 24px',
+                    border: 'none',
+                    borderRadius: '40px',
+                    fontSize: '0.9rem',
+                    fontWeight: 600,
+                    cursor: loading ? 'not-allowed' : 'pointer',
+                    opacity: loading ? 0.7 : 1
+                  }}
+                >
+                  {loading ? <Loader size={18} className="spin" /> : <Send size={18} />}
+                  {loading ? 'Envoi...' : 'Envoyer'}
+                </motion.button>
+              </form>
+            )}
           </motion.div>
 
           {/* Infos de contact */}

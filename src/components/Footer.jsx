@@ -30,28 +30,40 @@ export default function Footer() {
     }}>
       <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '32px' }}>
-          <a href="https://github.com/johaoooo" target="_blank" rel="noopener noreferrer" style={{
-            width: '40px', height: '40px',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: t.badge.bg, border: `1px solid ${t.border.accent}`,
-            borderRadius: '50%', color: t.text.accent,
-            transition: 'all 0.2s'
-          }}>
+          <motion.a
+            href="https://github.com/johaoooo" target="_blank" rel="noopener noreferrer"
+            whileHover={{ scale: 1.1, y: -3 }}
+            style={{
+              width: '44px', height: '44px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              background: t.badge.bg, border: `1px solid ${t.border.accent}`,
+              borderRadius: '50%', color: t.text.accent,
+              transition: 'all 0.2s'
+            }}
+          >
             <GithubIcon />
-          </a>
-          <a href="https://linkedin.com/in/dehazounde-joseph" target="_blank" rel="noopener noreferrer" style={{
-            width: '40px', height: '40px',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: t.badge.bg, border: `1px solid ${t.border.accent}`,
-            borderRadius: '50%', color: t.text.accent,
-            transition: 'all 0.2s'
-          }}>
+          </motion.a>
+          <motion.a
+            href="https://linkedin.com/in/dehazounde-joseph" target="_blank" rel="noopener noreferrer"
+            whileHover={{ scale: 1.1, y: -3 }}
+            style={{
+              width: '44px', height: '44px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              background: t.badge.bg, border: `1px solid ${t.border.accent}`,
+              borderRadius: '50%', color: t.text.accent,
+              transition: 'all 0.2s'
+            }}
+          >
             <LinkedinIcon />
-          </a>
+          </motion.a>
         </div>
         
+        <div style={{ marginBottom: '8px' }}>
+          <span style={{ color: t.text.accent, fontWeight: 600, fontSize: '1.2rem' }}>JD</span>
+          <span style={{ color: t.text.secondary, fontSize: '0.6rem', margin: '0 8px' }}>✦</span>
+        </div>
         <div style={{ color: t.text.secondary, fontSize: '0.75rem' }}>
-          © {currentYear} Joseph Dehazounde - Expert Cybersécurité & Développeur Fullstack
+          © {currentYear} Joseph Dehazounde — Analyste en Cybersécurité & Fullstack Dev
         </div>
       </div>
     </footer>

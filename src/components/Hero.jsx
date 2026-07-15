@@ -9,16 +9,16 @@ export default function Hero() {
   const { darkMode } = useTheme()
   const t = useTokens(darkMode)
   
-  const [currentText, setCurrentText] = useState('')
-  const [isDeleting, setIsDeleting] = useState(false)
-  const [loopNum, setLoopNum] = useState(0)
-  
   const texts = [
-    'Expert en cybersécurité',
-    'Développeur web fullstack',
+    'Analyste en cybersécurité',
+    'Fullstack developer',
     'Marketeur',
     'Technicien en maintenance informatique'
   ]
+
+  const [currentText, setCurrentText] = useState(texts[0])
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [loopNum, setLoopNum] = useState(0)
   
   useEffect(() => {
     let timeout
@@ -37,7 +37,7 @@ export default function Hero() {
         setIsDeleting(true)
       } else if (isDeleting && updatedText === '') {
         setIsDeleting(false)
-        setLoopNum(loopNum + 1)
+        setLoopNum(prev => prev + 1)
         typingSpeed = 500
       }
       
@@ -46,13 +46,7 @@ export default function Hero() {
     
     timeout = setTimeout(handleTyping, 100)
     return () => clearTimeout(timeout)
-  }, [currentText, isDeleting, loopNum, texts])
-  
-  useEffect(() => {
-    if (currentText === '' && !isDeleting && loopNum === 0) {
-      setCurrentText('Expert en cybersécurité')
-    }
-  }, [])
+  }, [currentText, isDeleting, loopNum])
   
   return (
     <section id="hero" style={{
@@ -61,18 +55,47 @@ export default function Hero() {
       alignItems: 'center',
       background: t.bg.page,
       transition: 'background 0.3s',
-      padding: '100px 20px 60px'
+      padding: '100px 20px 60px',
+      position: 'relative',
+      overflow: 'hidden'
     }}>
+      {/* Effet de glow */}
+      <div style={{
+        position: 'absolute',
+        top: '-20%',
+        right: '-10%',
+        width: '400px',
+        height: '400px',
+        borderRadius: '50%',
+        background: `radial-gradient(circle, ${t.text.accent}15 0%, transparent 70%)`,
+        pointerEvents: 'none'
+      }} />
+      <div style={{
+        position: 'absolute',
+        bottom: '-20%',
+        left: '-10%',
+        width: '300px',
+        height: '300px',
+        borderRadius: '50%',
+        background: `radial-gradient(circle, ${t.text.accent}10 0%, transparent 70%)`,
+        pointerEvents: 'none'
+      }} />
+
       <div style={{
         maxWidth: '1200px',
         margin: '0 auto',
         width: '100%',
-        background: t.bg.surface,
+        background: `linear-gradient(135deg, ${t.bg.surface}, ${t.bg.surface}88)`,
         border: `1px solid ${t.border.default}`,
         borderRadius: '40px',
         padding: '60px 70px',
         transition: 'all 0.3s ease',
-        boxShadow: darkMode ? '0 20px 40px rgba(0,0,0,0.3)' : '0 20px 40px rgba(0,0,0,0.05)'
+        boxShadow: darkMode
+          ? '0 20px 40px rgba(0,0,0,0.3), 0 0 80px rgba(16,185,129,0.05)'
+          : '0 20px 40px rgba(0,0,0,0.05)',
+        backdropFilter: 'blur(10px)',
+        position: 'relative',
+        zIndex: 1
       }}>
         <div style={{
           display: 'grid',
@@ -88,31 +111,64 @@ export default function Hero() {
             className="hero-left"
             style={{ textAlign: 'left' }}
           >
+            <motion.p
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              style={{
+                color: t.text.accent,
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                letterSpacing: '3px',
+                textTransform: 'uppercase',
+                marginBottom: '12px'
+              }}
+            >
+              👋 Bienvenue sur mon portfolio
+            </motion.p>
             <h1 style={{
               color: t.text.primary,
-              fontSize: 'clamp(2rem, 4vw, 3rem)',
+              fontSize: 'clamp(2.2rem, 5vw, 3.2rem)',
               fontWeight: 700,
               lineHeight: 1.2,
-              marginBottom: '30px'
+              marginBottom: '16px'
+            }}>
+              Joseph{' '}
+              <span style={{
+                background: `linear-gradient(135deg, ${t.text.accent}, #34D399)`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>
+                Dehazounde
+              </span>
+            </h1>
+            <div style={{
+              color: t.text.secondary,
+              fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+              fontWeight: 400,
+              marginBottom: '30px',
+              minHeight: '2em'
             }}>
               <span style={{
                 color: t.text.accent,
                 display: 'inline-block',
-                minWidth: '320px',
-                textAlign: 'left'
+                minWidth: '280px',
+                textAlign: 'left',
+                fontWeight: 500
               }} className="dynamic-text">
                 {currentText}
                 <span style={{
                   display: 'inline-block',
                   width: '3px',
-                  height: '1em',
+                  height: '1.1em',
                   backgroundColor: t.text.accent,
                   marginLeft: '4px',
                   animation: 'blink 1s step-end infinite',
                   verticalAlign: 'middle'
                 }} />
               </span>
-            </h1>
+            </div>
             
             <div className="hero-buttons">
               <ScrollLink
@@ -189,7 +245,7 @@ export default function Hero() {
                 fontSize: '0.75rem',
                 letterSpacing: '1px'
               }}>
-                EXPERT CYBERSÉCURITÉ & FULLSTACK DEV
+                Analyste en cybersécurité & fullstack dev
               </p>
             </div>
           </motion.div>
