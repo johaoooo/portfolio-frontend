@@ -64,28 +64,15 @@ export default function Contact() {
           viewport={{ once: true }}
           style={{ textAlign: 'center', marginBottom: '50px' }}
         >
-          <motion.div
-            animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px' }}
-          >
-            <MessageCircle size={28} style={{ color: t.text.accent }} />
-            <h2 style={{
-              color: t.text.primary,
-              fontSize: 'clamp(1.8rem, 4vw, 2.2rem)',
-              fontWeight: 700,
-              margin: 0,
-              display: 'inline-block'
-            }}>
-              Contact
-            </h2>
-            <motion.div
-              animate={{ rotate: [0, 360] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-            >
-              <Sparkles size={28} style={{ color: t.text.accent }} />
-            </motion.div>
-          </motion.div>
+          <h2 style={{
+            color: t.text.primary,
+            fontSize: 'clamp(1.8rem, 4vw, 2.2rem)',
+            fontWeight: 700,
+            margin: 0,
+            display: 'inline-block'
+          }}>
+            Contact
+          </h2>
           <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: '60px' }}

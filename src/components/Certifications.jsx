@@ -6,29 +6,37 @@ const certificationsData = [
   {
     name: 'Informatique et Internet',
     issuer: 'Université Numérique Cheikh Hamidou Kane (Force-N)',
-    date: '2026',
     description: 'Formation en informatique et internet.',
     status: 'Obtenue'
   },
   {
     name: 'Marketing Digital',
     issuer: 'Université Numérique Cheikh Hamidou Kane (Force-N)',
-    date: 'En cours',
-    description: 'Formation en marketing digital.',
-    status: 'En cours'
+    description: 'Formation en marketing digital et stratégie web.',
+    status: 'Obtenue'
+  },
+  {
+    name: 'Intelligence Artificielle',
+    issuer: 'Université Numérique Cheikh Hamidou Kane (Force-N)',
+    description: 'Formation aux fondamentaux et usages pratiques de l\'intelligence artificielle.',
+    status: 'Obtenue'
   },
   {
     name: 'Bootcamp Cybersécurité',
     issuer: 'Dclic OIF',
-    date: 'En cours',
     description: 'Formation intensive en cybersécurité offensive et défensive.',
     status: 'En cours'
   },
   {
-    name: 'Ingénierie en Cybersécurité',
-    issuer: 'OpenClassrooms',
-    date: 'En cours',
-    description: 'Parcours complet en ingénierie cybersécurité.',
+    name: 'Administration Systèmes et Réseaux',
+    issuer: 'Formation professionnelle',
+    description: 'Gestion, configuration et sécurisation des réseaux et systèmes Linux/Windows.',
+    status: 'En cours'
+  },
+  {
+    name: 'Google Cybersecurity Certificate',
+    issuer: 'Google / Coursera',
+    description: 'Certification professionnelle en cybersécurité, détection des menaces et analyse SIEM.',
     status: 'En cours'
   }
 ]
@@ -56,23 +64,15 @@ export default function Certifications() {
           viewport={{ once: true }}
           style={{ textAlign: 'center', marginBottom: '50px' }}
         >
-          <motion.div
-            animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}
-          >
-            <Medal size={28} style={{ color: t.text.accent }} />
-            <h2 style={{
-              color: t.text.primary,
-              fontSize: 'clamp(1.8rem, 5vw, 2.2rem)',
-              fontWeight: 700,
-              margin: 0,
-              display: 'inline-block'
-            }}>
-              Certifications
-            </h2>
-            <Sparkles size={28} style={{ color: t.text.accent }} />
-          </motion.div>
+          <h2 style={{
+            color: t.text.primary,
+            fontSize: 'clamp(1.8rem, 5vw, 2.2rem)',
+            fontWeight: 700,
+            margin: 0,
+            display: 'inline-block'
+          }}>
+            Certifications
+          </h2>
           <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: '60px' }}
@@ -188,7 +188,6 @@ export default function Certifications() {
                 gap: '8px',
                 marginTop: 'auto'
               }}>
-                <Calendar size={14} style={{ color: t.text.accent }} />
                 <span style={{
                   color: cert.status === 'En cours' ? t.text.accent : t.text.secondary,
                   fontSize: '0.75rem',
@@ -197,7 +196,7 @@ export default function Certifications() {
                   borderRadius: '20px',
                   display: 'inline-block'
                 }}>
-                  {cert.status === 'En cours' ? '📖 En cours' : `✅ ${cert.date}`}
+                  {cert.status === 'En cours' ? 'En cours' : 'Obtenue'}
                 </span>
               </div>
             </motion.div>

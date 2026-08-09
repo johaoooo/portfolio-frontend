@@ -38,4 +38,17 @@ export const projects = [
     demo: "https://gold-platform-ecru.vercel.app/",
     tags: ["Next.js", "TypeScript", "Django"],
   },
+  {
+    id: 4,
+    title: "Saveurs d'Agojiés",
+    description: "Plateforme culinaire et e-boutique de spécialités gastronomiques locales béninoises avec catalogue dynamique et commande en ligne.",
+    problem: "Valorisation et numérisation des produits culinaires locaux avec une expérience utilisateur fluide.",
+    solution: "Plateforme web moderne développée avec React et Node.js, offrant une vitrine élégante, panier interactif et commande sécurisée.",
+    stack: ["React", "Node.js", "Vite", "Tailwind CSS"],
+    security: ["Sanitisation des données", "Protection CORS"],
+    result: "Accès simplifié à la commande en ligne et mise en valeur du patrimoine culinaire local.",
+    github: "https://github.com/johaoooo",
+    demo: "https://saveurs-d-agojies.vercel.app/",
+    tags: ["React", "Node.js", "E-commerce"],
+  },
 ]

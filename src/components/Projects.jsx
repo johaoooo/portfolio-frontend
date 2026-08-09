@@ -26,6 +26,13 @@ const PROJECTS = [
     github: 'https://github.com/johaoooo'
   },
   {
+    title: 'Saveurs d\'Agojiés',
+    description: 'Plateforme culinaire et e-boutique de spécialités gastronomiques locales',
+    tech: ['React', 'Node.js'],
+    link: 'https://saveurs-d-agojies.vercel.app/',
+    github: 'https://github.com/johaoooo'
+  },
+  {
     title: 'AgroTrust',
     description: 'Plateforme qui met en relation les agriculteurs avec les acheteurs',
     tech: ['React', 'Django'],
@@ -62,23 +69,15 @@ export default function Projects() {
           viewport={{ once: true }}
           style={{ textAlign: 'center', marginBottom: '50px' }}
         >
-          <motion.div
-            animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px' }}
-          >
-            <FolderGit2 size={28} style={{ color: t.text.accent }} />
-            <h2 style={{
-              color: t.text.primary,
-              fontSize: 'clamp(1.8rem, 4vw, 2.2rem)',
-              fontWeight: 700,
-              margin: 0,
-              display: 'inline-block'
-            }}>
-              Projets
-            </h2>
-            <Sparkles size={28} style={{ color: t.text.accent }} />
-          </motion.div>
+          <h2 style={{
+            color: t.text.primary,
+            fontSize: 'clamp(1.8rem, 4vw, 2.2rem)',
+            fontWeight: 700,
+            margin: 0,
+            display: 'inline-block'
+          }}>
+            Projets
+          </h2>
           <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: '60px' }}

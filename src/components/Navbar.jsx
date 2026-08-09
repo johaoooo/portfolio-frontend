@@ -69,11 +69,11 @@ export default function Navbar() {
   }, [isHomePage, navigate, handleScroll])
 
   const menuItems = [
-    { name: 'Accueil', to: '/', icon: <Home size={16} />, isScroll: true, scrollTo: 'hero' },
-    { name: 'Compétences', to: '/', icon: <Code size={16} />, isScroll: true, scrollTo: 'skills' },
-    { name: 'Projets', to: '/', icon: <Briefcase size={16} />, isScroll: true, scrollTo: 'projects' },
-    { name: 'Contact', to: '/', icon: <Mail size={16} />, isScroll: true, scrollTo: 'contact' },
-    { name: 'Blog', to: '/blog', icon: <Newspaper size={16} />, isScroll: false, scrollTo: null }
+    { name: 'Accueil', to: '/', isScroll: true, scrollTo: 'hero' },
+    { name: 'Compétences', to: '/', isScroll: true, scrollTo: 'skills' },
+    { name: 'Projets', to: '/', isScroll: true, scrollTo: 'projects' },
+    { name: 'Contact', to: '/', isScroll: true, scrollTo: 'contact' },
+    { name: 'Blog', to: '/blog', isScroll: false, scrollTo: null }
   ]
 
   const isActive = (item) => {
@@ -107,83 +107,94 @@ export default function Navbar() {
         transition: 'background 0.3s, border-color 0.3s',
         boxShadow: darkMode ? '0 4px 20px rgba(0,0,0,0.3)' : '0 4px 20px rgba(0,0,0,0.05)'
       }}>
-        {/* Logo avec effet gradient */}
-        <RouterLink to="/" style={{
-          fontWeight: 800, fontSize: '1.5rem',
+        {/* Logo Monogramme moderne JD uniquement */}
+        <RouterLink to="/" aria-label="Accueil" style={{
           cursor: 'pointer', textDecoration: 'none',
-          display: 'flex', alignItems: 'center', gap: '6px',
-          marginRight: '40px'
+          display: 'flex', alignItems: 'center',
+          marginRight: '24px'
         }}>
-          <span style={{
-            background: `linear-gradient(135deg, ${t.text.accent}, #34D399)`,
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
-          }}>
+          <div style={{
+            width: '40px', height: '40px',
+            borderRadius: '12px',
+            background: `linear-gradient(135deg, ${t.text.accent}, #059669)`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            color: '#05080F', fontWeight: 900, fontSize: '1.1rem',
+            letterSpacing: '-0.5px',
+            boxShadow: '0 4px 14px rgba(16, 185, 129, 0.35)',
+            transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.transform = 'scale(1.05)'
+            e.currentTarget.style.boxShadow = '0 6px 20px rgba(16, 185, 129, 0.5)'
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.transform = 'scale(1)'
+            e.currentTarget.style.boxShadow = '0 4px 14px rgba(16, 185, 129, 0.35)'
+          }}
+          >
             JD
-          </span>
-          <span style={{ color: t.text.secondary, fontSize: '0.6rem', fontWeight: 300 }}>✦</span>
+          </div>
         </RouterLink>
 
         <div className="nav-links" style={{
-          display: 'flex', gap: '32px', alignItems: 'center',
+          display: 'flex', gap: '8px', alignItems: 'center',
           flex: 1,
           justifyContent: 'center'
         }}>
-          {menuItems.map(item => (
-            <span
-              key={item.name}
-              onClick={() => handleNavClick(item)}
-              className={`nav-link hover:!text-emerald-500 dark:hover:!text-emerald-400`}
-              style={{
-                color: isActive(item) ? t.text.accent : t.text.secondary,
-                fontSize: '0.9rem',
-                cursor: 'pointer',
-                fontWeight: 500,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                transition: 'all 0.2s ease',
-                position: 'relative'
-              }}
-            >
-              {item.icon}
-              {item.name}
-              {isActive(item) && (
-                <span className="hidden md:block" style={{
-                  position: 'absolute', bottom: '-8px',
-                  left: '50%', transform: 'translateX(-50%)',
-                  width: '20px', height: '2px',
-                  background: t.text.accent, borderRadius: '2px'
-                }} />
-              )}
-            </span>
-          ))}
+          {menuItems.map(item => {
+            const active = isActive(item)
+            return (
+              <span
+                key={item.name}
+                onClick={() => handleNavClick(item)}
+                style={{
+                  color: active ? t.text.accent : t.text.secondary,
+                  background: active ? t.badge.bg : 'transparent',
+                  fontSize: '0.88rem',
+                  cursor: 'pointer',
+                  fontWeight: active ? 600 : 500,
+                  padding: '8px 16px',
+                  borderRadius: '30px',
+                  transition: 'all 0.25s ease',
+                  border: active ? `1px solid ${t.border.accent}` : '1px solid transparent'
+                }}
+              >
+                {item.name}
+              </span>
+            )
+          })}
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginLeft: '20px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginLeft: '16px' }}>
           <a
             href="/CV_DEHAZOUNDE_Joseph-vf.pdf"
             download
             style={{
               display: 'flex', alignItems: 'center', gap: '6px',
-              background: t.text.accent,
-              color: darkMode ? '#05080F' : '#fff',
-              padding: '6px 16px', borderRadius: '40px',
-              textDecoration: 'none', fontSize: '0.8rem',
-              fontWeight: 600, transition: 'opacity 0.2s'
+              background: `linear-gradient(135deg, ${t.text.accent}, #059669)`,
+              color: '#05080F',
+              padding: '7px 18px', borderRadius: '40px',
+              textDecoration: 'none', fontSize: '0.82rem',
+              fontWeight: 700, transition: 'transform 0.2s, box-shadow 0.2s',
+              boxShadow: '0 4px 12px rgba(16, 185, 129, 0.2)'
             }}
-            onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
-            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = 'translateY(-1px)'
+              e.currentTarget.style.boxShadow = '0 6px 16px rgba(16, 185, 129, 0.35)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = 'translateY(0)'
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(16, 185, 129, 0.2)'
+            }}
           >
             <FileText size={14} /> CV
           </a>
 
           <button style={{
-            background: 'none', border: `1px solid ${t.border.default}`,
-            color: t.text.secondary, borderRadius: '50%',
-            width: 36, height: 36, cursor: 'pointer',
-            transition: 'border-color 0.2s, color 0.2s',
+            background: t.badge.bg, border: `1px solid ${t.border.default}`,
+            color: t.text.accent, borderRadius: '50%',
+            width: 38, height: 38, cursor: 'pointer',
+            transition: 'all 0.2s',
             display: 'flex', alignItems: 'center', justifyContent: 'center'
           }} onClick={() => setDarkMode(!darkMode)} aria-label="Changer de thème">
             {darkMode ? <Sun size={16} /> : <Moon size={16} />}
@@ -226,7 +237,6 @@ export default function Navbar() {
                 background: isActive(item) ? t.badge.bg : 'transparent'
               }}
             >
-              {item.icon}
               {item.name}
             </span>
           ))}

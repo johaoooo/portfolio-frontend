@@ -111,27 +111,13 @@ export default function Hero() {
             className="hero-left"
             style={{ textAlign: 'left' }}
           >
-            <motion.p
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              style={{
-                color: t.text.accent,
-                fontSize: '0.85rem',
-                fontWeight: 600,
-                letterSpacing: '3px',
-                textTransform: 'uppercase',
-                marginBottom: '12px'
-              }}
-            >
-              👋 Bienvenue sur mon portfolio
-            </motion.p>
             <h1 style={{
               color: t.text.primary,
-              fontSize: 'clamp(2.2rem, 5vw, 3.2rem)',
-              fontWeight: 700,
-              lineHeight: 1.2,
-              marginBottom: '16px'
+              fontSize: 'clamp(2.2rem, 5vw, 3.4rem)',
+              fontWeight: 800,
+              lineHeight: 1.15,
+              marginBottom: '16px',
+              letterSpacing: '-0.5px'
             }}>
               Joseph{' '}
               <span style={{
@@ -140,14 +126,14 @@ export default function Hero() {
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text'
               }}>
-                Dehazounde
+                DEHAZOUNDE
               </span>
             </h1>
             <div style={{
               color: t.text.secondary,
-              fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+              fontSize: 'clamp(1rem, 2vw, 1.25rem)',
               fontWeight: 400,
-              marginBottom: '30px',
+              marginBottom: '32px',
               minHeight: '2em'
             }}>
               <span style={{
@@ -155,7 +141,7 @@ export default function Hero() {
                 display: 'inline-block',
                 minWidth: '280px',
                 textAlign: 'left',
-                fontWeight: 500
+                fontWeight: 600
               }} className="dynamic-text">
                 {currentText}
                 <span style={{
@@ -170,23 +156,24 @@ export default function Hero() {
               </span>
             </div>
             
-            <div className="hero-buttons">
+            <div className="hero-buttons" style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
               <ScrollLink
                 to="projects"
                 smooth duration={500}
                 offset={-70}
                 className="hero-btn"
                 style={{
-                  background: t.text.accent,
-                  color: darkMode ? '#05080F' : '#fff',
-                  padding: '12px 28px',
+                  background: `linear-gradient(135deg, ${t.text.accent}, #059669)`,
+                  color: '#05080F',
+                  padding: '13px 30px',
                   borderRadius: '40px',
                   textDecoration: 'none',
                   fontSize: '0.9rem',
-                  fontWeight: 600,
+                  fontWeight: 700,
                   cursor: 'pointer',
                   display: 'inline-block',
-                  transition: 'opacity 0.2s'
+                  transition: 'transform 0.2s, box-shadow 0.2s',
+                  boxShadow: '0 4px 20px rgba(16, 185, 129, 0.35)'
                 }}
               >
                 Voir mes projets
@@ -197,10 +184,10 @@ export default function Hero() {
                 offset={-70}
                 className="hero-btn"
                 style={{
-                  background: 'transparent',
-                  border: `2px solid ${t.text.accent}`,
+                  background: t.badge.bg,
+                  border: `1px solid ${t.border.accent}`,
                   color: t.text.accent,
-                  padding: '12px 28px',
+                  padding: '13px 30px',
                   borderRadius: '40px',
                   textDecoration: 'none',
                   fontSize: '0.9rem',
@@ -238,7 +225,7 @@ export default function Hero() {
                 fontWeight: 600,
                 marginBottom: '6px'
               }}>
-                Joseph <span style={{ color: t.text.accent }}>Dehazounde</span>
+                Joseph <span style={{ color: t.text.accent }}>DEHAZOUNDE</span>
               </h2>
               <p style={{
                 color: t.text.accent,

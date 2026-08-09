@@ -23,10 +23,12 @@ export default function About() {
   ]
 
   const certifications = [
-    { name: "Informatique et Internet", issuer: "Force-N", year: "2026", status: "Obtenue", icon: <Award size={16} /> },
-    { name: "Marketing Digital", issuer: "Force-N", year: "En cours", status: "En cours", icon: <Target size={16} /> },
-    { name: "Bootcamp Cybersécurité", issuer: "Dclic OIF", year: "En cours", status: "En cours", icon: <Shield size={16} /> },
-    { name: "Ingénierie en Cybersécurité", issuer: "OpenClassrooms", year: "En cours", status: "En cours", icon: <BookOpen size={16} /> }
+    { name: "Informatique et Internet", issuer: "Force-N", status: "Obtenue", icon: <Award size={16} /> },
+    { name: "Marketing Digital", issuer: "Force-N", status: "Obtenue", icon: <Target size={16} /> },
+    { name: "Intelligence Artificielle", issuer: "Force-N", status: "Obtenue", icon: <Cpu size={16} /> },
+    { name: "Bootcamp Cybersécurité", issuer: "Dclic OIF", status: "En cours", icon: <Shield size={16} /> },
+    { name: "Administration Systèmes et Réseaux", issuer: "Formation professionnelle", status: "En cours", icon: <Wrench size={16} /> },
+    { name: "Google Cybersecurity Certificate", issuer: "Google / Coursera", status: "En cours", icon: <Shield size={16} /> }
   ]
 
   const experiences = [
@@ -83,23 +85,15 @@ export default function About() {
           viewport={{ once: true }}
           style={{ textAlign: 'center', marginBottom: '50px' }}
         >
-          <motion.div
-            animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px' }}
-          >
-            <Sparkles size={28} style={{ color: t.text.accent }} />
-            <h2 style={{
-              color: t.text.primary,
-              fontSize: 'clamp(1.8rem, 4vw, 2.2rem)',
-              fontWeight: 700,
-              margin: 0,
-              display: 'inline-block'
-            }}>
-              Mon parcours
-            </h2>
-            <Sparkles size={28} style={{ color: t.text.accent }} />
-          </motion.div>
+          <h2 style={{
+            color: t.text.primary,
+            fontSize: 'clamp(1.8rem, 4vw, 2.2rem)',
+            fontWeight: 700,
+            margin: 0,
+            display: 'inline-block'
+          }}>
+            Mon parcours
+          </h2>
           <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: '60px' }}
@@ -134,9 +128,6 @@ export default function About() {
             }}
           >
             <h3 style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
               color: t.text.accent,
               fontSize: '1.3rem',
               fontWeight: 600,
@@ -144,7 +135,6 @@ export default function About() {
               paddingBottom: '12px',
               borderBottom: `2px solid ${t.border.accent}`
             }}>
-              <GraduationCap size={24} />
               Formations
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -152,9 +142,8 @@ export default function About() {
                 <div key={i}>
                   <h4 style={{ color: t.text.primary, fontSize: '1rem', fontWeight: 600, marginBottom: '6px' }}>{f.title}</h4>
                   <p style={{ color: t.text.secondary, fontSize: '0.85rem', marginBottom: '4px' }}>{f.institution}</p>
-                  <div style={{ display: 'flex', gap: '16px', fontSize: '0.7rem', color: t.text.secondary }}>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><Calendar size={12} /> {f.period}</span>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><MapPin size={12} /> {f.location}</span>
+                  <div style={{ fontSize: '0.75rem', color: t.text.secondary }}>
+                    <span>{f.location}</span>
                   </div>
                   {i < formations.length - 1 && <hr style={{ margin: '16px 0 0', borderColor: t.border.default }} />}
                 </div>
@@ -176,9 +165,6 @@ export default function About() {
             }}
           >
             <h3 style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
               color: t.text.accent,
               fontSize: '1.3rem',
               fontWeight: 600,
@@ -186,7 +172,6 @@ export default function About() {
               paddingBottom: '12px',
               borderBottom: `2px solid ${t.border.accent}`
             }}>
-              <Award size={24} />
               Certifications
             </h3>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
@@ -199,18 +184,12 @@ export default function About() {
                     borderRadius: '40px',
                     padding: '12px 20px',
                     flex: '1 1 auto',
-                    minWidth: '220px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '10px'
+                    minWidth: '220px'
                   }}
                 >
-                  <div style={{ color: t.text.accent }}>{cert.icon}</div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 600, color: t.text.accent, fontSize: '0.85rem' }}>{cert.name}</div>
-                    <div style={{ fontSize: '0.65rem', color: t.text.secondary, marginTop: '2px' }}>
-                      {cert.issuer} • {cert.year}
-                    </div>
+                  <div style={{ fontWeight: 600, color: t.text.accent, fontSize: '0.85rem' }}>{cert.name}</div>
+                  <div style={{ fontSize: '0.75rem', color: t.text.secondary, marginTop: '2px' }}>
+                    {cert.issuer}
                   </div>
                 </div>
               ))}
@@ -231,9 +210,6 @@ export default function About() {
             }}
           >
             <h3 style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
               color: t.text.accent,
               fontSize: '1.3rem',
               fontWeight: 600,
@@ -241,7 +217,6 @@ export default function About() {
               paddingBottom: '12px',
               borderBottom: `2px solid ${t.border.accent}`
             }}>
-              <Briefcase size={24} />
               Expériences professionnelles
             </h3>
             <div style={{ position: 'relative', paddingLeft: '24px' }}>

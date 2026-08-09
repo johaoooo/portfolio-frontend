@@ -60,23 +60,15 @@ export default function Skills() {
           viewport={{ once: true }}
           style={{ textAlign: 'center', marginBottom: '50px' }}
         >
-          <motion.div
-            animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '12px' }}
-          >
-            <Cpu size={28} style={{ color: t.text.accent }} />
-            <h2 style={{
-              color: t.text.primary,
-              fontSize: 'clamp(1.8rem, 4vw, 2.2rem)',
-              fontWeight: 700,
-              margin: 0,
-              display: 'inline-block'
-            }}>
-              Compétences
-            </h2>
-            <Sparkles size={28} style={{ color: t.text.accent }} />
-          </motion.div>
+          <h2 style={{
+            color: t.text.primary,
+            fontSize: 'clamp(1.8rem, 4vw, 2.2rem)',
+            fontWeight: 700,
+            margin: 0,
+            display: 'inline-block'
+          }}>
+            Compétences
+          </h2>
           <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: '60px' }}
@@ -129,24 +121,7 @@ export default function Skills() {
                 flexDirection: 'column'
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-                <motion.div
-                  whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-                  transition={{ duration: 0.3 }}
-                  style={{
-                    width: '50px',
-                    height: '50px',
-                    background: t.badge.bg,
-                    border: `1px solid ${t.border.accent}`,
-                    borderRadius: '15px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: t.text.accent
-                  }}
-                >
-                  {skill.icon}
-                </motion.div>
+              <div style={{ marginBottom: '16px' }}>
                 <h3 style={{
                   color: t.text.accent,
                   fontSize: '1rem',
