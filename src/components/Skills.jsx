@@ -1,42 +1,75 @@
 import { useTheme } from '../context/ThemeContext'
 import { useTokens } from '../theme/tokens'
 import { motion } from 'framer-motion'
-import { Code, Shield, Cloud, Database, Sparkles, Cpu, PenTool, Server, Globe, Lock, Terminal, Wrench, Brain } from 'lucide-react'
+import { Code, Shield, Cloud, Database, PenTool, Terminal, Brain } from 'lucide-react'
 
 const SKILLS = [
   { 
     category: 'Langages de programmation', 
-    items: ['HTML', 'CSS', 'JavaScript', 'Python', 'SQL'],
+    items: [
+      { name: 'HTML', logo: '/logos/html5.svg' },
+      { name: 'CSS', logo: '/logos/css3.svg' },
+      { name: 'JavaScript', logo: '/logos/javascript.svg' },
+      { name: 'Python', logo: '/logos/python.svg' },
+      { name: 'SQL', logo: '/logos/postgresql.svg' }
+    ],
     icon: <Code size={24} />
   },
   { 
     category: 'Frameworks & Bibliothèques', 
-    items: ['React JS', 'Node JS', 'Django', 'WordPress'],
+    items: [
+      { name: 'React JS', logo: '/logos/react.svg' },
+      { name: 'Node JS', logo: '/logos/nodejs.svg' },
+      { name: 'Django', logo: '/logos/django.svg' },
+      { name: 'WordPress', logo: '/logos/wordpress.svg' }
+    ],
     icon: <Terminal size={24} />
   },
   { 
     category: 'Cybersécurité', 
-    items: ['Tests d\'intrusion web', 'BurpSuite', 'Metasploit', 'TCP/IP', 'Cisco', 'OWASP Top 10'],
+    items: [
+      { name: 'Tests d\'intrusion web', logo: '/logos/kalilinux.svg' },
+      { name: 'BurpSuite', logo: '/logos/burpsuite.svg' },
+      { name: 'Metasploit', logo: '/logos/metasploit.svg' },
+      { name: 'Cisco', logo: '/logos/cisco.svg' },
+      { name: 'OWASP Top 10', logo: '/logos/owasp.svg' }
+    ],
     icon: <Shield size={24} />
   },
   { 
     category: 'Systèmes & DevOps', 
-    items: ['Linux', 'Docker', 'Virtualisation', 'Laragon', 'GitHub'],
+    items: [
+      { name: 'Linux', logo: '/logos/linux.svg' },
+      { name: 'Docker', logo: '/logos/docker.svg' },
+      { name: 'GitHub', logo: '/logos/github.svg' }
+    ],
     icon: <Cloud size={24} />
   },
   { 
     category: 'Bases de données', 
-    items: ['MySQL', 'PostgreSQL'],
+    items: [
+      { name: 'MySQL', logo: '/logos/mysql.svg' },
+      { name: 'PostgreSQL', logo: '/logos/postgresql.svg' }
+    ],
     icon: <Database size={24} />
   },
   { 
     category: 'Outils & Logiciels', 
-    items: ['Figma', 'OBS', 'Microsoft Office', 'Canva', 'Adobe'],
+    items: [
+      { name: 'Figma', logo: '/logos/figma.svg' },
+      { name: 'Canva', logo: '/logos/canva.svg' }
+    ],
     icon: <PenTool size={24} />
   },
   { 
     category: 'Soft Skills', 
-    items: ['Leadership', 'Rigueur', 'Autonomie', 'Esprit d\'initiative', 'Gestion d\'équipe'],
+    items: [
+      { name: 'Leadership', emoji: '👑' },
+      { name: 'Rigueur', emoji: '🎯' },
+      { name: 'Autonomie', emoji: '⚡' },
+      { name: 'Esprit d\'initiative', emoji: '💡' },
+      { name: 'Gestion d\'équipe', emoji: '🤝' }
+    ],
     icon: <Brain size={24} />
   }
 ]
@@ -121,13 +154,16 @@ export default function Skills() {
                 flexDirection: 'column'
               }}
             >
-              <div style={{ marginBottom: '16px' }}>
+              <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <span style={{ color: t.text.accent, display: 'flex', alignItems: 'center' }}>
+                  {skill.icon}
+                </span>
                 <h3 style={{
                   color: t.text.accent,
-                  fontSize: '1rem',
+                  fontSize: '0.95rem',
                   fontWeight: 700,
                   textTransform: 'uppercase',
-                  letterSpacing: '1px',
+                  letterSpacing: '0.5px',
                   margin: 0
                 }}>
                   {skill.category}
@@ -135,34 +171,58 @@ export default function Skills() {
               </div>
 
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', flex: 1 }}>
-                {skill.items.map((item, i) => (
-                  <motion.span
-                    key={item}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.05 + i * 0.02, duration: 0.3 }}
-                    viewport={{ once: true }}
-                    whileHover={{ 
-                      scale: 1.05,
-                      y: -2,
-                      background: t.text.accent,
-                      color: darkMode ? '#05080F' : '#fff'
-                    }}
-                    style={{
-                      background: t.badge.bg,
-                      color: t.badge.text,
-                      border: `1px solid ${t.border.accent}`,
-                      padding: '6px 14px',
-                      borderRadius: '30px',
-                      fontSize: '0.75rem',
-                      fontWeight: 500,
-                      cursor: 'pointer',
-                      transition: 'all 0.2s ease'
-                    }}
-                  >
-                    {item}
-                  </motion.span>
-                ))}
+                {skill.items.map((item, i) => {
+                  const name = typeof item === 'string' ? item : item.name
+                  const logo = typeof item === 'object' ? item.logo : null
+                  const emoji = typeof item === 'object' ? item.emoji : null
+
+                  return (
+                    <motion.span
+                      key={name}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.04 + i * 0.02, duration: 0.3 }}
+                      viewport={{ once: true }}
+                      whileHover={{ 
+                        scale: 1.06,
+                        y: -2,
+                        borderColor: t.text.accent,
+                        boxShadow: '0 4px 12px rgba(16, 185, 129, 0.15)'
+                      }}
+                      style={{
+                        background: t.badge.bg,
+                        color: t.text.primary,
+                        border: `1px solid ${t.border.accent}`,
+                        padding: '7px 14px',
+                        borderRadius: '30px',
+                        fontSize: '0.78rem',
+                        fontWeight: 500,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px'
+                      }}
+                    >
+                      {logo && (
+                        <img
+                          src={logo}
+                          alt={name}
+                          style={{
+                            width: '16px',
+                            height: '16px',
+                            objectFit: 'contain',
+                            flexShrink: 0
+                          }}
+                        />
+                      )}
+                      {emoji && (
+                        <span style={{ fontSize: '0.85rem' }}>{emoji}</span>
+                      )}
+                      <span>{name}</span>
+                    </motion.span>
+                  )
+                })}
               </div>
             </motion.div>
           ))}
@@ -183,3 +243,4 @@ export default function Skills() {
     </section>
   )
 }
+

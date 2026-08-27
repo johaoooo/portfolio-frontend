@@ -7,31 +7,36 @@ const certificationsData = [
     name: 'Informatique et Internet',
     issuer: 'Université Numérique Cheikh Hamidou Kane (Force-N)',
     description: 'Formation en informatique et internet.',
-    status: 'Obtenue'
+    status: 'Obtenue',
+    logo: '/logos/force-n.svg'
   },
   {
     name: 'Marketing Digital',
     issuer: 'Université Numérique Cheikh Hamidou Kane (Force-N)',
     description: 'Formation en marketing digital et stratégie web.',
-    status: 'Obtenue'
+    status: 'Obtenue',
+    logo: '/logos/force-n.svg'
   },
   {
     name: 'Intelligence Artificielle',
     issuer: 'Université Numérique Cheikh Hamidou Kane (Force-N)',
     description: 'Formation aux fondamentaux et usages pratiques de l\'intelligence artificielle.',
-    status: 'Obtenue'
+    status: 'Obtenue',
+    logo: '/logos/force-n.svg'
   },
   {
     name: 'Bootcamp Cybersécurité',
     issuer: 'Dclic OIF',
     description: 'Formation intensive en cybersécurité offensive et défensive.',
-    status: 'En cours'
+    status: 'En cours',
+    logo: '/logos/dclic.svg'
   },
   {
     name: 'Google Cybersecurity Certificate',
     issuer: 'Google / Coursera',
     description: 'Certification professionnelle en cybersécurité, détection des menaces et analyse SIEM.',
-    status: 'En cours'
+    status: 'En cours',
+    logo: '/logos/coursera.svg'
   }
 ]
 
@@ -128,22 +133,37 @@ export default function Certifications() {
                 flexWrap: 'wrap'
               }}>
                 <motion.div
-                  whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
+                  whileHover={{ rotate: [0, -8, 8, 0], scale: 1.08 }}
                   transition={{ duration: 0.3 }}
                   style={{
-                    width: '50px',
-                    height: '50px',
+                    width: '52px',
+                    height: '52px',
                     background: t.badge.bg,
                     border: `1px solid ${t.border.accent}`,
-                    borderRadius: '15px',
+                    borderRadius: '16px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: t.text.accent,
-                    flexShrink: 0
+                    flexShrink: 0,
+                    padding: '8px',
+                    overflow: 'hidden'
                   }}
                 >
-                  <Award size={24} />
+                  {cert.logo ? (
+                    <img
+                      src={cert.logo}
+                      alt={cert.issuer}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        display: 'block'
+                      }}
+                    />
+                  ) : (
+                    <Award size={24} />
+                  )}
                 </motion.div>
                 <div style={{ flex: 1 }}>
                   <h3 style={{
@@ -157,9 +177,9 @@ export default function Certifications() {
                   </h3>
                   <p style={{
                     color: t.text.accent,
-                    fontSize: '0.7rem',
+                    fontSize: '0.75rem',
                     margin: '5px 0 0 0',
-                    fontWeight: 500
+                    fontWeight: 600
                   }}>
                     {cert.issuer}
                   </p>

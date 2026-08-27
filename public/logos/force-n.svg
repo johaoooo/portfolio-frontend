@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="28" fill="#0a2540"/>
+  <circle cx="64" cy="64" r="42" fill="none" stroke="#00d4ff" stroke-width="6"/>
+  <text x="64" y="74" fill="#ffffff" font-family="Arial, sans-serif" font-weight="900" font-size="28" text-anchor="middle">F-N</text>
+  <path fill="#00d4ff" d="M64 16l6 12h-12zM64 112l-6-12h12zM16 64l12-6v12zM112 64l-12 6v-12z"/>
+</svg>
