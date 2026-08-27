@@ -1,5 +1,6 @@
 import { useTokens } from '../theme/tokens'
 import { motion } from 'framer-motion'
+import Logo from './Logo'
 
 const GithubIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -19,6 +20,10 @@ export default function Footer() {
   const t = useTokens()
   const currentYear = new Date().getFullYear()
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <footer style={{
       background: t.bg.surface,
@@ -27,7 +32,7 @@ export default function Footer() {
       transition: 'background 0.3s, border-color 0.3s'
     }}>
       <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '32px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '28px' }}>
           <motion.a
             href="https://github.com/johaoooo" target="_blank" rel="noopener noreferrer"
             whileHover={{ scale: 1.1, y: -3 }}
@@ -56,10 +61,12 @@ export default function Footer() {
           </motion.a>
         </div>
         
-        <div style={{ marginBottom: '8px' }}>
-          <span style={{ color: t.text.accent, fontWeight: 600, fontSize: '1.2rem' }}>JD</span>
-          <span style={{ color: t.text.secondary, fontSize: '0.6rem', margin: '0 8px' }}>✦</span>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+          <div onClick={scrollToTop} title="Retour en haut" style={{ display: 'inline-block', cursor: 'pointer' }}>
+            <Logo size={40} />
+          </div>
         </div>
+
         <div style={{ color: t.text.secondary, fontSize: '0.75rem' }}>
           © {currentYear} Joseph Dehazounde — Analyste en Cybersécurité & Fullstack Dev
         </div>
@@ -67,3 +74,4 @@ export default function Footer() {
     </footer>
   )
 }
+

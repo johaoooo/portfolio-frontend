@@ -1,29 +1,31 @@
-import { useTheme } from '../context/ThemeContext'
+import { useTokens } from '../theme/tokens'
+import { motion } from 'framer-motion'
 
-export default function Logo({ size = 36 }) {
-  const { darkMode } = useTheme()
+export default function Logo({ size = 40, animated = true }) {
+  const t = useTokens()
 
   return (
-    <div style={{
-      width: size,
-      height: size,
-      background: darkMode
-        ? 'linear-gradient(135deg, #722F37 0%, #8B3A45 100%)'
-        : 'linear-gradient(135deg, #5C1F28 0%, #4A1520 100%)',
-      borderRadius: '10px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      boxShadow: darkMode
-        ? '0 0 15px rgba(114,47,55,0.30)'
-        : '0 2px 10px rgba(92,31,40,0.20)',
-    }}>
-      <span style={{
-        fontFamily: 'Syne, sans-serif',
-        fontSize: size * 0.55,
-        fontWeight: 800,
-        color: '#FFFFFF',
-      }}>JD</span>
-    </div>
+    <motion.div
+      whileHover={animated ? { scale: 1.05 } : {}}
+      style={{
+        width: size,
+        height: size,
+        borderRadius: '12px',
+        background: `linear-gradient(135deg, ${t.text.accent}, #059669)`,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#05080F',
+        fontWeight: 900,
+        fontSize: size * 0.45,
+        letterSpacing: '-0.5px',
+        boxShadow: '0 4px 14px rgba(16, 185, 129, 0.35)',
+        transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+        cursor: 'pointer'
+      }}
+    >
+      JD
+    </motion.div>
   )
 }
+

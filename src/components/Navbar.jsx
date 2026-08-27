@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { scroller } from 'react-scroll'
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom'
 import { FileText, Home, Code, Briefcase, Mail, Sun, Moon, Menu, X, Newspaper, ChevronsLeft, ChevronsRight } from 'lucide-react'
+import Logo from './Logo'
 
 export default function Navbar() {
   const { darkMode, setDarkMode } = useTheme()
@@ -113,27 +114,7 @@ export default function Navbar() {
           display: 'flex', alignItems: 'center',
           marginRight: '24px'
         }}>
-          <div style={{
-            width: '40px', height: '40px',
-            borderRadius: '12px',
-            background: `linear-gradient(135deg, ${t.text.accent}, #059669)`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: '#05080F', fontWeight: 900, fontSize: '1.1rem',
-            letterSpacing: '-0.5px',
-            boxShadow: '0 4px 14px rgba(16, 185, 129, 0.35)',
-            transition: 'transform 0.2s ease, box-shadow 0.2s ease'
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.transform = 'scale(1.05)'
-            e.currentTarget.style.boxShadow = '0 6px 20px rgba(16, 185, 129, 0.5)'
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.transform = 'scale(1)'
-            e.currentTarget.style.boxShadow = '0 4px 14px rgba(16, 185, 129, 0.35)'
-          }}
-          >
-            JD
-          </div>
+          <Logo size={40} />
         </RouterLink>
 
         <div className="nav-links" style={{
