@@ -28,12 +28,6 @@ const certificationsData = [
     status: 'En cours'
   },
   {
-    name: 'Administration Systèmes et Réseaux',
-    issuer: 'Formation professionnelle',
-    description: 'Gestion, configuration et sécurisation des réseaux et systèmes Linux/Windows.',
-    status: 'En cours'
-  },
-  {
     name: 'Google Cybersecurity Certificate',
     issuer: 'Google / Coursera',
     description: 'Certification professionnelle en cybersécurité, détection des menaces et analyse SIEM.',

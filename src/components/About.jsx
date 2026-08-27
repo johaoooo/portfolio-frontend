@@ -27,7 +27,6 @@ export default function About() {
     { name: "Marketing Digital", issuer: "Force-N", status: "Obtenue", icon: <Target size={16} /> },
     { name: "Intelligence Artificielle", issuer: "Force-N", status: "Obtenue", icon: <Cpu size={16} /> },
     { name: "Bootcamp Cybersécurité", issuer: "Dclic OIF", status: "En cours", icon: <Shield size={16} /> },
-    { name: "Administration Systèmes et Réseaux", issuer: "Formation professionnelle", status: "En cours", icon: <Wrench size={16} /> },
     { name: "Google Cybersecurity Certificate", issuer: "Google / Coursera", status: "En cours", icon: <Shield size={16} /> }
   ]
 
