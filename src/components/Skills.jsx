@@ -63,13 +63,7 @@ const SKILLS = [
   },
   { 
     category: 'Soft Skills', 
-    items: [
-      { name: 'Leadership', emoji: '👑' },
-      { name: 'Rigueur', emoji: '🎯' },
-      { name: 'Autonomie', emoji: '⚡' },
-      { name: 'Esprit d\'initiative', emoji: '💡' },
-      { name: 'Gestion d\'équipe', emoji: '🤝' }
-    ],
+    items: ['Leadership', 'Rigueur', 'Autonomie', 'Esprit d\'initiative', 'Gestion d\'équipe'],
     icon: <Brain size={24} />
   }
 ]

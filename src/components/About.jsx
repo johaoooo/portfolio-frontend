@@ -23,11 +23,11 @@ export default function About() {
   ]
 
   const certifications = [
-    { name: "Informatique et Internet", issuer: "Force-N", status: "Obtenue", logo: "/logos/force-n.svg" },
-    { name: "Marketing Digital", issuer: "Force-N", status: "Obtenue", logo: "/logos/force-n.svg" },
-    { name: "Intelligence Artificielle", issuer: "Force-N", status: "Obtenue", logo: "/logos/force-n.svg" },
-    { name: "Bootcamp Cybersécurité", issuer: "Dclic OIF", status: "En cours", logo: "/logos/dclic.svg" },
-    { name: "Google Cybersecurity Certificate", issuer: "Google / Coursera", status: "En cours", logo: "/logos/coursera.svg" }
+    { name: "Informatique et Internet", issuer: "Force-N", status: "Obtenue" },
+    { name: "Marketing Digital", issuer: "Force-N", status: "Obtenue" },
+    { name: "Intelligence Artificielle", issuer: "Force-N", status: "Obtenue" },
+    { name: "Bootcamp Cybersécurité", issuer: "Dclic OIF", status: "En cours" },
+    { name: "Google Cybersecurity Certificate", issuer: "Google / Coursera", status: "En cours" }
   ]
 
   const experiences = [
@@ -181,26 +181,14 @@ export default function About() {
                     background: t.badge.bg,
                     border: `1px solid ${t.border.accent}`,
                     borderRadius: '40px',
-                    padding: '10px 20px',
+                    padding: '12px 20px',
                     flex: '1 1 auto',
-                    minWidth: '220px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px'
+                    minWidth: '220px'
                   }}
                 >
-                  {cert.logo && (
-                    <img
-                      src={cert.logo}
-                      alt={cert.issuer}
-                      style={{ width: '22px', height: '22px', objectFit: 'contain', flexShrink: 0 }}
-                    />
-                  )}
-                  <div>
-                    <div style={{ fontWeight: 600, color: t.text.accent, fontSize: '0.85rem' }}>{cert.name}</div>
-                    <div style={{ fontSize: '0.75rem', color: t.text.secondary, marginTop: '2px' }}>
-                      {cert.issuer}
-                    </div>
+                  <div style={{ fontWeight: 600, color: t.text.accent, fontSize: '0.85rem' }}>{cert.name}</div>
+                  <div style={{ fontSize: '0.75rem', color: t.text.secondary, marginTop: '2px' }}>
+                    {cert.issuer}
                   </div>
                 </div>
               ))}
